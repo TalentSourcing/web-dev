@@ -1,0 +1,1 @@
+"../TalentSourcing/web-dev/stowe" is the head directory where we'll contribute our source code. 
