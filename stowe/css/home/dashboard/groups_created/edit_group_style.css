@@ -67,7 +67,7 @@
 }
 
 #list_invited {
-    height: 300px;
+    height: 300px; /* TODO make % */
 }
 
 #div_invite_buttons {
@@ -81,55 +81,13 @@
 }
 
 
-/* LISTS */
-.users_list {
-    border: thin solid black;
-    overflow: hidden;
-    overflow-y: scroll;
-    margin: 2%;
-}
-
-.li_invite {
-    list-style: none;
-    border: solid lightgray;
-    margin: 1% 1% 1% -2%;
-    padding: 1%;
-}
-.li_invite img {
-    width: 5%;
-    height: 5%;
-    display: inline-block;
-    vertical-align: middle;
-}
-.li_invite .div_list_text {
-    margin-left: 1%;
-    display: inline-block;
-    vertical-align: middle;
-}
-.div_list_text .label_name {
-    font-size: 150%;
-}
-.div_list_text .label_occupation {
-    font-size: 80%;
-    font-style: italic;
-    color: #888888;
-}
-
-.li_invite button {
-    display: block;
-    float: right;
-    margin-right: 1%;
-    vertical-align: middle;
-}
-
-
 /* APPLICANTS */
 #div_applicants {
     border: solid black;
 }
 
 #list_applicants {
-    height: 300px;
+    height: 300px; /* TODO make % */
 }
 
 
@@ -146,4 +104,46 @@
 }
 #footer > h3 {
     margin: 0;
+}
+
+
+/* LISTS */
+.users_list {
+    border: thin solid black;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin: 2%;
+}
+
+.users_list_item {
+    list-style: none;
+    border: solid lightgray;
+    margin: 1% 1% 1% -2%;
+    padding: 1%;
+}
+.users_list_item .user_list_img {
+    width: 5%;
+    height: 5%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.users_list_item .div_user_list_text {
+    margin-left: 1%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.div_user_list_text .label_name {
+    font-size: 150%;
+}
+.div_user_list_text .label_occupation {
+    font-size: 80%;
+    font-style: italic;
+    color: #888888;
+}
+
+.users_list_item .list_button {
+    display: block;
+    float: right;
+    margin-right: 1%;
+    vertical-align: middle;
 }
