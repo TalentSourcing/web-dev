@@ -1,0 +1,61 @@
+/* David Lindskog */
+
+#header {
+    border: solid gray;
+    margin: 2% 0;
+}
+#header > h3 {
+    margin: 0;
+}
+
+#content_pane {
+    min-height: 500px;
+    border: solid red;
+}
+
+.panel {
+    border: solid black;
+    margin: 2% 1%;
+}
+
+
+/* TITLE */
+#div_title {
+    height: 110px; /* TODO make % */
+}
+#div_img {
+    display: inline-block;
+    vertical-align: top;
+    width: 10%;
+    height: 100%;
+    /*border: solid green;*/
+}
+#img_group {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+}
+#div_title_form {
+    display: inline-block;
+    vertical-align: top;
+    /*border: solid orange;*/
+}
+#div_title_form > form {
+    margin: 0;
+    /*border: solid blue;*/
+}
+#title_field {
+    font-size: 500%;
+    height: 100%;
+}
+
+
+/* FOOTER */
+#footer {
+    border: solid gray;
+    margin: 2% 0;
+}
+#footer > h3 {
+    margin: 0;
+}
