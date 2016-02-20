@@ -1,5 +1,9 @@
 /* David Lindskog */
 
+body {
+
+}
+
 #header {
     border: solid gray;
     margin: 2% 0;
@@ -10,11 +14,14 @@
 
 #content_pane {
     min-height: 500px;
-    border: solid red;
 }
 
 .panel {
     margin: 2% 1%;
+    padding: 1%;
+}
+.panel > h1 {
+    margin: 0 0 1% 0;
 }
 
 
@@ -50,20 +57,36 @@
 
 /* ABOUT */
 #div_about {
-    border: solid black;
+    border: thin solid lightgray;
+}
+
+#div_about > form > textarea {
+    resize: none;
+    width: 100%;
+    border: none;
+    font-size: 100%;
+    font-style: italic;
 }
 
 
 /* DESIRED SKILLS */
 #div_desired_skills {
-    border: solid black;
+    border: thin solid lightgray;
+}
+
+#div_desired_skills > form > textarea {
+    resize: none;
+    width: 100%;
+    border: none;
+    font-size: 100%;
+    font-style: italic;
 }
 
 
 /* INVITE */
 #div_invite {
-    border: solid black;
-    min-height: 450px;
+    border: thin solid lightgray;
+    min-height: 450px; /* TODO make % */
 }
 
 #list_invited {
@@ -73,7 +96,6 @@
 #div_invite_buttons {
     width: 100%;
     text-align: right;
-    margin-bottom: 2%;
 }
 #div_invite_buttons #button_add {
     width: 10%;
@@ -83,7 +105,7 @@
 
 /* APPLICANTS */
 #div_applicants {
-    border: solid black;
+    border: thin solid lightgray;
 }
 
 #list_applicants {
@@ -93,7 +115,7 @@
 
 /* BUTTONS */
 #div_buttons {
-    border: solid black;
+    border: thin solid lightgray;
 }
 
 

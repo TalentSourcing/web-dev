@@ -4,9 +4,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Group</title>
+    <title>TalentMe - Edit Group</title>
     <link rel="stylesheet" type="text/css" href="../../../../css/home/dashboard/groups_created/edit_group_style.css" />
-</head>
+    <script src="../../../../js/jquery-1.12.0.min.js"></script>
+
 <body>
 <div id="header">
     <h3>Header</h3>
@@ -19,7 +20,9 @@
         </div>
         <div id="div_title_form">
             <form>
-                <input type="text" id="title_field" name="group_title" placeholder="Group Title"/>
+                <input type="text" id="title_field" name="group_title" placeholder="Group Title"
+                       onfocus="this.value='';this.style.fontStyle='normal';"
+                       onblur="this.style.fontStyle='italic';"/>
             </form>
         </div>
 
@@ -27,10 +30,20 @@
 
     <div class="panel" id="div_about">
         <h1>About</h1>
+        <form>
+            <textarea placeholder="Info about group here..."
+                      onfocus="this.value='';this.style.fontStyle='normal';"
+                      onblur="this.style.fontStyle='italic';"></textarea>
+        </form>
     </div>
 
     <div class="panel" id="div_desired_skills">
         <h1>Desired Skills</h1>
+        <form>
+            <textarea placeholder="Listed skills here"
+                      onfocus="this.value='';this.style.fontStyle='normal';"
+                      onblur="this.style.fontStyle='italic';"></textarea>
+        </form>
     </div>
 
     <div class="panel" id="div_invite">
