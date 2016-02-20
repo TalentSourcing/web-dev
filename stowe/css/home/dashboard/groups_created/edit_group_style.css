@@ -13,7 +13,7 @@ body {
 }
 
 #content_pane {
-    min-height: 500px;
+    /*min-height: 500px;*/
 }
 
 .panel {
@@ -154,7 +154,7 @@ body {
     display: inline-block;
     vertical-align: middle;
 }
-.div_groups_list_text .label_name {
+.div_groups_list_text .group_name {
     font-size: 150%;
 }
 .div_groups_list_text .label_subtext {

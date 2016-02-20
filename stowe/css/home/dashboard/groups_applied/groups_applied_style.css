@@ -1,29 +1,18 @@
 /* David Lindskog */
 
-#header {
+.header {
     border: solid gray;
     margin: 2% 0;
 }
-#header > h3 {
+.header > h3 {
     margin: 0;
-}
-
-#content_pane {
-    min-height: 500px;
-}
-
-.panel {
-    margin: 2% 1%;
-    padding: 1%;
-}
-.panel > h1 {
-    margin: 0 0 1% 0;
 }
 
 
 /* LISTS */
 .groups_list {
     border: medium solid lightgray;
+    height: 300px;
     overflow: hidden;
     overflow-y: scroll;
     margin: 2%;
@@ -46,8 +35,14 @@
     display: inline-block;
     vertical-align: middle;
 }
-.div_groups_list_text .label_name {
+.div_groups_list_text .group_name {
     font-size: 150%;
+    text-decoration: none;
+    color: black;
+}
+.group_name:visited {
+    font-size: inherit;
+    color: inherit;
 }
 .div_groups_list_text .label_subtext {
     font-size: 80%;
@@ -84,4 +79,14 @@
 .pending {
     background-color: #ffe680;
     color: #b35900;
+}
+
+
+/* FOOTER */
+.footer {
+    border: solid gray;
+    margin: 2% 0;
+}
+.footer > h3 {
+    margin: 0;
 }
