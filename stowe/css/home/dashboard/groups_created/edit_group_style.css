@@ -130,40 +130,40 @@ body {
 
 
 /* LISTS */
-.users_list {
+.groups_list {
     border: medium solid lightgray;
     overflow: hidden;
     overflow-y: scroll;
     margin: 2%;
 }
 
-.users_list_item {
+.groups_list_item {
     list-style: none;
     border: thin solid lightgray;
     margin: 1% 1% 1% -2%;
     padding: 1%;
 }
-.users_list_item .user_list_img {
+.groups_list_item .groups_list_img {
     width: 5%;
     height: 5%;
     display: inline-block;
     vertical-align: middle;
 }
-.users_list_item .div_user_list_text {
+.groups_list_item .div_groups_list_text {
     margin-left: 1%;
     display: inline-block;
     vertical-align: middle;
 }
-.div_user_list_text .label_name {
+.div_groups_list_text .label_name {
     font-size: 150%;
 }
-.div_user_list_text .label_occupation {
+.div_groups_list_text .label_subtext {
     font-size: 80%;
     font-style: italic;
     color: #888888;
 }
 
-.users_list_item .list_button {
+.groups_list_item .list_button {
     display: block;
     float: right;
     margin-right: 1%;
