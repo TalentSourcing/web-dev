@@ -131,7 +131,7 @@ body {
 
 /* LISTS */
 .users_list {
-    border: thin solid black;
+    border: medium solid lightgray;
     overflow: hidden;
     overflow-y: scroll;
     margin: 2%;
@@ -139,7 +139,7 @@ body {
 
 .users_list_item {
     list-style: none;
-    border: solid lightgray;
+    border: thin solid lightgray;
     margin: 1% 1% 1% -2%;
     padding: 1%;
 }
