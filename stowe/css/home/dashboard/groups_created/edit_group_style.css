@@ -14,7 +14,6 @@
 }
 
 .panel {
-    border: solid black;
     margin: 2% 1%;
 }
 
@@ -25,10 +24,10 @@
 }
 #div_img {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: bottom;
     width: 10%;
-    height: 100%;
-    /*border: solid green;*/
+    height: 95%;
+    border: dashed lightgray;
 }
 #img_group {
     width: 100%;
@@ -38,16 +37,105 @@
 }
 #div_title_form {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: bottom;
+    margin-left: 1%;
     /*border: solid orange;*/
 }
-#div_title_form > form {
-    margin: 0;
-    /*border: solid blue;*/
-}
 #title_field {
-    font-size: 500%;
-    height: 100%;
+    font-size: 400%;
+    font-style: italic;
+    border: none;
+}
+
+
+/* ABOUT */
+#div_about {
+    border: solid black;
+}
+
+
+/* DESIRED SKILLS */
+#div_desired_skills {
+    border: solid black;
+}
+
+
+/* INVITE */
+#div_invite {
+    border: solid black;
+    min-height: 450px;
+}
+
+#list_invited {
+    height: 300px;
+}
+
+#div_invite_buttons {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 2%;
+}
+#div_invite_buttons #button_add {
+    width: 10%;
+    margin-right: 3%;
+}
+
+
+/* LISTS */
+.users_list {
+    border: thin solid black;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin: 2%;
+}
+
+.li_invite {
+    list-style: none;
+    border: solid lightgray;
+    margin: 1% 1% 1% -2%;
+    padding: 1%;
+}
+.li_invite img {
+    width: 5%;
+    height: 5%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.li_invite .div_list_text {
+    margin-left: 1%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.div_list_text .label_name {
+    font-size: 150%;
+}
+.div_list_text .label_occupation {
+    font-size: 80%;
+    font-style: italic;
+    color: #888888;
+}
+
+.li_invite button {
+    display: block;
+    float: right;
+    margin-right: 1%;
+    vertical-align: middle;
+}
+
+
+/* APPLICANTS */
+#div_applicants {
+    border: solid black;
+}
+
+#list_applicants {
+    height: 300px;
+}
+
+
+/* BUTTONS */
+#div_buttons {
+    border: solid black;
 }
 
 
