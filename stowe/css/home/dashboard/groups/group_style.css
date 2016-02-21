@@ -122,6 +122,10 @@ body {
 #div_buttons {
 
 }
+#div_button_group {
+    text-align: right;
+    margin-right: 3%;
+}
 
 
 /* FOOTER */
