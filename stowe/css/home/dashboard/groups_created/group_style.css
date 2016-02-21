@@ -19,6 +19,7 @@ body {
 .panel {
     margin: 2% 1%;
     padding: 1%;
+    border: thin solid lightgray;
 }
 .panel > h1 {
     margin: 0 0 1% 0;
@@ -28,6 +29,7 @@ body {
 /* TITLE */
 #div_title {
     height: 110px; /* TODO make % */
+    border: none;
 }
 #div_img {
     display: inline-block;
@@ -42,12 +44,16 @@ body {
     display: inline-block;
     text-align: center;
 }
-#div_title_form {
+.div_group_title {
     display: inline-block;
     vertical-align: bottom;
     margin-left: 1%;
-    /*border: solid orange;*/
 }
+/*#div_title_form {*/
+    /*display: inline-block;*/
+    /*vertical-align: bottom;*/
+    /*margin-left: 1%;*/
+/*}*/
 #title_field {
     font-size: 400%;
     font-style: italic;
@@ -57,7 +63,7 @@ body {
 
 /* ABOUT */
 #div_about {
-    border: thin solid lightgray;
+
 }
 
 #div_about > form > textarea {
@@ -71,7 +77,7 @@ body {
 
 /* DESIRED SKILLS */
 #div_desired_skills {
-    border: thin solid lightgray;
+
 }
 
 #div_desired_skills > form > textarea {
@@ -85,7 +91,6 @@ body {
 
 /* INVITE */
 #div_invite {
-    border: thin solid lightgray;
     min-height: 450px; /* TODO make % */
 }
 
@@ -105,7 +110,7 @@ body {
 
 /* APPLICANTS */
 #div_applicants {
-    border: thin solid lightgray;
+
 }
 
 #list_applicants {
@@ -115,7 +120,7 @@ body {
 
 /* BUTTONS */
 #div_buttons {
-    border: thin solid lightgray;
+
 }
 
 
