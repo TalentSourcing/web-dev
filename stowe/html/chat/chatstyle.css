@@ -1,0 +1,51 @@
+head{
+height: 10%;
+
+
+} 
+div.openedchats{
+border: 1px solid #000000;
+height: 40%;
+width: 20%;
+padding: 0%;
+
+}
+       
+ul{
+    list-style: none;
+    padding: 0px;
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%;
+}
+
+li{
+    
+text-align: left;
+border: 1px solid #000000;
+color: #000000;
+padding: 5px;
+}
+
+
+
+
+#footer{
+    position: absolute;
+    padding: 0px;
+    margin: 0;   
+    background-color: #333;
+    text-align: center;
+    color: #FFFFFF;
+    overflow: hidden;
+    width: 100%;
+}
+
+div.chat{
+
+border: 2px solid #000000;
+text-align: left;
+padding: 5px;
+width: 80%;
+float: left;
+}
