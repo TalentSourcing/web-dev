@@ -1,11 +1,19 @@
-ul{
-    background-color: #D3D3D3;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
-li{
-    display: inline;
-    padding: 20px;
-    
+li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    list-style-type: none;
 }
 
 form{
@@ -21,4 +29,25 @@ form{
 #search.hover {
     color: #FFFFFF;
     background-color: #236B8E;
+}
+
+div.tables{
+    border: 2px solid #000000;
+    margin: 2px;
+    padding: 5px;  
+}
+#smile{
+    display: inline-block;
+}
+
+
+#footer{
+    position: absolute;
+    padding: 0px;
+    margin: 0;   
+    background-color: #333;
+    text-align: center;
+    color: #FFFFFF;
+    overflow: hidden;
+    width: 100%;
 }
