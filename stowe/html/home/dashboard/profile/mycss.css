@@ -1,0 +1,176 @@
+#bbody
+    {
+        margin:0;
+        background-image:url("blurry-background.jpg") ;
+        background-attachment:fixed;
+        max-height:50%;
+    }
+
+#bheader
+    {
+        font-family:"Georgia";
+        font-size:1em;
+        width:99%;
+        height:15%;
+        padding:0.5%;
+        background-image:url("bluebackground.png");
+        /* background-color:#3366ff;*/
+    }
+   
+.bimg-circle 
+    {
+        border-radius: 50%;
+    }
+
+/*#bnav
+    {
+        width:99%;
+        height:5%;
+        padding:0.5%;
+        background-image:url("bluebackground.png");
+        /* background-color:#3366ff*/;
+    }*/
+
+#userinput{
+    
+            float:right;
+            margin-left:5%;
+            margin-right:20%;
+            margin-bottom: 20%;
+            margin-top:10%;
+            width:40%; 
+            border-radius:10px;
+            /*border-radius:15px 50px ;*/
+            overflow:scroll;
+            float:right;
+            height:37%;
+}
+
+.button
+    {
+        border-radius: 5px;
+        height:25px;
+        width:200px;
+   
+    }
+.button2
+    {
+        border-radius: 5px;
+        height:25px;
+        width:175px;
+    }
+#login-help
+    {
+        
+    }
+
+/*#aside
+    {
+  
+        width:30%;
+        margin-left:0%;
+        overflow:scroll;
+        height:67%;
+        width:40%;
+        max-width:600px;
+        padding:5%;
+        background-color:grey;
+    }*/
+
+#bsection
+    {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 ;
+        margin-left:30%;
+        margin-right:20%;
+        margin-bottom: 20%;
+        margin-top:5%;
+        border-radius:10px;
+        /*border-radius:15px 50px ;*/
+        overflow:scroll;
+        float:right;
+        height:67%;
+        border:none;
+        width:50%;
+        padding:5%;
+   }
+
+.login
+    {
+        margin-left:58%;
+        margin-top:0%;
+        width:42%;
+        height:15%;
+    }
+
+h1
+    {
+        margin: 0px ;
+        line-height: 40px;
+        color: black;
+        text-align: center;
+        text-shadow: 0 1px grey;
+        /*background: #f3f3f3;*/
+        border-radius: 3px 3px 0 0;
+    }
+
+form
+    {
+        border:none;
+    }
+
+table,tr,td
+    {  
+        border:none;
+    }
+
+ td 
+    {
+        padding: 5px;
+        text-align: left;
+    }
+
+
+#bfooter
+    {
+        margin-bottom:0;
+        overflow:auto;
+        text-align:center;
+        height:5%;
+        width:99%;
+        padding:0.5%;
+        background-image:url("bluebackground.png");
+    }
+ul
+    {
+        font-weight:bold;
+        list-style-type:none;
+        font-family:"Georgia";
+        margin:0;
+        padding:0;
+        overflow:hidden;
+        top:0;
+        width:100%;
+	}
+li
+    {
+        font-weight:bold;
+        font-family:"Georgia";
+        text-decoration:none;
+        float:left;
+        text-align:center;
+        line-height:1.8;
+    }
+
+li a
+    {
+        font-family:"Georgia";
+        font-weight:bold;
+        text-decoration:none;
+        /*color:rgb(53, 122, 187);*/
+        /*color:#a7b8aa;*/
+        color:#006666;
+        padding: 14px 16px;
+        display:inline-block;
+        text-align:center;
+    }
+
