@@ -4,6 +4,7 @@
         background-image:url("blurry-background.jpg") ;
         background-attachment:fixed;
         max-height:50%;
+        width:100%;
     }
 
 #bheader
@@ -76,7 +77,6 @@
         padding:5%;
         background-color:grey;
     }*/
-
 #bsection
     {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 ;
@@ -90,16 +90,19 @@
         float:right;
         height:67%;
         border:none;
+        min-width:50%;
+        max-width:50%;
         width:50%;
         padding:5%;
    }
 
 .login
     {
-        margin-left:58%;
+        margin-left:20%;
         margin-top:0%;
-        width:42%;
+        width:81%;
         height:15%;
+        min-width:42%;
     }
 
 h1
@@ -116,13 +119,21 @@ h1
 form
     {
         border:none;
+        overflow:hidden;
     }
 
-table,tr,td
+tr,td
     {  
+        min-width:100%;
         border:none;
+      
     }
-
+.buser{
+    min-width:50%;
+}
+.forms{
+    min-width:100%;
+}
  td 
     {
         padding: 5px;
