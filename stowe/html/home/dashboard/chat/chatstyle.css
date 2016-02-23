@@ -11,7 +11,7 @@ div.body{
 div.openedchats{
 border: 1px solid #000000;
 height: 100%;
-width: 25%;
+width: 20%;
 padding: 0%;
 float: left;
 }
@@ -49,7 +49,7 @@ div.chat{
 border: 2px solid #000000;
 text-align: left;
 padding: 5px;
-width: 75%;
+width: 70%;
 float: right;
 }
 
