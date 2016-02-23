@@ -1,16 +1,11 @@
 body,html{
 			margin: 0;
 			padding: 0;
-		}
-		
-		.header{
-			border-style: solid;
-			border-width:medium;
-			height: auto;
-			width: 99.5%;
+			background: #E8EDF9;
 		}
 		
 		.DashboardMain{
+			padding-top:70px;
 			height:auto;
 			overflow: auto;
 			width: 99.5%;
@@ -35,17 +30,9 @@ body,html{
 			width: 94.5%;
 		}
 		
-		.footer{
-			border-style: solid;
-			border-width: medium;
-			width: 99.5%;
-		}
-		
 		#pic{
 			margin: 0.5%;	
 			float: left;
-			border-style: solid;
-			border-width: medium;
 			border-color: #ccc;
 			width: 7%;
 			height: auto;
@@ -67,15 +54,13 @@ body,html{
 			margin: 0.5%;
 			padding-left: 2%;
 			float: left;
-			border-style: solid;
-			border-width: medium;
 			width: 500px;
 			min-width: 300px;
 			min-height: 90px;
 			height: 20%;
 			-moz-box-shadow:    inset 0 0 10px #000000;
-           -webkit-box-shadow:  inset 0 0 10px #000000;
-            box-shadow:         inset 0 0 10px #000000;
+           		-webkit-box-shadow: inset 0 0 10px #000000;
+            		box-shadow:         inset 0 0 10px #000000;
 		}
 		
 		.icon{
@@ -102,37 +87,140 @@ body,html{
 			width: 100%;
 			height: auto;
 			float: left;
-			background-color:cadetblue;
+			background: #7094A8;
 			
 			-moz-box-shadow:    inset 0 0 10px #000000;
-            -webkit-box-shadow: inset 0 0 10px #000000;
-            box-shadow:         inset 0 0 10px #000000;
+            		-webkit-box-shadow: inset 0 0 10px #000000;
+            		box-shadow:         inset 0 0 10px #000000;
 		}
 		
 		.heading{
 			padding-left: 1%;
 			font-size: 120%;
+			color: #E8EDF9;
 		}
 		
 		#profile{
 			text-align: left;
+			color: #5B5E63;
 		}
 		
 		.createGroupContent,.matchGroupContent,.groupInContent,.groupAppliedContent{
 			text-decoration: none;
-			color: black;
+			color: #1B2336;
 		}
 		
 		#p1{
 			font-size: 130%;
+			color: #1B2336;
 		}
 		
 		#p2{
 			font-size: 120%;
+			color: #5B5E63;
 		}
 		
 		.individualGrp:hover{
 			background-color:#ccc;
 			color: blue;
 		}
+
+
+/*footer part*/
+
+footer {
+	border: 1px solid black;
+	width: 90%;
+	margin: auto;
+	display: block;
+	bottom: 0;
+	left: 0;
+	background: #E8EDF9;
+	position: relative;
+	font-family: Raleway;
+} #footer_table {
+	width: 70%;
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	table-layout: fixed;
+} .table_header {
+	font-size: 16px;
+	padding-bottom: 2%;
+	color: #5B5E63;
+} .table_data {
+	font-size: 13px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+} .table_data a {
+	text-decoration: none;
+	color: #7094A8;
+
+	-webkit-transition: all 0.15s ease-in;
+	-moz-transition: all 0.15s ease-in;
+	transition: all 0.15s ease-in;
+} #footer_text {
+	text-align: center;
+	margin: auto;
+	font-size: 11.5px;
+	color: #5B5E63;
+}
+
+.table_data a:hover {
+	color: #1B2336;
+}
+
+
+
+/*Header part*/
+#header_content {
+	margin: auto;
+	display: block;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	z-index: 1;
+	background: #7094A8;
+}
+
+#header_content #header_bar p {
+	float: left;
+	font-family: Raleway;
+	font-weight: bold;
+	font-size: 150%;
+	padding-top: 0.35%;
+	letter-spacing: 1px;
+	margin-left: 25%;
+	position: absolute;
+}
+
+#header_content #header_logo_container {
+	float: left;
+	width: 355px;
+	position: relative;
+}
+
+#header_content #header_logo_container #logo_image {
+	width: 20%;
+	padding-left: 30%;
+}
+
+#header_content #header_bar {
 		
+}
+
+#header_content #header_bar p a {
+	text-decoration: none;
+	color: #E8EDF9;
+
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+}
+
+#header_content #header_bar p a:hover {
+	text-decoration: none;
+	color: white;
+}	
