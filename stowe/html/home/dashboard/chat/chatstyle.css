@@ -110,35 +110,25 @@ float: right;
 
 
 .chat #m1{
-border: thin solid white;
-border-radius: 10px;
 float: left;
 width: 95%;
 }
 .chat #m2{
 width:95%
-border: thin solid black;
-border-radius: 10px;
 float: right;
 }
 
 .chat #m3{
-border: thin solid white;
-border-radius: 10px;
 float: left;
 width: 95%;
 }
 
 .chat #m4{
 width:95%
-border: thin solid white;
-border-radius: 10px;
 float: right;
 }
 
 .chat #m5{
-border: thin solid white;
-border-radius: 10px;
 float: left;
 width: 95%;
 }
