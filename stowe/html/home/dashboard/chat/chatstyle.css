@@ -2,9 +2,6 @@ head{
 height: 10%;
 }
 
-body{
-    color: #E8EDF9;
-}
 
 .body{
 margin-top: 20px;
@@ -56,6 +53,7 @@ width: 70%;
 float: right;
 height: 100%;
 margin-bottom: 10px;
+    background-color: #E8EDF9;
 }
 
 #chattitle{
@@ -93,7 +91,7 @@ width: 95%;
 }
 .chat #m2{
 width:95%
-border: thin solid black;
+border: thin solid white;
 border-radius: 10px;
 float: right;
 }
@@ -117,4 +115,8 @@ border: thin solid white;
 border-radius: 10px;
 float: left;
 width: 95%;
+}
+
+p{
+    color: #7094A8;
 }
