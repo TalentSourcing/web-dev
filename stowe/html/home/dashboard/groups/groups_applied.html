@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <title>TalentMe - Groups Applied</title>
     <link rel="stylesheet" type="text/css" href="../../../../css/home/dashboard/groups/groups_applied_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/footer.css" />
     <script src="../../../../js/jquery-1.12.0.min.js"></script>
 </head>
 <body>
-<div class="header">
-    <h3>Header</h3>
-</div>
+<header id="header_content">
+    <div id="header_logo_container">
+        <img id="logo_image" src="../../../../image/home/logo.jpg" alt="Logo">
+    </div>
+    <div id="header_bar">
+        <p><a href="#">TalentMe</a></p>
+    </div>
+</header>
 
 <div id="content_pane">
     <h1>Groups Applied For</h1>
@@ -67,9 +74,42 @@
     </ul>
 </div>
 
-<div class="footer">
-    <h3>Footer</h3>
-</div>
+<footer>
+    <table id="footer_table">
+        <tr class="table_row">
+            <th class="table_header">TalentMe</th>
+            <th class="table_header">Features</th>
+            <th class="table_header">Support</th>
+            <th class="table_header">Legal</th>
+        </tr>
+        <tr class="table_row">
+            <td class="table_data"><a href="">Home</a></td>
+            <td class="table_data"><a href="#">Overview</a></td>
+            <td class="table_data"><a href="#">Help</a></td>
+            <td class="table_data"><a href="#">Terms</a></td>
+        </tr>
+        <tr class="table_row">
+            <td class="table_data"><a href="#">About</a></td>
+            <td class="table_data"><a href="#">TalentMe Mobile</a></td>
+            <td class="table_data"><a href="#">Survey</a></td>
+            <td class="table_data"><a href="#">Privacy</a></td>
+        </tr>
+        <tr class="table_row">
+            <td class="table_data"><a href="#">Jobs</a></td>
+            <td class="table_data"><a href="#">Premium TalentMe</a></td>
+            <td class="table_data"><a href="#">Investor Relation</a></td>
+            <td class="table_data"></td>
+        </tr>
+        <tr class="table_row">
+            <td class="table_data"><a href="#">Advertise</a></td>
+            <td class="table_data"><a href="#">Meet Talent</a></td>
+            <td class="table_data"></td>
+            <td class="table_data"></td>
+        </tr>
+    </table>
+    <br><br>
+    <p id="footer_text">Copyright &copy; 2016 TalentMe.</p>
+</footer>
 
 </body>
 </html>

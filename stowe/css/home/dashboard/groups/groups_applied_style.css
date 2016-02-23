@@ -1,12 +1,16 @@
 /* David Lindskog */
 
-.header {
-    border: solid gray;
-    margin: 2% 0;
+body {
+    margin-top: 7%;
 }
-.header > h3 {
-    margin: 0;
-}
+
+/*.header {*/
+    /*border: solid gray;*/
+    /*margin: 2% 0;*/
+/*}*/
+/*.header > h3 {*/
+    /*margin: 0;*/
+/*}*/
 
 
 /* LISTS */
