@@ -1,16 +1,12 @@
-
-.body{
-width: 100%;
-height: 100%;
+head{
+height: 10%;
 }
 
-#footer{
-    padding: 0px;
-    margin: 0;
-    text-align: center;
-    overflow: hidden;
-    width: 100%;
-    background: #E8EDF9;
+.body{
+
+width: 100%;
+height: 100%;
+
 }
 
 .openedchats{
@@ -36,8 +32,21 @@ padding: 5px;
 
 }
 
+
+#footer{
+
+    padding: 0px;
+    margin: 0;
+    background-color: #333;
+    text-align: center;
+    color: #FFFFFF;
+    overflow: hidden;
+    width: 100%;
+}
+
 .chat{
-border: 1px solid #000000;
+
+border: 2px solid #000000;
 text-align: left;
 padding: 10px;
 width: 70%;
@@ -72,27 +81,35 @@ float: right;
 
 
 .chat #m1{
+border: thin solid white;
+border-radius: 10px;
 float: left;
 width: 95%;
 }
 .chat #m2{
 width:95%
+border: thin solid black;
+border-radius: 10px;
 float: right;
 }
 
 .chat #m3{
+border: thin solid white;
+border-radius: 10px;
 float: left;
 width: 95%;
 }
 
 .chat #m4{
 width:95%
+border: thin solid white;
+border-radius: 10px;
 float: right;
 }
 
 .chat #m5{
+border: thin solid white;
+border-radius: 10px;
 float: left;
 width: 95%;
 }
-
-
