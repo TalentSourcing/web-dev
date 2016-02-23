@@ -3,14 +3,7 @@
 body {
     min-width: 1000px;
     margin-top: 7%;
-}
-
-#header {
-    border: solid gray;
-    margin: 2% 0;
-}
-#header > h3 {
-    margin: 0;
+    background: #E8EDF9;
 }
 
 #content_pane {
@@ -20,10 +13,11 @@ body {
 .panel {
     margin: 2% 1%;
     padding: 1%;
-    border: thin solid lightgray;
+    border: thin solid #1B2336;
 }
 .panel > h1 {
     margin: 0 0 1% 0;
+    color: #1B2336;
 }
 
 
@@ -37,7 +31,7 @@ body {
     vertical-align: bottom;
     width: 10%;
     height: 95%;
-    border: dashed lightgray;
+    border: dashed #7094A8;
 }
 #img_group {
     width: 100%;
@@ -54,6 +48,7 @@ body {
     font-size: 400%;
     /*font-style: italic;*/
     border: none;
+    background: #E8EDF9;
 }
 
 
@@ -67,7 +62,8 @@ body {
     width: 100%;
     border: none;
     font-size: 100%;
-    /*font-style: italic;*/
+    color: #5B5E63;
+    background: #E8EDF9;
 }
 
 
@@ -81,7 +77,8 @@ body {
     width: 100%;
     border: none;
     font-size: 100%;
-    /*font-style: italic;*/
+    color: #5B5E63;
+    background: #E8EDF9;
 }
 
 
@@ -136,15 +133,16 @@ body {
 
 /* LISTS */
 .groups_list {
-    border: medium solid lightgray;
+    border: medium solid #7094A8;
     overflow: hidden;
     overflow-y: scroll;
     margin: 2%;
+    background-color: #E8EDF9;
 }
 
 .groups_list_item {
     list-style: none;
-    border: thin solid lightgray;
+    border: thin solid #7094A8;
     margin: 1% 1% 1% -2%;
     padding: 1%;
 }
@@ -153,6 +151,7 @@ body {
     height: 5%;
     display: inline-block;
     vertical-align: middle;
+    border: thin solid #7094A8;
 }
 .groups_list_item .div_groups_list_text {
     margin-left: 1%;
@@ -160,6 +159,7 @@ body {
     vertical-align: middle;
 }
 .div_groups_list_text .group_name {
+    color: #1B2336;
     font-size: 150%;
 }
 .div_groups_list_text .label_subtext {
