@@ -1,21 +1,19 @@
 /* David Lindskog */
 
 body {
+    min-width: 1000px;
     margin-top: 7%;
+    background: #E8EDF9;
 }
 
-/*.header {*/
-    /*border: solid gray;*/
-    /*margin: 2% 0;*/
-/*}*/
-/*.header > h3 {*/
-    /*margin: 0;*/
-/*}*/
+h1 {
+    color: #1B2336;
+}
 
 
 /* LISTS */
 .groups_list {
-    border: medium solid lightgray;
+    border: medium solid #7094A8;
     height: 300px;
     overflow: hidden;
     overflow-y: scroll;
@@ -24,7 +22,7 @@ body {
 
 .groups_list_item {
     list-style: none;
-    border: thin solid lightgray;
+    border: thin solid #7094A8;
     margin: 1% 1% 1% -2%;
     padding: 1%;
 }
@@ -33,6 +31,7 @@ body {
     height: 5%;
     display: inline-block;
     vertical-align: middle;
+    border: thin solid #7094A8;
 }
 .groups_list_item .div_groups_list_text {
     margin-left: 1%;
