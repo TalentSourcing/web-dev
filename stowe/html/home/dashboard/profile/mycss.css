@@ -1,7 +1,8 @@
 #bbody
     {
         margin:0;
-        background-image:url("blurry-background.jpg") ;
+        /*background-image:url("blurry-background.jpg") ;*/
+        background: #E8EDF9;
         background-attachment:fixed;
         max-height:50%;
         width:100%;
@@ -10,18 +11,97 @@
 #bheader
     {
         font-family:"Georgia";
+        color: #E8EDF9;
         font-size:1em;
         width:99%;
         height:15%;
         padding:0.5%;
-        background-image:url("bluebackground.png");
+        background: #7094A8;
+        /*background-image:url("bluebackground.png");*/
         /* background-color:#3366ff;*/
     }
+
+
+
+#header_content {
+    vertical-align:middle;
+	margin: auto;
+	display: block;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	z-index: 1;
+	background: #7094A8;
+}
+
+ #header_bar p {
+     vertical-align:middle;
+	float: left;
+	font-family: Raleway;
+	font-weight: bold;
+	font-size: 150%;
+	padding-top: 0.35%;
+	letter-spacing: 1px;
+	margin-left: 15%;
+	position: absolute;
+     float:left;
+}
+
+#header_logo_container {
+    margin-left:0%;
+	float: left;
+    vertical-align:middle;
+	width: 325px;
+	position: relative;
+}
+
+  #logo_image {
+	width: 20%;
+	float:left;
+     vertical-align:middle;
+}
+
+
+
+
+#header_bar p a {
+	text-decoration: none;
+	color: #E8EDF9;
+    vertical-align:middle;
+
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+}
+
+#header_bar p a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+
+
+
    
 .bimg-circle 
     {
+        min-width:25%;
         border-radius: 50%;
+        overflow:auto;
     }
+.login
+    {
+        vertical-align:middle;
+        margin-left:40%;
+        margin-top:0%;
+        width:50%;
+        height:15%;
+        min-width:42%;
+        color: #E8EDF9;
+        overflow:auto;
+    }
+
 
 /*#bnav
     {
@@ -29,7 +109,7 @@
         height:5%;
         padding:0.5%;
         background-image:url("bluebackground.png");
-        /* background-color:#3366ff*/;
+        /* background-color:#3366ff;
     }*/
 
 #userinput{
@@ -45,7 +125,8 @@
             overflow:scroll;
             float:right;
             height:37%;
-}
+            color: #5B5E63;
+            }   
 
 .button
     {
@@ -59,11 +140,9 @@
         border-radius: 5px;
         height:25px;
         width:175px;
+        color: #E8EDF9;
     }
-#login-help
-    {
-        
-    }
+
 
 /*#aside
     {
@@ -91,25 +170,18 @@
         height:67%;
         border:none;
         min-width:50%;
-        max-width:50%;
+        max-width:75%;
         width:50%;
         padding:5%;
+        color: #5B5E63;
    }
 
-.login
-    {
-        margin-left:20%;
-        margin-top:0%;
-        width:81%;
-        height:15%;
-        min-width:42%;
-    }
 
 h1
     {
         margin: 0px ;
         line-height: 40px;
-        color: black;
+       color: #1B2336;
         text-align: center;
         text-shadow: 0 1px grey;
         /*background: #f3f3f3;*/
@@ -118,12 +190,14 @@ h1
 
 form
     {
+        color: #5B5E63;
         border:none;
         overflow:hidden;
     }
 
 tr,td
     {  
+        color: #5B5E63;
         min-width:100%;
         border:none;
       
@@ -132,6 +206,7 @@ tr,td
     min-width:50%;
 }
 .forms{
+    color: #5B5E63;
     min-width:100%;
 }
  td 
@@ -140,19 +215,46 @@ tr,td
         text-align: left;
     }
 
-
+/*footer {
+	border: 1px solid black;
+	width: 90%;
+    height:5%;
+	margin: auto;
+	display: block;
+	bottom: 0;
+	left: 0;
+	background: #ffffff;/*#99FFD1;
+	position: relative;
+    font-family:Raleway;
+}*/
 #bfooter
     {
+        border: 1px solid black;
+        margin: auto;
         margin-bottom:0;
+        display: block;
         overflow:auto;
         text-align:center;
+        background: #E8EDF9;
+        position: relative;
+        position: relative;
+        bottom: 0;
+	    left: 0;
         height:5%;
-        width:99%;
         padding:0.5%;
-        background-image:url("bluebackground.png");
+        border: 1px solid black;
+	   width: 90%;
+	   margin: auto;
+	   display: block;
+	   bottom: 0;
+	   left: 0;
+	   background: #E8EDF9;
+	   position: relative;
+        /*background-image:url("bluebackground.png");*/
     }
 ul
     {
+        color: #5B5E63;
         font-weight:bold;
         list-style-type:none;
         font-family:"Georgia";
@@ -164,6 +266,7 @@ ul
 	}
 li
     {
+        color: #5B5E63;
         font-weight:bold;
         font-family:"Georgia";
         text-decoration:none;
@@ -174,6 +277,7 @@ li
 
 li a
     {
+        color: #5B5E63;
         font-family:"Georgia";
         font-weight:bold;
         text-decoration:none;
@@ -185,3 +289,89 @@ li a
         text-align:center;
     }
 
+
+
+/*#footer_table {
+    align-content: center;
+    width: 70%;
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	table-layout: fixed;
+    
+
+} .table_header {
+	font-size: 16px;
+	padding-bottom: 2%;
+	color: #5B5E63;
+} .table_data {
+	font-size: 13px;
+	padding-top: 0.5p%;
+	padding-bottom: 0.5;
+} .table_data a {
+	text-decoration: none;
+	color: #5B5E63;
+
+	-webkit-transition: all 0.15s ease-in;
+	-moz-transition: all 0.15s ease-in;
+	transition: all 0.15s ease-in;
+} #footer_text {
+	text-align: center;
+	margin: auto;
+	font-size: 11.5px;
+	color: #5B5E63;
+}
+
+.table_data a:hover {
+	color: #99FFD1;
+} */
+
+.parahide{visibility: hidden;}
+footer {
+    height:5%;
+	border: 1px solid black;
+	width: 90%;
+	margin: auto;
+	display: block;
+    margin-top:180%;
+	bottom: 0;
+	left: 0;
+	background: #E8EDF9;
+	position: relative;
+	font-family: Raleway;
+    overflow:auto;
+    max-height:5%;
+    
+} #footer_table {
+	width: 70%;
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	table-layout: fixed;
+} .table_header {
+	font-size: 16px;
+	padding-bottom: 2%;
+	color: #5B5E63;
+} .table_data {
+	font-size: 13px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+} .table_data a {
+	text-decoration: none;
+	color: #7094A8;
+
+	-webkit-transition: all 0.15s ease-in;
+	-moz-transition: all 0.15s ease-in;
+	transition: all 0.15s ease-in;
+} #footer_text {
+	text-align: center;
+	margin: auto;
+	font-size: 11.5px;
+	color: #5B5E63;
+}
+
+.table_data a:hover {
+	color: #1B2336;
+}
