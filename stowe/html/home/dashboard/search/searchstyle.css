@@ -26,28 +26,32 @@ form{
     
 }
 
-#search.hover {
-    color: #FFFFFF;
-    background-color: #236B8E;
-}
 
-div.tables{
-    border: 2px solid #000000;
-    margin: 2px;
-    padding: 5px;  
-}
-#smile{
-    display: inline-block;
-}
-
-
-#footer{
-    position: absolute;
+.tables{
+    border: 1px solid #000000;
+    margin: 0px;
     padding: 0px;
-    margin: 0;   
-    background-color: #333;
-    text-align: center;
-    color: #FFFFFF;
-    overflow: hidden;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
+#smilediv{
+    float: left;
+    width: 5%;
+    height: 15%;
+}
+
+#smile{
+    float: left;
+    height:100%;
+    width:100%;
+}
+
+
+#listingtext{
+    float: left;
+    width: 80%;
+    height: 100%;
+}
+
+
