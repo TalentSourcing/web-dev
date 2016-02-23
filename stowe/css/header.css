@@ -1,4 +1,3 @@
-
 #header_content {
 	margin: auto;
 	display: block;
@@ -7,7 +6,6 @@
 	left: 0;
 	position: fixed;
 	z-index: 1;
-/*	background: #99FFD1;*/
 	background: #7094A8;
 }
 
@@ -33,7 +31,20 @@
 	padding-left: 30%;
 }
 
+#header_content #header_bar {
+	
+}
+
 #header_content #header_bar p a {
 	text-decoration: none;
-	color: #5B5E63;
+	color: #E8EDF9;
+
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+}
+
+#header_content #header_bar p a:hover {
+	text-decoration: none;
+	color: white;
 }
