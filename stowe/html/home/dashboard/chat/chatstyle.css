@@ -1,3 +1,52 @@
+#header_content {
+	margin: auto;
+	display: block;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	z-index: 1;
+/*	background: #99FFD1;*/
+	background: #7094A8;
+}
+
+#header_content #header_bar p {
+	float: left;
+	font-family: Raleway;
+	font-weight: bold;
+	font-size: 22px;
+	padding-top: 0.35%;
+	letter-spacing: 1px;
+	margin-left: 25%;
+	position: absolute;
+}
+
+#header_content #header_logo_container {
+	float: left;
+	width: 325px;
+	position: relative;
+}
+
+#header_content #header_logo_container #logo_image {
+	width: 20%;
+	padding-left: 30%;
+}
+
+#header_content #header_bar p a {
+	text-decoration: none;
+	color: #5B5E63;
+}
+
+
+
+
+
+
+
+
+
+
+
 head{
 height: 10%;
 }
