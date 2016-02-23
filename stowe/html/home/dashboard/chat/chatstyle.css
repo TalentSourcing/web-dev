@@ -1,37 +1,42 @@
+
+
 head{
 height: 10%;
+}
 
+.body{
 
-} 
-div.openedchats{
+width: 100%;
+height: 100%;
+
+}
+
+.openedchats{
 border: 1px solid #000000;
-height: 40%;
-width: 20%;
-padding: 0%;
+height: 100%;
+width: 25%;
+float: left;
+background-color: #eeeeee;
 
 }
        
 ul{
     list-style: none;
     padding: 0px;
-    background-color: #eeeeee;
     height: 100%;
     width: 100%;
 }
 
 li{
-    
-text-align: left;
-border: 1px solid #000000;
+text-align: center;
 color: #000000;
 padding: 5px;
+
 }
 
 
-
-
 #footer{
-    position: absolute;
+
     padding: 0px;
     margin: 0;   
     background-color: #333;
@@ -41,11 +46,74 @@ padding: 5px;
     width: 100%;
 }
 
-div.chat{
+.chat{
 
-border: 2px solid #000000;
+border: 1px solid #000000;
 text-align: left;
-padding: 5px;
-width: 80%;
-float: left;
+padding: 10px;
+width: 70%;
+float: right;
+height: 100%;
+margin-bottom: 10px;
 }
+
+#chattitle{
+text-align:center;
+font-size: 150%;
+padding: 0px;
+margin:0px;
+}
+
+#input{
+border: thin solid white;
+border-radius: 10px;
+float: left;
+width: 95%;
+
+}
+
+#input #searchtext{
+width: 75%;
+}
+
+#input #search{
+width: 20%;
+float: right;
+}
+
+
+.chat #m1{
+border: thin solid white;
+border-radius: 10px;
+float: left;
+width: 95%;
+}
+.chat #m2{
+width:95%
+border: thin solid black;
+border-radius: 10px;
+float: right;
+}
+
+.chat #m3{
+border: thin solid white;
+border-radius: 10px;
+float: left;
+width: 95%;
+}
+
+.chat #m4{
+width:95%
+border: thin solid white;
+border-radius: 10px;
+float: right;
+}
+
+.chat #m5{
+border: thin solid white;
+border-radius: 10px;
+float: left;
+width: 95%;
+}
+
+
