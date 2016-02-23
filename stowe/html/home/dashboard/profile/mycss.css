@@ -175,7 +175,18 @@
         padding:5%;
         color: #5B5E63;
    }
+a{
+    
+   text-decoration:none;
+    color: #5B5E63;
 
+
+    font-family:"Georgia";
+}
+a:hover{
+    
+    color: #1B2336;
+}
 
 h1
     {
