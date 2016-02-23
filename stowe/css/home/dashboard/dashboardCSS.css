@@ -14,10 +14,14 @@ body,html{
 		.profileSection{
 			margin: 2%;
 			padding: 0.5%;
-			border-style: solid;
 			border-width: medium;
 			height: auto;
 			overflow: auto;
+		}
+
+		.commSection {
+			margin: 2%;
+			padding: 0.5%;
 		}
 		
 		.createdGroups,.matchedGroups,.groupsIn,.groupsApplied{
@@ -129,7 +133,6 @@ body,html{
 /*footer part*/
 
 footer {
-	border: 1px solid black;
 	width: 90%;
 	margin: auto;
 	display: block;
