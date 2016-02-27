@@ -16,15 +16,14 @@ function init() {
 	}
 
 	/* Attempt to select 'talentme_db' as database.  If it does not exist, create it. */
-	if ($conn->select_db($dbname)) {
+	if ($conn->select_db($dbname)) { // select_db returns true if found, false if not found
         $result = $conn->query("SELECT DATABASE()");
         $row = $result->fetch_row();
         printf("Current database is %s.\n", $row[0]);
         $result->close();
 	}
-    else {
+    else { // database $dbname not found, create a new one
         echo "No database by the name '$dbname' found. ";
-
         // Create database
         $sql = "CREATE DATABASE " . $dbname;
         if ($conn->query($sql) === TRUE) {
