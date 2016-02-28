@@ -32,7 +32,7 @@ class TalentMeDB {
         if ($conn->select_db($dbname)) { // select_db returns true if found, false if not found
             $result = $conn->query("SELECT DATABASE()");
             $row = $result->fetch_row();
-            printf("Current database is %s.\n", $row[0] . "<br>");
+            echo "Current database is " . $row[0] . "<br>";
             $result->close();
         }
         else { // database $dbname not found, create a new one
@@ -47,7 +47,6 @@ class TalentMeDB {
             }
         }
 
-        // TODO create tables here ----
         $this->createUserTable($conn);
         $this->createGroupTable($conn);
         $this->createUserGroupTable($conn);
@@ -97,14 +96,13 @@ class TalentMeDB {
         }
     }
 
-    // TODO foreign key assignment is throwing errorno 150
     private function createUserGroupTable (&$conn) {
         $strlen = 255;
 
         $sql = "CREATE TABLE UserGroupTable (".
             "user_group_id INT NOT NULL AUTO_INCREMENT, ".
             "user_email VARCHAR($strlen) NOT NULL, ".
-            "group_id VARCHAR($strlen) NOT NULL, ".
+            "group_id INT NOT NULL, ".
             "user_role VARCHAR($strlen) NOT NULL, ".
             "PRIMARY KEY (user_group_id), ".
             "FOREIGN KEY (user_email) REFERENCES UserTable(user_email), ".
@@ -118,7 +116,24 @@ class TalentMeDB {
     }
 
     private function createChatLineTable (&$conn) {
+        $strlen = 255;
 
+        $sql = "CREATE TABLE ChatLineTable (".
+            "id INT NOT NULL AUTO_INCREMENT, ".
+            "chat_id INT NOT NULL, ".
+            "user_email VARCHAR($strlen) NOT NULL, ".
+            "text_line VARCHAR($strlen), ".
+            "time_stamp TIMESTAMP, ".
+            "group_id INT, ".
+            "PRIMARY KEY (id), ".
+            "FOREIGN KEY (user_email) REFERENCES UserTable(user_email), ".
+            "FOREIGN KEY (group_id) REFERENCES GroupTable(group_id))";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "ChatLineTable created successfully<br>";
+        } else {
+            echo "Error creating table: " . $conn->error . "<br>";
+        }
     }
 }
 
