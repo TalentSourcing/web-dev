@@ -1,13 +1,21 @@
 <?php
 
-// This file will initialize the mysql database and set up the necessary tables.
+// This class will initialize the mysql database and set up the necessary tables.
 
 class TalentMeDB {
+    private $servername = "localhost";
+    private $username = "root";
+    private $password = "root";
+    private $dbname = "talentme_db";
     private $conn = null;
 
+    /* Constructor */
     public function TalentMeDB () {
-        $this->conn = $this->init();
+        $this->init();
     }
+
+
+    /* Public methods */
 
     public function close () {
         if ($this->conn != null) {
@@ -15,44 +23,51 @@ class TalentMeDB {
         }
     }
 
-    private function init () {
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $dbname = "talentme_db";
+    public function delete () {
+        if ($this->conn != null) {
+            if ($this->conn->query("DROP DATABASE $this->dbname") === true) {
+                $this->close();
+                echo "Deleted database '$this->dbname' successfully!<br>";
+            }
+            else {
+                echo "Could not delete database '$this-dbname'<br>";
+            }
+        }
+    }
 
+
+    /* Private methods */
+
+    private function init () {
         // Create connection
-        $conn = mysqli_connect($servername, $username, $password);
+        $this->conn = mysqli_connect($this->servername, $this->username, $this->password);
         // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
         }
 
         /* Attempt to select 'talentme_db' as database.  If it does not exist, create it. */
-        if ($conn->select_db($dbname)) { // select_db returns true if found, false if not found
-            $result = $conn->query("SELECT DATABASE()");
+        if ($this->conn->select_db($this->dbname)) { // select_db returns true if found, false if not found
+            $result = $this->conn->query("SELECT DATABASE()");
             $row = $result->fetch_row();
             echo "Current database is " . $row[0] . "<br>";
             $result->close();
         }
         else { // database $dbname not found, create a new one
-            echo "No database by the name '$dbname' found.<br>";
+            echo "No database by the name '$this->dbname' found.<br>";
             // Create database
-            $sql = "CREATE DATABASE " . $dbname;
-            if ($conn->query($sql) === TRUE) {
-                $conn->select_db($dbname);
-                echo "New database '$dbname' created successfully.<br>";
+            $sql = "CREATE DATABASE " . $this->dbname;
+            if ($this->conn->query($sql) === TRUE) {
+                $this->conn->select_db($this->dbname);
+                echo "New database '$this->dbname' created successfully.<br>";
+                $this->createUserTable($this->conn);
+                $this->createGroupTable($this->conn);
+                $this->createUserGroupTable($this->conn);
+                $this->createChatLineTable($this->conn);
             } else {
-                echo "Error creating database: " . $conn->error;
+                echo "Error creating database: " . $this->conn->error;
             }
         }
-
-        $this->createUserTable($conn);
-        $this->createGroupTable($conn);
-        $this->createUserGroupTable($conn);
-        $this->createChatLineTable($conn);
-
-        return $conn;
     }
 
     private function createUserTable (&$conn) {
@@ -137,7 +152,7 @@ class TalentMeDB {
     }
 }
 
-
+// test creation
 $database = new TalentMeDB();
 
 
