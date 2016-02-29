@@ -3,18 +3,18 @@
 
 require 'init_database.php';
 
-$conn = new TalentMeDB();
+new TalentMeDB();
 
-if (!$conn){
-  die('Could not connect: ' . mysql_error());
-}
 
 
 class DatabaseInterface{
     private $conn = null;
 
     public function DatabaseInterface(){
-        $this->conn = new TalentMeDB();
+        $this->conn = TalentMeDB::getConnection();
+        if (!$conn){
+            die('Could not connect: ' . mysql_error());
+            }
     }
 
 
