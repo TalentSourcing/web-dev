@@ -47,7 +47,7 @@ else
         {
             echo "You searched for <b>$search</b> <hr size='1'></br>";
 
-            mysql_connect("8888","your mysql username","password");
+            mysql_connect("8888","root","root");
 
             mysql_select_db("TalentMeDB");
 
