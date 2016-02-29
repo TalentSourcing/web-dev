@@ -45,8 +45,9 @@ echo "Search term too short";
 
 else{
 echo "You searched for <b>$search</b> <hr size='1'></br>";
+
 mysql_connect("localhost","your mysql username","password");
-mysql_select_db("your database name");
+mysql_select_db("TalentMeDB");
 
 $search_exploded = explode (" ", $search);
 
@@ -66,10 +67,8 @@ $run = mysql_query($construct);
 $foundnum = mysql_num_rows($run);
 
 if ($foundnum==0)
-echo "Sorry, there are no matching result for <b>$search</b>.</br></br>1.
-Try more general words. for example: If you want to search 'how to create a website'
-then use general keyword like 'create' 'website'</br>2. Try different words with similar
- meaning</br>3. Please check your spelling";
+echo "Sorry, there are no matching results for <b>$search</b>.</br></br>1.
+Try a more general search.</br>2. Try different words with similar meaning</br>3. Please check your spelling.";
 else
 {
 echo "$foundnum results found !<p>";
