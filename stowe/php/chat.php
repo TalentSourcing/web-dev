@@ -11,7 +11,11 @@ public function DatabaseInterface () {
 
 function createGroupChat ($creator_user_email, $group_id){
 
-    $sql = "INSERT INTO ChatLineTable ". "(creator_user_email, group_id) ". "VALUES        ('$creator_user_email', '$group_id')";
+
+
+    $sql = "INSERT INTO ChatLineTable ".
+        "(id, chat_id, user_email, text_line, time_stamp, group_id) ".
+        "VALUES ('', '', $creator_user_email','','',  '$group_id')";
 
     if ($this->conn->query($sql)){
         echo "Insert success!";
@@ -24,13 +28,17 @@ function createGroupChat ($creator_user_email, $group_id){
 
 function createIndividualChat ($creator_user_email, $recipient_user_email){
 
-
-    $sql = "INSERT INTO ChatLineTable ". "(user_email, user)"
+    $sql = "INSERT INTO ChatLineTable ".
+        "(id, chat_id, user_email, text_line, time_stamp, group_id)" .
+        "VALUES ('$creator_user_email', )";
 }
 
 
 function send ($user_email, $chat_id, $text_line){
 
+    $sql = "INSERT INTO ChatLineTable ".
+        "(id, chat_id, user_email, text_line, time_stamp, group_id) " .
+        "VALUES ('','$chat_id', '$user_email, '$text_line','$time_stamp','')";
 
 }
 
@@ -38,14 +46,30 @@ function send ($user_email, $chat_id, $text_line){
 //returns list of chatId’s affiliated with user
 function getChatList ($user_email){
 
-    $sql = "SELECT user_name, chat_id" .
-        "FROM ChatLineTable";
+    try{
+        $sql = "SELECT user_name, chat_id" .
+            "FROM ChatLineTable";
+
+        echo "Success.";
+
+    }
+    catch(Exception $e){
+        echo "Error Message" $e->getMessage();
+    }
 }
 
 
 //query for chatId, return list of chat lines
 function getChat ($chat_id){
 
-    $sql = "SELECT chat_id, text_line" .
-        "FROM ChatLineTable";
+    try{
+        $sql = "SELECT chat_id, text_line" .
+            "FROM ChatLineTable";
+
+        echo "Success.";
+    }
+
+    catch(Exception $e){
+        echo "Error Message" $e->getMessage();
+    }
 }
