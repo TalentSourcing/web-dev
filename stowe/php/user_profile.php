@@ -22,14 +22,12 @@ class DatabaseInterface {
             "VALUES ('$user_email', '$first_name', '$last_name', '$password', '$linkedin_url', '$skills', '$occupation',
             '$gender', '$profile_img', '$objective')";
 
-        try {
-            if ($this->conn->query($sql)) {
-                echo "Success!";
-            }
-        } catch (Exception $e) {
-            echo $e . "<br>";
+        if ($this->conn->query($sql)) {
+            echo "Insert success!";
         }
-        echo "after if/else";
+        else {
+            echo "Insert Failure: " . $this->conn->error . "<br>";
+        }
     }
 }
 
