@@ -23,6 +23,13 @@ class TalentMeDB {
         return TalentMeDB::$conn;
     }
 
+    public static function query ($sql) {
+        if (!($result = TalentMeDB::$conn->query($sql))) {
+            throw new Exception("TalentMeDb::query exception: " . TalentMeDB::$conn->error);
+        }
+        return $result;
+    }
+
     public function close () {
         if (TalentMeDB::$conn != null) {
             TalentMeDB::$conn->close();
@@ -159,7 +166,7 @@ class TalentMeDB {
 }
 
 // test creation
-$database = new TalentMeDB();
-
+//$database = new TalentMeDB();
+new TalentMeDB();
 
 ?>
