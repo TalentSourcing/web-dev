@@ -12,6 +12,15 @@ class Search {
 	}
 	echo "get database!";
     }
+
+	function searchForGroups(searchText) {
+		
+	}
+
+	funtion searchForUsers(searchText) {
+		
+	}
+
 /*
     function search(searchText) {
         $button = $_GET ['submit'];
@@ -62,6 +71,3 @@ class Search {
 }
 
 ?>
-
-
-
