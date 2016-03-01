@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: davidlindskog
- * Date: 2/29/16
- * Time: 10:41 AM
- */
 
 require 'init_database.php';
 
-class DatabaseInterface {
+class UserProfile {
     private $conn = null;
 
     public function DatabaseInterface () {
