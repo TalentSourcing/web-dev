@@ -1,11 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: mishayalavarthy
+ * Date: 3/1/16
+ * Time: 10:00 AM
+ */
+
 
 require 'init_database.php';
 
-class DatabaseInterface {
+class Chat {
     private $conn = null;
 
-public function DatabaseInterface () {
+public function Chat () {
         $this->conn = TalentMeDB::getConnection();
     }
 
@@ -15,13 +22,21 @@ function createGroupChat ($creator_user_email, $group_id){
         "(id, chat_id, user_email, text_line, time_stamp, group_id) ".
         "VALUES ('', '', $creator_user_email','','',  '$group_id')";
 
-    if ($this->conn->query($sql)){
-        echo "Insert success!";
+    if ($this->conn->query($sql)) {
+        echo "Insert success!<br>";
     }
-    else{
-        echo "Error Message: " . $this->conn->error . "<br>";
+    else {
+        echo "Error Message: $this->conn->error <br>";
+    }
     }
 }
+
+$dbi = new Chat();
+$dbi->createGroupChat("", "", "misha.yalavarthy@gmail.com", "", "", "2");
+
+
+/*
+
 
 //naina - please help on completing this function
 function createIndividualChat ($creator_user_email, $recipient_user_email, $chat_id){
