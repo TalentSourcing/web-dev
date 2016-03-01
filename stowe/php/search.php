@@ -1,11 +1,7 @@
 <?php
 
-
 require 'init_database.php';
-
 new TalentMeDB();
-
-
 
 class DatabaseInterface{
     private $conn = null;
@@ -75,12 +71,8 @@ class DatabaseInterface{
                                 }
                         }
                 }
-    }
-
-
-
-    }
-
+            }
+        }
 }
 
 
