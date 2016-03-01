@@ -17,11 +17,10 @@ class Chat {
     }
 
     //the database connection is working, but insert is NOT
-    public function createGroupChat ($creator_user_email, $group_id) {
-
+    function createGroupChat ($creator_user_email, $group_id) {
         $sql = "INSERT INTO ChatLineTable ".
             "(id, chat_id, user_email, text_line, time_stamp, group_id) ".
-            "VALUES ('', '', '$creator_user_email','','', '$group_id')";
+            "VALUES ('', '', '$creator_user_email','','', '')";
 
         if ($this->conn->query($sql)) {
             echo "Insert success!<br>";
@@ -30,7 +29,13 @@ class Chat {
             echo "Error Message: $this->conn->error <br>";
         }
     }
+}
 
+$dbi = new Chat();
+$dbi->createGroupChat("", "", "misha.yalavarthy@gmail.com", "", "", "");
+
+
+/*
 
     //naina - please help on completing this function
     function createIndividualChat ($creator_user_email, $recipient_user_email, $chat_id){
@@ -113,3 +118,6 @@ $dbi->createGroupChat("", "", "misha.yalavarthy@gmail.com", "", "", "2");
 //$dbi->send("","2","misha.yalavarthy@gmail.com", "Hello, do you want to work today?","6.30.55pm.3.1.2016,"");
 //$dbi->getChatList("", "", "misha.yalavarthy@gmail.com,"","","");
 //$dbi->getChat("", "3", "", "", "", "");
+
+
+?>
