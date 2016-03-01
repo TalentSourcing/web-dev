@@ -4,34 +4,60 @@ $(document).ready(function() {
 		click: function() {
 			var searchFieldText = $("#searchField").val();
 			
-			queryGroupEntries(searchFieldText);
-			queryUserEntries(searchFieldText);
+			$.ajax({
+				type: "POST",
+				url: "../../../../php/init_database.php",
+				data: {searchFieldText:searchFieldText},
+				complete: function(response) {
+					var groupList = [
+							{
+								groupId: 1, 
+								groupImg: "../../../../image/default-placeholder.png",
+								groupName: "Group Name",
+								founderName: "Founder Name",
+								groupIntro: "Group intro"
+							},
+							{
+								groupId: 2, 
+								groupImg: "../../../../image/default-placeholder.png",
+								groupName: "Group Name",
+								founderName: "Founder Name",
+								groupIntro: "Group intro"
+							}
+							];
+
+					var userList = [
+							{
+								email: "abc@gmail.com",
+								userProfileImg: "../../../../image/default-placeholder.png",
+								firstName: "User",
+								lastName: "name",
+								skills: "User skills"
+							}, 
+							{
+								email: "xyz@gmail.com",
+								userProfileImg: "../../../../image/default-placeholder.png",
+								firstName: "User",
+								lastName: "name",
+								skills: "User skills"
+							}
+							];
+
+					// var obj = JSON.parse(response);
+					// var groupList = obj.groups;
+					// var userList = obj.users;
+					createGroupEntries(groupList);
+					createUserEntries(userList);
+				}
+			});
 		}
 	});
 });
 
-function queryGroupEntries(searchFieldText) {
+function createGroupEntries(groupList) {
 	var parentNode = $("#groups");
 	parentNode.empty();
 
-	// query for group list
-	//var groupList = <?php echo searchForGroups(searchFieldText); ?>;
-	var groupList = [
-			{
-				groupId: 1, 
-				groupImg: "../../../../image/default-placeholder.png",
-				groupName: "Group Name",
-				founderName: "Founder Name",
-				groupIntro: "Group intro"
-			},
-			{
-				groupId: 2, 
-				groupImg: "../../../../image/default-placeholder.png",
-				groupName: "Group Name",
-				founderName: "Founder Name",
-				groupIntro: "Group intro"
-			}
-			];
 	for (var i = 0; i < groupList.length; i++) {
 		var groupId = groupList[i].groupId;
 		var groupImg = groupList[i].groupImg;
@@ -43,28 +69,10 @@ function queryGroupEntries(searchFieldText) {
 	}
 }
 
-function queryUserEntries(searchFieldText) {
+function createUserEntries(userList) {
 	var parentNode = $("#users");
 	parentNode.empty();
 
-	// query for user list
-	//var userList = <?php echo searchForUsers(searchFieldText); ?>;
-	var userList = [
-			{
-				email: "abc@gmail.com",
-				userProfileImg: "../../../../image/default-placeholder.png",
-				firstName: "User",
-				lastName: "name",
-				skills: "User skills"
-			}, 
-			{
-				email: "xyz@gmail.com",
-				userProfileImg: "../../../../image/default-placeholder.png",
-				firstName: "User",
-				lastName: "name",
-				skills: "User skills"
-			}
-			];
 	for (var i = 0; i < userList.length; i++) {
 		var email = userList[i].email;
 		var userProfileImg = userList[i].userProfileImg;
