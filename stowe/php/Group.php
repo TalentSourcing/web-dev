@@ -5,30 +5,37 @@
 
 require 'init_database.php';
 
-class Group {
+class Group
+{
     private $conn = null;
 
-    public function DatabaseInterface () {
+    public function Group () {
         $this->conn = TalentMeDB::getConnection();
     }
 
     function createGroup ($user_email, $group_name, $about, $desired_skills, $group_img)
     {
         $sql = "INSERT INTO GroupTable ".
-            " (user_email, group_name, group_img , about, desired_skills) ".
-            "VALUES ('$user_email', '$group_name', '$group_img', '$about', '$desired_skills') ";
+            "(group_id, group_name, group_img , about, desired_skills) ".
+            "VALUES ('$group_id', '$group_name', '$group_img', '$about', '$desired_skills') ";
 
-        try {
+
             if ($this->conn->query($sql)) {
                 echo "Success!";
             }
-        } catch (Exception $e) {
-            echo $e . "<br>";
+
+        else {
+
+            echo "Not able to create group!";
         }
-        echo "after if/else";
-    }
+
+
+}
+
+
+
     //this function updates the group details in GroupTable
-    function update ($group_id,$group_name, $about, $desired_skills, $group_img)
+    public function update ($group_id,$group_name, $about, $desired_skills, $group_img)
     {
         $sql = "UPDATE GroupTable SET  ".
             "group_name='$group_name',".
@@ -47,7 +54,7 @@ class Group {
         echo "after if/else";
     }
 
-    function delete ($group_id)
+    public function delete ($group_id)
     {
         $sql = "DELETE FROM GroupTable ".
             " (group_name, about, desired_skills, group_img) ".
@@ -62,7 +69,7 @@ class Group {
         }
         echo "after if/else";
     }
-    function inviteUser ($user_email,$group_id)
+    public function inviteUser ($user_email,$group_id)
 
     {
 
@@ -80,7 +87,7 @@ class Group {
         }
         echo "after if/else";
     }
-    function approveUser ($user_email,$group_id)
+    public function approveUser ($user_email,$group_id)
 
     {
 
@@ -97,9 +104,9 @@ class Group {
         } catch (Exception $e) {
             echo $e . "<br>";
         }
-        echo "after if/else";
+        echo "failure";
     }
-    function declineUserApplication ($user_email,$group_id)
+    public function declineUserApplication ($user_email,$group_id)
     {
         $sql = "DELETE FROM UserGroupTable ".
             " (user_group_id,user_email,group_id,user_role) ".
@@ -118,5 +125,5 @@ class Group {
 }
 
 $group = new Group();
-$group->createGroup("Bhargavi.k6@gmail.com", "CS Group", "Computer Science","C and Java", "");
+$group->createGroup("G1", "CS Group", "Computer Science","C and Java", "thtea");
 
