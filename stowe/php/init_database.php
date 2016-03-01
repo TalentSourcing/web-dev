@@ -19,7 +19,13 @@ class TalentMeDB {
 
     /* Public methods */
 
+    /**
+     * @return MySqli
+     */
     public static function getConnection() {
+        if (TalentMeDB::$conn == null) {
+            new TalentMeDB();
+        }
         return TalentMeDB::$conn;
     }
 
@@ -30,7 +36,7 @@ class TalentMeDB {
         return $result;
     }
 
-    public function close () {
+    public static function close () {
         if (TalentMeDB::$conn != null) {
             TalentMeDB::$conn->close();
         }
