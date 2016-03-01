@@ -6,13 +6,15 @@ $(document).ready(function() {
 
 function queryGroupEntries() {
 	var parentGroup = $("#groups");
-	var groupEntry = createEntryForGroup();
+	var groupId = 1;
+	var groupEntry = createEntryForGroup(groupId);
 	parentGroup.append(groupEntry);
 }
 
 function queryUserEntries() {
 	var parentUser = $("#users");
-	var userEntry = createEntryForUser();
+	var email = 'abc@gmail.com';
+	var userEntry = createEntryForUser(email);
 	parentUser.append(userEntry);
 }
 
@@ -23,18 +25,18 @@ function queryUserEntries() {
 	</div>
 	<div class="content">
 	    	<h2><a class="name_entry" href="../groups/view_group_external.html">Group Name</a></h2>
-	    	<h3>Fouder: <a id="name_founder" href="../profile/userProfile.html">Founder name</a></h3>    
+	    	<h3>Fouder: <a class="name_founder" href="../profile/userProfile.html">Founder name</a></h3>    
 	        <p>Group Intro</p> 
 	</div>
 	<div>
-		<button id="button_apply_group" class="button_entry" type="button">Apply to join</button>
+		<button class="button_entry" type="button">Apply to join</button>
 	</div>
 </div>
 */
-function createEntryForGroup() {
+function createEntryForGroup(groupId) {
 	var entry = $('<div/>', {
 				class: "entry",
-				id: "group_1"
+				id: "group_" + groupId
 				});
 
 	var image_container = $('<div/>', {
@@ -65,7 +67,7 @@ function createEntryForGroup() {
 				text: "Founder: "
 				}).append(
 					$('<a/>', {
-						id: "name_founder",
+						class: "name_founder",
 						href: "../profile/userProfile.html",
 						text: "Founder name"
 					})
@@ -93,7 +95,7 @@ function createEntryForGroup() {
 
 
 /*
-<div class="entry" id="user_1">
+<div class="entry" id="abc@gmail.com">
 	<div class="image_container">
 		<img class="image" src="../../../../image/default-placeholder.png" alt="User image">
 	</div>
@@ -103,14 +105,14 @@ function createEntryForGroup() {
 		<p>User skills</p>
 	</div>
 	<div>
-		<button id="button_chat" class="button_entry" type="button" onclick="window.open('../chat/chat.html')">Chat</button>
+		<button class="button_entry" type="button" onclick="window.open('../chat/chat.html')">Chat</button>
 	</div>
 </div>
 */
-function createEntryForUser() {
+function createEntryForUser(email) {
 	var entry = $('<div/>', {
 				class: "entry",
-				id: "user_1"
+				id: email
 				});
 
 	var image_container = $('<div/>', {

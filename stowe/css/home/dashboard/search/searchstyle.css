@@ -78,7 +78,7 @@ form{
 
 .name_entry {
 	text-decoration: none;
-	font-family: Lora;
+	font-family: Raleway;
 	color: #7094A8;
 
 	-webkit-transition: all 0.3s ease-in;
@@ -90,7 +90,7 @@ form{
 	color: #5B5E63;
 }
 
-#name_founder {
+.name_founder {
 	text-decoration: none;
 	font-family: Lora;
 	color: #7094A8;
@@ -100,7 +100,7 @@ form{
 	transition: all 0.3s ease-in;
 }
 
-#name_founder:hover {
+.name_founder:hover {
 	color: #5B5E63;
 }
 
@@ -112,6 +112,7 @@ form{
 	float: right;
 	margin: 5%;
 	width: 7%;
+	opacity: 0.8;
 	font-family: Lora;
 
 	-webkit-transition: all 0.2s ease-in;
@@ -121,10 +122,4 @@ form{
 
 .button_entry:hover {
 	color: #5B5E63;
-}
-
-#button_apply_group {
-}
-
-#button_chat {
 }
