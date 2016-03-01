@@ -88,20 +88,33 @@ class User {
             for ($i = 0; $row = $result->fetch_assoc(); $i++) {
                 $json_objs[$i] = json_encode($row);
             }
-
-            foreach ($json_objs as $obj) {
-                echo "$obj <br>";
-            }
+            return $json_objs;
         }
         else {
             echo "GetAppliedGroups Failure:";
+            return null;
 //            echo "GetAppliedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
 
     }
 
     public function getJoinedGroups($user_email) {
-
+        $sql = "SELECT * FROM UserGroupTable ".
+            "WHERE user_email='$user_email' AND user_role='$this->MEMBER'";
+        if ($result = $this->conn->query($sql)) {
+            echo "GetJoinedGroups success!<br>";
+            // turn each row into an assoc array, then convert each element into a json string
+            $json_objs = array();
+            for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                $json_objs[$i] = json_encode($row);
+            }
+            return $json_objs;
+        }
+        else {
+            echo "GetJoinedGroups Failure:";
+            return null;
+//            echo "GetJoinedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
+        }
     }
 
     public function leaveGroup($user_email, $group_id) {
@@ -124,5 +137,6 @@ class User {
 $user = new User();
 $user->test();
 $user->applyForGroup("d.lindskog1@gmail.com", 1);
-$user->getAppliedGroups("d.lindskog1@gmail.com");
+$objs = $user->getJoinedGroups("d.lindskog1@gmail.com");
+echo $objs[0];
 //$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);
