@@ -62,7 +62,7 @@ class User {
         }
         else {
             echo "UserGroupTable insert Failure:";
-            echo "UserGroupTable insert Failure: $this->conn->error <br>"; // this may not be working for some reason
+//            echo "UserGroupTable insert Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
@@ -74,17 +74,36 @@ class User {
         }
         else {
             echo "UserGroupTable delete Failure:";
-            echo "UserGroupTable delete Failure: $this->conn->error <br>"; // this may not be working for some reason
+//            echo "UserGroupTable delete Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
     public function getAppliedGroups($user_email) {
+        $sql = "SELECT * FROM UserGroupTable ".
+                "WHERE user_email='$user_email' AND user_role='$this->APPLIED'";
+        if ($result = $this->conn->query($sql)) {
+            echo "GetAppliedGroups success!<br>";
+            // turn each row into an assoc array, then convert each element into a json string
+            $json_objs = array();
+            for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                $json_objs[$i] = json_encode($row);
+            }
+
+            foreach ($json_objs as $obj) {
+                echo "$obj <br>";
+            }
+        }
+        else {
+            echo "GetAppliedGroups Failure:";
+//            echo "GetAppliedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
+        }
 
     }
 
     public function getJoinedGroups($user_email) {
 
     }
+
     public function leaveGroup($user_email, $group_id) {
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->MEMBER'";
@@ -93,7 +112,7 @@ class User {
         }
         else {
             echo "LeaveGroup Failure:";
-            echo "LeaveGroup Failure: $this->conn->error <br>"; // this may not be working for some reason
+//            echo "LeaveGroup Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
@@ -105,4 +124,5 @@ class User {
 $user = new User();
 $user->test();
 $user->applyForGroup("d.lindskog1@gmail.com", 1);
-$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);
+$user->getAppliedGroups("d.lindskog1@gmail.com");
+//$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);
