@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$("#searchButton").on({
 		click: function() {
 			var searchFieldText = $("#searchField").val();
-
+			
 			queryGroupEntries(searchFieldText);
 			queryUserEntries(searchFieldText);
 		}
@@ -11,34 +11,68 @@ $(document).ready(function() {
 });
 
 function queryGroupEntries(searchFieldText) {
-	var parentGroup = $("#groups");
+	var parentNode = $("#groups");
+	parentNode.empty();
 
 	// query for group list
-	
-
-	var groupId = 1;
-	var groupImg = "../../../../image/default-placeholder.png";
-	var groupName = "Group name";
-	var founderName = "Founder name";
-	var groupIntro = "Group intro";
-	var groupEntry = createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro);
-	parentGroup.append(groupEntry);
+	//var groupList = <?php echo searchForGroups(searchFieldText); ?>;
+	var groupList = [
+			{
+				groupId: 1, 
+				groupImg: "../../../../image/default-placeholder.png",
+				groupName: "Group Name",
+				founderName: "Founder Name",
+				groupIntro: "Group intro"
+			},
+			{
+				groupId: 2, 
+				groupImg: "../../../../image/default-placeholder.png",
+				groupName: "Group Name",
+				founderName: "Founder Name",
+				groupIntro: "Group intro"
+			}
+			];
+	for (var i = 0; i < groupList.length; i++) {
+		var groupId = groupList[i].groupId;
+		var groupImg = groupList[i].groupImg;
+		var groupName = groupList[i].groupName;
+		var founderName = groupList[i].founderName;
+		var groupIntro = groupList[i].groupIntro;
+		var groupEntry = createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro);
+		parentNode.append(groupEntry);
+	}
 }
 
 function queryUserEntries(searchFieldText) {
-	var parentUser = $("#users");
+	var parentNode = $("#users");
+	parentNode.empty();
 
 	// query for user list
-
-
-	var email = 'abc@gmail.com';
-	var userProfileImg = "../../../../image/default-placeholder.png";
-	var firstName = "User";
-	var lastName = "name";
-	var userName = firstName + " " + lastName;
-	var skills = "User skills";
-	var userEntry = createEntryForUser(email, userProfileImg, userName, skills);
-	parentUser.append(userEntry);
+	//var userList = <?php echo searchForUsers(searchFieldText); ?>;
+	var userList = [
+			{
+				email: "abc@gmail.com",
+				userProfileImg: "../../../../image/default-placeholder.png",
+				firstName: "User",
+				lastName: "name",
+				skills: "User skills"
+			}, 
+			{
+				email: "xyz@gmail.com",
+				userProfileImg: "../../../../image/default-placeholder.png",
+				firstName: "User",
+				lastName: "name",
+				skills: "User skills"
+			}
+			];
+	for (var i = 0; i < userList.length; i++) {
+		var email = userList[i].email;
+		var userProfileImg = userList[i].userProfileImg;
+		var userName = userList[i].firstName + " " + userList[i].lastName;
+		var skills = userList[i].skills;
+		var userEntry = createEntryForUser(email, userProfileImg, userName, skills);
+		parentNode.append(userEntry);
+	}
 }
 
 /*
