@@ -118,5 +118,5 @@ class DatabaseInterface {
 }
 
 $dbi = new DatabaseInterface();
-$dbi->createGroup("bk@gmail.com", "Group1", "Computer","Java", "img.jpg");
+$dbi->createGroup("Bhargavi.k6@gmail.com", "CS Group", "Computer Science","C and Java", "");
 
