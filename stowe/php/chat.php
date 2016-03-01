@@ -19,25 +19,24 @@ function createGroupChat ($creator_user_email, $group_id){
         echo "Insert success!";
     }
     else{
-        echo "Insert Failure: " . $this->conn->error . "<br>";
+        echo "Error Message: " . $this->conn->error . "<br>";
     }
 }
 
 //naina - please help on completing this function
-function createIndividualChat ($creator_user_email, $recipient_user_email){
-
-$sql = "SELECT user_email " .
-    "FROM UserTable " .
-    "WHERE user_name " .
-    "LIKE '$recipient_user_email'";
+function createIndividualChat ($creator_user_email, $recipient_user_email, $chat_id){
 
 
-
+//do we need to pass in a null value for ID, since it is integer autoincremented.
     try{
 
         $sql = "INSERT INTO ChatLineTable ".
         "(id, chat_id, user_email, text_line, time_stamp, group_id)" .
-        "VALUES ('$creator_user_email', )";
+        "VALUES ('', $chat_id, $creator_user_email','','','' )";
+
+        $sql = "INSERT INTO ChatLineTable ".
+        "(id, chat_id, user_email, text_line, time_stamp, group_id)" .
+        "VALUES ('', $chat_id, $recipient_user_email','','','' )";
 
         echo "Success.";
     }
@@ -45,7 +44,6 @@ $sql = "SELECT user_email " .
     catch(Exception $e){
         echo "Error Message" $e->getMessage();
     }
-
 }
 
 
