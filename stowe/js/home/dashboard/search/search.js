@@ -1,7 +1,11 @@
 
 $(document).ready(function() {
-	queryGroupEntries();
-	queryUserEntries();
+	$("#searchButton").on({
+		click: function() {
+			queryGroupEntries();
+			queryUserEntries();
+		}
+	});
 });
 
 function queryGroupEntries() {
