@@ -130,13 +130,20 @@ class User {
     }
 
     public function getUserProfile($user_email) {
-
+        $sql = "SELECT * FROM UserTable WHERE user_email='$user_email'";
+        if ($result = $this->conn->query($sql)) {
+            echo "GetUserProfile success!";
+            return json_encode($result->fetch_assoc());
+        }
+        else {
+            echo "GetUserProfile failure";
+        }
     }
 }
 
 $user = new User();
 $user->test();
 $user->applyForGroup("d.lindskog1@gmail.com", 1);
-$objs = $user->getJoinedGroups("d.lindskog1@gmail.com");
-echo $objs[0];
+$objs = $user->getUserProfile("d.lindskog1@gmail.com");
+echo $objs;
 //$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);
