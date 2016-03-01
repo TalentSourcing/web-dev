@@ -1,0 +1,100 @@
+<?php
+
+require 'init_database.php';
+//require 'user_profile.php';
+
+class User {
+    private $conn = null;
+
+    private $FOUNDER = "founder";
+    private $MEMBER = "member";
+    private $INVITED = "invited";
+    private $APPLIED = "applied";
+
+    public function User () {
+        $this->conn = TalentMeDB::getConnection();
+    }
+
+    // TODO delete this later --
+    public function test() {
+        $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id=1");
+        if ($result->num_rows != 0) {
+            echo "GroupTable insert failure: group_id already exists in table<br>";
+            return null;
+        }
+
+        $sql = "INSERT INTO GroupTable (group_name, group_img, about, desired_skills) ".
+            "VALUES ('group1', '', '', '')";
+        if ($this->conn->query($sql)) {
+            echo "GroupTable insert success!<br>";
+        }
+        else {
+            echo "GroupTable insert Failure: $this->conn->error <br>";
+        }
+    }
+
+    public function applyForGroup($user_email, $group_id) {
+        // check for existence of user
+        $result = $this->conn->query("SELECT * FROM UserTable WHERE user_email='$user_email'");
+        if ($result->num_rows < 1) {
+            echo "UserGroupTable insert failure: user with email '$user_email' does not exist in UserTable<br>";
+            return null;
+        }
+
+        // check for existence of group
+        $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id='$group_id'");
+        if ($result->num_rows < 1) {
+            echo "UserGroupTable insert failure: Group with id '$group_id' does not exist in GroupTable<br>";
+            return null;
+        }
+
+        // check for existence of UserGroupTable row already
+        $result = $this->conn->query("SELECT * FROM UserGroupTable WHERE user_email='$user_email' AND group_id=$group_id");
+        if ($result->num_rows != 0) {
+            echo "UserGroupTable insert failure: user_email/group_id row already exists in table<br>";
+            return null;
+        }
+
+        $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) ".
+            "VALUES ('$user_email', $group_id, '$this->APPLIED')";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable insert success!<br>";
+        }
+        else {
+            echo "UserGroupTable insert Failure:";
+            echo "UserGroupTable insert Failure: $this->conn->error <br>"; // this may not be working for some reason
+        }
+    }
+
+    public function cancelGroupApplication($user_email, $group_id) {
+        $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
+            "AND user_role='$this->APPLIED'";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable delete success!<br>";
+        }
+        else {
+            echo "UserGroupTable delete Failure:";
+            echo "UserGroupTable delete Failure: $this->conn->error <br>"; // this may not be working for some reason
+        }
+    }
+
+    public function getAppliedGroups($user_email) {
+
+    }
+
+    public function getJoinedGroups($user_email) {
+
+    }
+    public function leaveGroup($user_email, $group_id) {
+
+    }
+
+    public function getUserProfile($user_email) {
+
+    }
+}
+
+$user = new User();
+$user->test();
+$user->applyForGroup("d.lindskog1@gmail.com", 1);
+$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);

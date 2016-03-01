@@ -5,7 +5,7 @@ require 'init_database.php';
 class UserProfile {
     private $conn = null;
 
-    public function DatabaseInterface () {
+    public function UserProfile () {
         $this->conn = TalentMeDB::getConnection();
     }
 
@@ -64,8 +64,8 @@ class UserProfile {
     }
 }
 
-//$dbi = new DatabaseInterface();
-//$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
+$dbi = new UserProfile();
+$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
 //$dbi->updateUser("d.lindskog1@gmail.com", "Bob", "Nelson", "password", "", "", "", "", "", "");
 //$dbi->deleteUser("d.lindskog1@gmail.com");
 //$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");

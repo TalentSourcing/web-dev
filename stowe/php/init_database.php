@@ -171,8 +171,7 @@ class TalentMeDB {
     }
 }
 
-// test creation
-//$database = new TalentMeDB();
+// TODO remove this later
 new TalentMeDB();
 
 ?>
