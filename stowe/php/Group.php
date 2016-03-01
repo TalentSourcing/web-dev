@@ -13,7 +13,7 @@ class Group
         $this->conn = TalentMeDB::getConnection();
     }
 
-    function createGroup ($user_email, $group_name, $about, $desired_skills, $group_img)
+    function createGroup ($group_id, $group_name, $about, $desired_skills, $group_img)
     {
         $sql = "INSERT INTO GroupTable ".
             "(group_id, group_name, group_img , about, desired_skills) ".
@@ -32,42 +32,44 @@ class Group
 
 }
 
+ function updateGroup($group_name, $about, $desired_skills, $group_img, $group_id)
+{
 
-
-    //this function updates the group details in GroupTable
-    public function update ($group_id,$group_name, $about, $desired_skills, $group_img)
-    {
-        $sql = "UPDATE GroupTable SET  ".
-            "group_name='$group_name',".
-            "about='$about',".
-            "desired_skills='$desired_skills',".
-            "group_img='$group_img',".
-            "WHERE (group_id)=('$group_id') ";
-
-        try {
-            if ($this->conn->query($sql)) {
-                echo "Success!";
-            }
-        } catch (Exception $e) {
-            echo $e . "<br>";
-        }
-        echo "after if/else";
+    $sql = "UPDATE GroupTable SET".
+        "group_name='$group_name',".
+        "about='$about',".
+        "desired_skills='$desired_skills',".
+        "group_img='$group_img',".
+        "WHERE group_id='$group_id'";
+    if ($this->conn->query($sql)) {
+        echo "Successfully Updated the Group!";
     }
 
-    public function delete ($group_id)
+    else {
+
+        echo "Update unsuccessful!!";
+    }
+
+}
+
+
+    public function deleteGroup ($group_id)
     {
         $sql = "DELETE FROM GroupTable ".
             " (group_name, about, desired_skills, group_img) ".
             "WHERE (group_id)=('$group_id') ";
 
-        try {
-            if ($this->conn->query($sql)) {
+
+            if ($this->conn->query($sql))
+            {
                 echo "Success!";
             }
-        } catch (Exception $e) {
-            echo $e . "<br>";
+
+        else {
+            echo "Not able to delete the group!";
+
         }
-        echo "after if/else";
+
     }
     public function inviteUser ($user_email,$group_id)
 
@@ -125,5 +127,7 @@ class Group
 }
 
 $group = new Group();
-$group->createGroup("G1", "CS Group", "Computer Science","C and Java", "thtea");
+#$group->createGroup("G1", "CS Group", "Computer Science","C and Java", "thtea");
+#$group->updateGroup("Computer Science Group","Student","Perl PHP","pic.jpg","1");
+$group->deleteGroup("1");
 
