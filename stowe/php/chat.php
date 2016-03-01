@@ -106,7 +106,6 @@ class Chat {
     }
 }
 
-
 $dbi = new Chat();
 $dbi->createGroupChat("", "", "misha.yalavarthy@gmail.com", "", "", "2");
 //$dbi->createIndividualChat("","1","misha.yalavarthy@gmail.com","", "", "");
