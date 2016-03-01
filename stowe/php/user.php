@@ -86,7 +86,15 @@ class User {
 
     }
     public function leaveGroup($user_email, $group_id) {
-
+        $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
+            "AND user_role='$this->MEMBER'";
+        if ($this->conn->query($sql)) {
+            echo "LeaveGroup success!<br>";
+        }
+        else {
+            echo "LeaveGroup Failure:";
+            echo "LeaveGroup Failure: $this->conn->error <br>"; // this may not be working for some reason
+        }
     }
 
     public function getUserProfile($user_email) {
