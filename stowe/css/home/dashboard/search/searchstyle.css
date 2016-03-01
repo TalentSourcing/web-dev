@@ -1,6 +1,6 @@
 body{
     background: #E8EDF9;
-	min-width: 770px;
+	min-width: 800px;
 }
 
 ul {
@@ -36,14 +36,14 @@ form{
     display: inline;
     padding: 20px; 
 }
+
 #searchButton {
     color: #FFFFFF;
     background-color: #607B8B;
     
 }
 
-
-.tables{
+.entry{
     border: 1px solid black;
     margin: 0px;
     padding: 0px;
@@ -52,11 +52,15 @@ form{
     overflow: hidden;
 }
 
+.entry:nth-child(even) {
+	background-color: #F0F3FA;
+}
+
 .image_container {
     border: 1px solid black;
     float: left;
-    width: 5%;
-	padding: 5%;
+    width: 10%;
+	min-width: 135px;
 }
 
 .image {
@@ -74,17 +78,49 @@ form{
 
 .name_entry {
 	text-decoration: none;
+	font-family: Lora;
+	color: #7094A8;
+
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+}
+
+.name_entry:hover {
+	color: #5B5E63;
 }
 
 #name_founder {
 	text-decoration: none;
+	font-family: Lora;
+	color: #7094A8;
+
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+}
+
+#name_founder:hover {
+	color: #5B5E63;
+}
+
+.description {
+	font-family: Lora;
 }
 
 .button_entry {
-	border: 2px solid black;
 	float: right;
 	margin: 5%;
-	width: 6.5%;
+	width: 7%;
+	font-family: Lora;
+
+	-webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in;
+}
+
+.button_entry:hover {
+	color: #5B5E63;
 }
 
 #button_apply_group {
