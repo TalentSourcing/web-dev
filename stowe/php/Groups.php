@@ -5,7 +5,7 @@
 
 require 'init_database.php';
 
-class DatabaseInterface {
+class Group {
     private $conn = null;
 
     public function DatabaseInterface () {
@@ -117,6 +117,6 @@ class DatabaseInterface {
     }
 }
 
-$dbi = new DatabaseInterface();
-$dbi->createGroup("Bhargavi.k6@gmail.com", "CS Group", "Computer Science","C and Java", "");
+$group = new Group();
+$group->createGroup("Bhargavi.k6@gmail.com", "CS Group", "Computer Science","C and Java", "");
 
