@@ -19,7 +19,7 @@
 		</div>
 	</header>
 
-	<div id="body">
+	<div>
     		<h1>Search</h1>
     		<ul>
         		<li><a>Groups</a></li>
@@ -33,28 +33,40 @@
     		</ul>
 		<br>
 
-		<div class="tables">
-    			<div id="smilediv">
-         			<img id="smile" src="../../../../image/home/dashboard/search/smiley.jpeg" alt="smiley">
-    			</div>
-    			<div id="listingtext">
-    				<h2>Group Listing Sample</h2>
-    				<h3>GroupName, FounderName</h3>    
-        			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p> </div>
-	    		</div>
-    		<br>
+		<div id="groups">
+			<div class="tables" id="group_1">
+    				<div class="image_container">
+         				<img class="image" src="../../../../image/default-placeholder.png" alt="Group image">
+	    			</div>
+	    			<div class="content">
+	    				<h2><a class="name_entry" href="../groups/view_group_external.html">Group Name</a></h2>
+	    				<h3>Fouder: <a id="name_founder" href="../profile/userProfile.html">Founder name</a></h3>    
+	        			<p>Group Intro</p> 
+				</div>
+				<div>
+					<button id="button_apply_group" class="button_entry" type="button">Apply to join</button>
+				</div>
+		    	</div>
+		</div>
 
-		<div class="tables">
-	     		<div id="smilediv">
-	         		<img id="smile" src="../../../../image/home/dashboard/search/smiley.jpeg" alt="smiley">
-	    		</div>
-	    		<div id="listingtext">
-	    			<h2>User Listing Sample</h2>
-	    			<h3>User Name</h3>    
-	        		<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p> 
-    			</div>
-    		</div>
  		<br>
+
+		<div id="users">
+			<div class="tables" id="user_1">
+	     			<div class="image_container">
+		         		<img class="image" src="../../../../image/default-placeholder.png" alt="User image">
+		    		</div>
+		    		<div class="content">
+		    			<h2><a class="name_entry" href="../profile/userProfile.html">User name</a></h2>
+		        		<h3>Skills</h3>
+					<p>User skills</p>
+	    			</div>
+				<div>
+					<button id="button_chat" class="button_entry" type="button" onclick="window.open('../chat/chat.html')">Chat</button>
+				</div>
+    			</div>
+ 			<br>
+		</div>
 	</div>
 
 	<footer>
