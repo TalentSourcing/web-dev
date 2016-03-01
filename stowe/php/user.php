@@ -1,7 +1,6 @@
 <?php
 
 require 'init_database.php';
-//require 'user_profile.php';
 
 class User {
     private $conn = null;

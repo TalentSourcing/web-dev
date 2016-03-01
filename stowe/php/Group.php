@@ -7,17 +7,22 @@ require 'init_database.php';
 
 class Group
 {
+
+    private $FOUNDER = "founder";
+    private $MEMBER = "member";
+    private $INVITED = "invited";
+    private $APPLIED = "applied";
     private $conn = null;
 
     public function Group () {
         $this->conn = TalentMeDB::getConnection();
     }
 
-    function createGroup ($group_id, $group_name, $about, $desired_skills, $group_img)
+    function createGroup ( $group_name, $about, $desired_skills, $group_img)
     {
         $sql = "INSERT INTO GroupTable ".
-            "(group_id, group_name, group_img , about, desired_skills) ".
-            "VALUES ('$group_id', '$group_name', '$group_img', '$about', '$desired_skills') ";
+            "( group_name, group_img , about, desired_skills) ".
+            "VALUES ( '$group_name', '$group_img', '$about', '$desired_skills') ";
 
 
             if ($this->conn->query($sql)) {
@@ -30,18 +35,20 @@ class Group
         }
 
 
-}
+}//working
 
- function updateGroup($group_name, $about, $desired_skills, $group_img, $group_id)
+ public function updateGroup( $group_name,$about, $desired_skills, $group_img, $group_id )
 {
 
-    $sql = "UPDATE GroupTable SET".
+    $sql = "UPDATE GroupTable SET ".
         "group_name='$group_name',".
         "about='$about',".
         "desired_skills='$desired_skills',".
         "group_img='$group_img',".
-        "WHERE group_id='$group_id'";
-    if ($this->conn->query($sql)) {
+        "WHERE group_id=$group_id";
+
+    if ($this->conn->query($sql))
+    {
         echo "Successfully Updated the Group!";
     }
 
@@ -56,13 +63,13 @@ class Group
     public function deleteGroup ($group_id)
     {
         $sql = "DELETE FROM GroupTable ".
-            " (group_name, about, desired_skills, group_img) ".
+//            " (group_name, about, desired_skills, group_img) ".
             "WHERE (group_id)=('$group_id') ";
 
 
             if ($this->conn->query($sql))
             {
-                echo "Success!";
+                echo "Successfully deleted group!";
             }
 
         else {
@@ -70,32 +77,32 @@ class Group
 
         }
 
-    }
-    public function inviteUser ($user_email,$group_id)
+    }//working
+    public function inviteUser ($user_email,$group_id,$user_role)
 
     {
 
-        $applied="Applied";
+
         $sql = "INSERT INTO UserGroupTable ".
             " (user_email, group_id, user_role ) ".
-            "VALUES ('$user_email', '$group_id', $applied) ";
+            "VALUES ('$user_email', '$group_id', '$user_role->APPLIED') ";
 
-        try {
+
             if ($this->conn->query($sql)) {
-                echo "Success!";
+                echo "Successfully inserted into usergroup table!";
             }
-        } catch (Exception $e) {
-            echo $e . "<br>";
-        }
-        echo "after if/else";
+       else {
+
+           echo "Could not insert into UserGroupTable";
+       }
     }
     public function approveUser ($user_email,$group_id)
 
     {
 
-        $member="Member";
+
         $sql = "UPDATE UserGroupTable SET  ".
-            "user_role='$member'".
+            "user_role='$this->MEMBER'".
             "WHERE (user_email)=('$user_email') ".
             "group_id='$group_id'";
 
@@ -127,7 +134,9 @@ class Group
 }
 
 $group = new Group();
-#$group->createGroup("G1", "CS Group", "Computer Science","C and Java", "thtea");
-#$group->updateGroup("Computer Science Group","Student","Perl PHP","pic.jpg","1");
-$group->deleteGroup("1");
-
+#$group->createGroup( "CSE GroupS", "Math","Query", "kasdnv");
+$group->updateGroup("CSEGROUP","Student","Perl PHP","pic.jpg",4);
+#$group->deleteGroup(3);
+#$group->inviteUser( "Bhargavi.k6@gmail.com", 4,"");
+#$group->approveUser( "Bhargavi.k6@gmail.com", 4);
+#$group->declineUserApplication( "Bhargavi.k6@gmail.com", 4);
