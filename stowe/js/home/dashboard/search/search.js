@@ -2,23 +2,42 @@
 $(document).ready(function() {
 	$("#searchButton").on({
 		click: function() {
-			queryGroupEntries();
-			queryUserEntries();
+			var searchFieldText = $("#searchField").val();
+
+			queryGroupEntries(searchFieldText);
+			queryUserEntries(searchFieldText);
 		}
 	});
 });
 
-function queryGroupEntries() {
+function queryGroupEntries(searchFieldText) {
 	var parentGroup = $("#groups");
+
+	// query for group list
+	
+
 	var groupId = 1;
-	var groupEntry = createEntryForGroup(groupId);
+	var groupImg = "../../../../image/default-placeholder.png";
+	var groupName = "Group name";
+	var founderName = "Founder name";
+	var groupIntro = "Group intro";
+	var groupEntry = createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro);
 	parentGroup.append(groupEntry);
 }
 
-function queryUserEntries() {
+function queryUserEntries(searchFieldText) {
 	var parentUser = $("#users");
+
+	// query for user list
+
+
 	var email = 'abc@gmail.com';
-	var userEntry = createEntryForUser(email);
+	var userProfileImg = "../../../../image/default-placeholder.png";
+	var firstName = "User";
+	var lastName = "name";
+	var userName = firstName + " " + lastName;
+	var skills = "User skills";
+	var userEntry = createEntryForUser(email, userProfileImg, userName, skills);
 	parentUser.append(userEntry);
 }
 
@@ -37,7 +56,7 @@ function queryUserEntries() {
 	</div>
 </div>
 */
-function createEntryForGroup(groupId) {
+function createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro) {
 	var entry = $('<div/>', {
 				class: "entry",
 				id: "group_" + groupId
@@ -48,7 +67,7 @@ function createEntryForGroup(groupId) {
 					});
 	var image = $('<img/>', {
 				class: "image",
-				src: "../../../../image/default-placeholder.png",
+				src: groupImg,
 				alt: "Group image"
 				});
 
@@ -62,7 +81,7 @@ function createEntryForGroup(groupId) {
 					$('<a/>', {
 						class: "name_entry",
 						href: "../groups/view_group_external.html",
-						text: "Group name"
+						text: groupName
 						})
 					);
 	content.append(name_entry);
@@ -73,14 +92,14 @@ function createEntryForGroup(groupId) {
 					$('<a/>', {
 						class: "name_founder",
 						href: "../profile/userProfile.html",
-						text: "Founder name"
+						text: founderName
 					})
 				);
 	content.append(name_founder);
 
 	var group_intro = $('<p/>', {
 				class: "description",
-				text: "Group intro"
+				text: groupIntro
 				});
 	content.append(group_intro);
 	entry.append(content);
@@ -113,7 +132,7 @@ function createEntryForGroup(groupId) {
 	</div>
 </div>
 */
-function createEntryForUser(email) {
+function createEntryForUser(email, userProfileImg, userName, skills) {
 	var entry = $('<div/>', {
 				class: "entry",
 				id: email
@@ -124,7 +143,7 @@ function createEntryForUser(email) {
 					});
 	var image = $('<img/>', {
 				class: "image",
-				src: "../../../../image/default-placeholder.png",
+				src: userProfileImg,
 				alt: "Group image"
 				});
 
@@ -138,7 +157,7 @@ function createEntryForUser(email) {
 					$('<a/>', {
 						class: "name_entry",
 						href: "../profile/userProfile.html",
-						text: "User name"
+						text: userName
 						})
 					);
 	content.append(name_entry);
@@ -150,7 +169,7 @@ function createEntryForUser(email) {
 
 	var user_skills = $('<p/>', {
 				class: "description",
-				text: "User skills"
+				text: skills
 				});
 	content.append(user_skills);
 	entry.append(content);
