@@ -141,9 +141,9 @@ class User {
     }
 }
 
-$user = new User();
-$user->test();
-$user->applyForGroup("d.lindskog1@gmail.com", 1);
-$objs = $user->getUserProfile("d.lindskog1@gmail.com");
-echo $objs;
+//$user = new User();
+//$user->test();
+//$user->applyForGroup("d.lindskog1@gmail.com", 1);
+//$objs = $user->getUserProfile("d.lindskog1@gmail.com");
+//echo $objs;
 //$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);
