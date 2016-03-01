@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: davidlindskog
- * Date: 2/29/16
- * Time: 10:41 AM
- */
 
 require 'init_database.php';
 
-class DatabaseInterface {
+class UserProfile {
     private $conn = null;
 
-    public function DatabaseInterface () {
+    public function UserProfile () {
         $this->conn = TalentMeDB::getConnection();
     }
 
@@ -70,10 +64,10 @@ class DatabaseInterface {
     }
 }
 
-$dbi = new DatabaseInterface();
+$dbi = new UserProfile();
 $dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
-$dbi->updateUser("d.lindskog1@gmail.com", "Bob", "Nelson", "password", "", "", "", "", "", "");
-$dbi->deleteUser("d.lindskog1@gmail.com");
-$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
+//$dbi->updateUser("d.lindskog1@gmail.com", "Bob", "Nelson", "password", "", "", "", "", "", "");
+//$dbi->deleteUser("d.lindskog1@gmail.com");
+//$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
 
 //TalentMeDB::close();
