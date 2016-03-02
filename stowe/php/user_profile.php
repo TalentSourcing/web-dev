@@ -65,7 +65,7 @@ class UserProfile {
 }
 
 $dbi = new UserProfile();
-$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
+//$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
 //$dbi->updateUser("d.lindskog1@gmail.com", "Bob", "Nelson", "password", "", "", "", "", "", "");
 //$dbi->deleteUser("d.lindskog1@gmail.com");
 //$dbi->createUser("d.lindskog1@gmail.com", "David", "Lindskog", "password", "", "", "", "", "", "");
