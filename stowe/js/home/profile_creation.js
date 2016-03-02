@@ -1,18 +1,9 @@
 
 'use strict';
 
-//var profile = {
-//    'user_email' : '', // NOT NULL
-//    'first_name' : '', // NOT NULL
-//    'last_name' : '', // NOT NULL
-//    'password' : '', // NOT NULL
-//    'linkedin_url' : '',
-//    'skills' : '',
-//    'occupation' : '',
-//    'gender' : '',
-//    'profile_img' : '',
-//    'objective' : ''
-//};
+// this might have to become a get/post from html instead
+
+repopulate();
 
 function getFields () { // these might need input in front
     var profile = {};
@@ -28,6 +19,8 @@ function getFields () { // these might need input in front
         profile.profile_img = ""; // TODO need to use a button to select
         profile.objective = $('textarea[name="objective"]:checked').val();
     });
+    sessionStorage.setItem('saved_state', JSON.stringify(profile));
+    console.log("profile obj: " + JSON.stringify(profile));
     return profile;
 }
 
@@ -36,32 +29,49 @@ function validate () {
     var error_msg = {};
     var profile = getFields();
 
-    // check password
-    // check for NOT NULL fields
-    // check for white space only
-
-    // if checks pass, set next page to user_profile.html
-    // if checks fail, set next page to profileCreation.html and repopulate the fields
-
-    if (profile.password !== $('input[name="password_confirm"]').val()) {
-        valid = false
-        error_msg.password =  "Passwords do not match.  ";
-    }
-    if () { // check required fields for "" or whitespace
+    // check required fields for strings that have at least one non-whitespace character
+    if (!/S/.test(profile.user_email) || !/S/.test(profile.first_name) ||
+        !/S/.test(profile.last_name) || !/S/.test(profile.password)) {
         valid = false;
         error_msg.requiredFields = "Required fields are not all filled out";
     }
+    if (profile.password !== $('input[name="password_confirm"]').val()) {
+        valid = false;
+        error_msg.password = "Passwords do not match.  ";
+    }
 
-
+    // if checks pass, go to dashboard, else stay on same page to fix problems
+    valid = true; // TODO delete this
     if (valid) {
-        window.location.href = "dashboard/dashboard.html";
+        alert("Valid!");
+        sessionStorage.removeItem('saved_state');
+
+        // TODO create user in php
+
     }
     else {
+        alert("Some fields not valid!\n" + JSON.stringify(error_msg));
         window.location.href = "profileCreation.html";
-        repopulate(profile);
     }
 }
 
-function repopulate(profile) {
-    // TODO repoulate window fields here
+function repopulate () {
+    var state = null;
+    if ((state = JSON.parse(sessionStorage.getItem('saved_state'))) === null) {
+        console.log("no saved state found");
+        return;
+    }
+    console.log("saved state found!\n" + JSON.stringify(state));
+    $(document).ready(function () {
+        $('input[name="email"]').val(state.user_email);
+        $('input[name="firstname"]').val(state.first_name);
+        $('input[name="lastname"]').val(state.last_name);
+        $('input[name="password"]').val(state.password);
+        $('input[name="linkedin"]').val(state.linkedin_url);
+        $('textarea[name="skills"]').val(state.skills);
+        $('input[name="occupation"]').val(state.occupation);
+        $('input[name="gender"]:checked').val(state.gender);
+        // TODO profile_img
+        $('textarea[name="objective"]:checked').val(state.objective);
+    });
 }
