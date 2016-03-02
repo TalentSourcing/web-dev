@@ -46,10 +46,10 @@ class TalentMeDB {
         if (TalentMeDB::$conn != null) {
             if (TalentMeDB::$conn->query("DROP DATABASE $this->dbname") === true) {
                 $this->close();
-                echo "Deleted database '$this->dbname' successfully!<br>";
+                echo "Deleted database '$this->dbname' successfully!\n";
             }
             else {
-                echo "Could not delete database '$this->dbname'<br>";
+                echo "Could not delete database '$this->dbname'\n";
             }
         }
     }
@@ -69,16 +69,16 @@ class TalentMeDB {
         if (TalentMeDB::$conn->select_db($this->dbname)) { // select_db returns true if found, false if not found
             $result = TalentMeDB::$conn->query("SELECT DATABASE()");
             $row = $result->fetch_row();
-            echo "Current database is " . $row[0] . "<br>";
+            echo "Current database is " . $row[0] . "\n";
             $result->close();
         }
         else { // database $dbname not found, create a new one
-            echo "No database by the name '$this->dbname' found.<br>";
+            echo "No database by the name '$this->dbname' found.\n";
             // Create database
             $sql = "CREATE DATABASE " . $this->dbname;
             if (TalentMeDB::$conn->query($sql) === TRUE) {
                 TalentMeDB::$conn->select_db($this->dbname);
-                echo "New database '$this->dbname' created successfully.<br>";
+                echo "New database '$this->dbname' created successfully.\n";
                 $this->createUserTable(TalentMeDB::$conn);
                 $this->createGroupTable(TalentMeDB::$conn);
                 $this->createUserGroupTable(TalentMeDB::$conn);
@@ -106,9 +106,9 @@ class TalentMeDB {
             "PRIMARY KEY (user_email))";
 
         if ($conn->query($sql) === TRUE) {
-            echo "UserTable created successfully<br>";
+            echo "UserTable created successfully\n";
         } else {
-            echo "Error creating table: " . $conn->error . "<br>";
+            echo "Error creating table: " . $conn->error . "\n";
         }
     }
 
@@ -124,9 +124,9 @@ class TalentMeDB {
             "PRIMARY KEY (group_id))";
 
         if ($conn->query($sql) === TRUE) {
-            echo "GroupTable created successfully<br>";
+            echo "GroupTable created successfully\n";
         } else {
-            echo "Error creating table: " . $conn->error . "<br>";
+            echo "Error creating table: " . $conn->error . "\n";
         }
     }
 
@@ -143,9 +143,9 @@ class TalentMeDB {
             "FOREIGN KEY (group_id) REFERENCES GroupTable(group_id))";
 
         if ($conn->query($sql) === TRUE) {
-            echo "UserGroupTable created successfully<br>";
+            echo "UserGroupTable created successfully\n";
         } else {
-            echo "Error creating table: " . $conn->error . "<br>";
+            echo "Error creating table: " . $conn->error . "\n";
         }
     }
 
@@ -164,9 +164,9 @@ class TalentMeDB {
             "FOREIGN KEY (group_id) REFERENCES GroupTable(group_id))";
 
         if ($conn->query($sql) === TRUE) {
-            echo "ChatLineTable created successfully<br>";
+            echo "ChatLineTable created successfully\n";
         } else {
-            echo "Error creating table: " . $conn->error . "<br>";
+            echo "Error creating table: " . $conn->error . "\n";
         }
     }
 }

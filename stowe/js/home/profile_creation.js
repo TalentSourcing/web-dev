@@ -4,10 +4,6 @@
 // this might have to become a get/post from html instead
 // request types: create_user, update_user, delete_user
 const CREATE_USER = "create_user";
-const UPDATE_USER = "update_user";
-const DELETE_USER = "delete_user";
-
-repopulate();
 
 function getFields () { // these might need input in front
     var profile = {};
@@ -30,12 +26,15 @@ function getFields () { // these might need input in front
 
 function validate () {
     var valid = true;
-    var error_msg = {};
+    var error_msg = {
+        'requiredFields' : "",
+        'password' : ""
+    };
     var profile = getFields();
 
     // check required fields for strings that have at least one non-whitespace character
-    if (!/S/.test(profile.user_email) || !/S/.test(profile.first_name) ||
-        !/S/.test(profile.last_name) || !/S/.test(profile.password)) {
+    if (!/\S/.test(profile.user_email) || !/\S/.test(profile.first_name) ||
+        !/\S/.test(profile.last_name) || !/\S/.test(profile.password)) {
         valid = false;
         error_msg.requiredFields = "Required fields are not all filled out";
     }
@@ -45,12 +44,10 @@ function validate () {
     }
 
     // if checks pass, go to dashboard, else stay on same page to fix problems
-    valid = true; // TODO delete this
     if (valid) {
-        alert("Valid!");
         sessionStorage.removeItem('saved_state');
 
-        // TODO send profile to php
+        // send profile to php
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -61,28 +58,27 @@ function validate () {
         xmlhttp.send();
     }
     else {
-        alert("Some fields not valid!\n" + JSON.stringify(error_msg));
-        window.location.href = "profileCreation.html";
+        alert("Error!\n\n" + error_msg.requiredFields + "\n" + error_msg.password);
     }
 }
 
-function repopulate () {
-    var state = null;
-    if ((state = JSON.parse(sessionStorage.getItem('saved_state'))) === null) {
-        console.log("no saved state found");
-        return;
-    }
-    console.log("saved state found!\n" + JSON.stringify(state));
-    $(document).ready(function () {
-        $('input[name="email"]').val(state.user_email);
-        $('input[name="firstname"]').val(state.first_name);
-        $('input[name="lastname"]').val(state.last_name);
-        $('input[name="password"]').val(state.password);
-        $('input[name="linkedin"]').val(state.linkedin_url);
-        $('textarea[name="skills"]').val(state.skills);
-        $('input[name="occupation"]').val(state.occupation);
-        $('input[name="gender"]:checked').val(state.gender);
-        // TODO profile_img
-        $('textarea[name="objective"]:checked').val(state.objective);
-    });
-}
+//function repopulate () {
+//    var state = null;
+//    if ((state = JSON.parse(sessionStorage.getItem('saved_state'))) === null) {
+//        console.log("no saved state found");
+//        return;
+//    }
+//    console.log("saved state found!\n" + JSON.stringify(state));
+//    $(document).ready(function () {
+//        $('input[name="email"]').val(state.user_email);
+//        $('input[name="firstname"]').val(state.first_name);
+//        $('input[name="lastname"]').val(state.last_name);
+//        $('input[name="password"]').val(state.password);
+//        $('input[name="linkedin"]').val(state.linkedin_url);
+//        $('textarea[name="skills"]').val(state.skills);
+//        $('input[name="occupation"]').val(state.occupation);
+//        $('input[name="gender"]:checked').val(state.gender);
+//        // TODO profile_img
+//        $('textarea[name="objective"]:checked').val(state.objective);
+//    });
+//}
