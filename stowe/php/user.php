@@ -2,6 +2,13 @@
 
 require 'init_database.php';
 
+const APPLY_FOR_GROUP = "apply_for_group";
+const CANCEL_GROUP_APPLICATION = "cancel_group_application";
+const GET_APPLIED_GROUPS = "get_applied_groups";
+const GET_JOINED_GROUPS = "apply_for_group";
+const LEAVE_GROUP = "leave_group";
+const GET_USER_PROFILE = "get_user_profile";
+
 class User {
     private $conn = null;
 
@@ -15,22 +22,22 @@ class User {
     }
 
     // TODO delete this later --
-    public function test() {
-        $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id=1");
-        if ($result->num_rows != 0) {
-            echo "GroupTable insert failure: group_id already exists in table<br>";
-            return null;
-        }
-
-        $sql = "INSERT INTO GroupTable (group_name, group_img, about, desired_skills) ".
-            "VALUES ('group1', '', '', '')";
-        if ($this->conn->query($sql)) {
-            echo "GroupTable insert success!<br>";
-        }
-        else {
-            echo "GroupTable insert Failure: $this->conn->error <br>";
-        }
-    }
+//    public function test() {
+//        $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id=1");
+//        if ($result->num_rows != 0) {
+//            echo "GroupTable insert failure: group_id already exists in table<br>";
+//            return null;
+//        }
+//
+//        $sql = "INSERT INTO GroupTable (group_name, group_img, about, desired_skills) ".
+//            "VALUES ('group1', '', '', '')";
+//        if ($this->conn->query($sql)) {
+//            echo "GroupTable insert success!<br>";
+//        }
+//        else {
+//            echo "GroupTable insert Failure: $this->conn->error <br>";
+//        }
+//    }
 
     public function applyForGroup($user_email, $group_id) {
         // check for existence of user
@@ -131,18 +138,18 @@ class User {
     public function getUserProfile($user_email) {
         $sql = "SELECT * FROM UserTable WHERE user_email='$user_email'";
         if ($result = $this->conn->query($sql)) {
-            echo "GetUserProfile success!";
+            echo json_encode($result->fetch_assoc());
             return json_encode($result->fetch_assoc());
         }
         else {
-            echo "GetUserProfile failure";
+            echo json_encode("{'error' : 'getUserProfile Failure'}");
         }
     }
 }
 
-//$user = new User();
-//$user->test();
-//$user->applyForGroup("d.lindskog1@gmail.com", 1);
-//$objs = $user->getUserProfile("d.lindskog1@gmail.com");
-//echo $objs;
-//$user->cancelGroupApplication("d.lindskog1@gmail.com", 1);
+// check for which kind of request
+
+if (array_key_exists(GET_USER_PROFILE, $_GET)) {
+    $user = new User();
+    $user->getUserProfile($_GET[GET_USER_PROFILE]);
+}

@@ -7,4 +7,8 @@ fwrite($file, $json_str->name . "\n");
 fwrite($file, $json_str->age);
 fclose($file);
 
+echo "Success";
+// echoing can be used to send response data!  Would be retrieve in js through xmlhttp.responseText
+// in the callback function
+
 ?>

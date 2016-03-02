@@ -18,6 +18,12 @@ function getFields () {
         profile.profile_img = ""; // TODO need to use a button to select
         profile.objective = $('textarea[name="objective"]:checked').val();
     });
+    // convert whitespace to ""
+    for (var key in profile) {
+        if (profile.hasOwnProperty(key) && !/\S/.test(profile[key])) {
+            profile[key] = "";
+        }
+    }
     sessionStorage.setItem('saved_state', JSON.stringify(profile));
     console.log("profile obj: " + JSON.stringify(profile));
     return profile;
