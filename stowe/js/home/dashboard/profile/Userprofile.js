@@ -1,13 +1,5 @@
-/**
- * Created by davidlindskog on 3/2/16.
- */
 
 // php requests:
-const APPLY_FOR_GROUP = "apply_for_group";
-const CANCEL_GROUP_APPLICATION = "cancel_group_application";
-const GET_APPLIED_GROUPS = "get_applied_groups";
-const GET_JOINED_GROUPS = "apply_for_group";
-const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
 function getUserProfile (user_email) {
@@ -32,7 +24,20 @@ function getUserProfile (user_email) {
 }
 
 function populateProfile (user_data) {
+    $(document).ready(function () {
+        $('#user_data').text(JSON.stringify(user_data)); // store user data right on the page
+        $('#user_email').text(user_data.user_email);
+        $('#name').text(user_data.first_name + " " + user_data.last_name); // first + last
+        $('#linkedin_url').attr('src', user_data.linkedin_url);
 
+        user_data.skills.split(/\s/).forEach(function (skill) {
+            $('#skills').append("<li>" + skill + "</li>");
+        });
+
+        $('#occupation').text(user_data.occupation);
+        $('#profile_img').attr("src", "../../../../" + user_data.profile_img);
+        $('#objective').text(user_data.objective);
+    });
 }
 
 /**
@@ -46,4 +51,4 @@ function extractJSONObject (string) {
     return string.substring(json_start, json_end + 1);
 }
 
-getUserProfile('s');
+getUserProfile('d.lindskog1@gmail.com');

@@ -4,9 +4,11 @@
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="../../../../css/home/dashboard/profile/userProfile.css"/>
     <link rel="shortcut icon" href="../../../../image/home/favicon.ico" type="image/x-icon" />
+    <script src="../../../../js/jquery-1.12.0.min.js"></script>
     <script src="../../../../js/home/dashboard/profile/Userprofile.js"></script>
 </head>
     <body id="bbody">
+        <label id="user_data" style="display: none;">user_data</label> <!-- hide the user data on the loaded page -->
         <div id="header_logo_container">
 			<img id="logo_image" src="../../../../image/home/logo.jpg" alt="Logo">
 		</div>
@@ -92,19 +94,19 @@
                     <table id="bforms">
                         <tr>
                             <td>Name:</td>
-                                <td>Bhargavi Mani Ketha</td>
+                                <td id="name"></td>
                         </tr>
                         
                         <tr>
                             <td>Occupation:</td>
-                            <td>Graduate Student at Santa Clara</td>
+                            <td id="occupation"></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
-                            <td rowspan="4" colspan="4"><img class="bimg-circle" 				src="../../../../image/home/dashboard/profile/12071632_10153374026759422_1634040128_n.jpg" alt="Upload picture" width=250px  				height=250px ></td>
+                            <td rowspan="4" colspan="4"><img id="profile_img" class="bimg-circle" src="../../../../image/home/dashboard/profile/12071632_10153374026759422_1634040128_n.jpg" alt="Upload picture" width=250px height=250px ></td>
                         </tr>
                         
                         <tr><td>Objective:</td>
-                            <td>Seeking internship and part time opportunities as a software developer</td>
+                            <td id="objective"></td>
                     
                            
          
@@ -112,25 +114,18 @@
                         
                         <tr>
                              <td>Birthday:</td>
-                            <td>February 3, 1993</td>
+                            <td id="birthday">February 3, 1993</td>
                             
                         </tr>
     
                         <tr>
                            <td>Email</td>
-                            <td>Bhargavi.k6@gmail.com</td>
+                            <td id="user_email"></td>
                         </tr>
                         
                         <tr>
                             <td>Skills:</td>
-                            <td> <ul>
-                                <li>Java</li>
-                                <li>C</li>
-                                <li>C++</li>
-                                <li>HTML 5.0</li>
-                                <li>CSS3</li>
-                                <li>Javascript</li>
-                                </ul></td>
+                            <td> <ul id="skills"></ul></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
@@ -138,41 +133,35 @@
                              
                            
                             
-                            <td rowspan="4" colspan="4"><input class="button" type="Submit" value="Add Bhargavi to Talent Group!"></td> 
+                            <td rowspan="4" colspan="4"><input class="button" type="Submit" value="Add to Talent Group!"></td>
                               
                         </tr>
        
                         <tr>
-                            <td colspan="2"><a href="#">Click here to view Bhargavi's LinkedIn profile</a> </td>
+                            <td colspan="2"><a id="linkedin_url" href="#">LinkedIn profile</a> </td>
                             <td></td>
     
                         </tr>
                         
                         <tr>
-                             <td  colspan="2"><a href="#" >Click here to view Bhargavi's Facebook profile</a> </td>
+                             <td  colspan="2"><a href="#" >Facebook profile</a> </td>
                             <td></td>
                         </tr>
                         
                         <tr>
-                            <td  colspan="2"><a href="#">Click here to view Bhargavi's Github profile</a> </td>
+                            <td  colspan="2"><a href="#">Github profile</a> </td>
                         </tr>
        
                         <tr>
                             <td>Areas of Interest:</td>
-                            <td> <ul>
-                                <li>Virtualization</li>
-                                <li>Data Science</li>
-                                <li>Data Protection</li>
-                                <li>Cloud Computing</li>
+                            <td> <ul id="interests">
                                 </ul>
                                
                             </td>
                         </tr>
                          <tr>
                             <td>Bhargavi's Groups:</td>
-                            <td> <ul>
-                                <li>Group 1</li>
-                                <li>Group 2</li>
+                            <td> <ul id="groups">
                                 
                                 </ul>
                                
