@@ -53,7 +53,7 @@ function validate () {
                 console.log(xmlhttp.responseText);
             }
         };
-        xmlhttp.open("GET","../../../php/user_profile.php?" + UPDATE_USER + "=" + JSON.stringify(profile), true);
+        xmlhttp.open("GET","../../../../php/user_profile.php?" + UPDATE_USER + "=" + JSON.stringify(profile), true);
         xmlhttp.send();
     }
     else {
