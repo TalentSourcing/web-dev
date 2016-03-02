@@ -2,6 +2,10 @@
 'use strict';
 
 // this might have to become a get/post from html instead
+// request types: create_user, update_user, delete_user
+const CREATE_USER = "create_user";
+const UPDATE_USER = "update_user";
+const DELETE_USER = "delete_user";
 
 repopulate();
 
@@ -46,8 +50,15 @@ function validate () {
         alert("Valid!");
         sessionStorage.removeItem('saved_state');
 
-        // TODO create user in php
-
+        // TODO send profile to php
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                console.log(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open("GET","../../php/user_profile.php?" + CREATE_USER + "=" + JSON.stringify(profile), true);
+        xmlhttp.send();
     }
     else {
         alert("Some fields not valid!\n" + JSON.stringify(error_msg));
