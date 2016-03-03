@@ -14,129 +14,120 @@ class Group
     private $APPLIED = "applied";
     private $conn = null;
 
-    public function Group () {
+    public function Group()
+    {
         $this->conn = TalentMeDB::getConnection();
     }
 
-    function createGroup ( $group_name, $about, $desired_skills, $group_img)
+    public function createGroup($group_name, $about, $desired_skills, $group_img)
     {
-        $sql = "INSERT INTO GroupTable ".
-            "( group_name, group_img , about, desired_skills) ".
+        $sql = "INSERT INTO GroupTable " .
+            "( group_name, group_img , about, desired_skills) " .
             "VALUES ( '$group_name', '$group_img', '$about', '$desired_skills') ";
 
 
-            if ($this->conn->query($sql)) {
-                echo "Success!";
-            }
-
-        else {
+        if ($this->conn->query($sql)) {
+            echo "Success!";
+        } else {
 
             echo "Not able to create group!";
         }
 
 
-}//working
-
- public function updateGroup( $group_name,$about, $desired_skills, $group_img, $group_id )
-{
-
-    $sql = "UPDATE GroupTable SET ".
-        "group_name='$group_name',".
-        "about='$about',".
-        "desired_skills='$desired_skills',".
-        "group_img='$group_img',".
-        "WHERE group_id=$group_id";
-
-    if ($this->conn->query($sql))
+    }//working
+    public function updateGroup( $group_id, $group_name,$group_img,$about, $desired_skills )
     {
-        echo "Successfully Updated the Group!";
-    }
 
-    else {
-
-        echo "Update unsuccessful!!";
-    }
-
-}
+        $sql = "UPDATE GroupTable SET ".
+            "group_name='$group_name', ".
+            "group_img='$group_img', ".
+            "about='$about', ".
+            "desired_skills='$desired_skills', ".
+            "WHERE group_id='$group_id'";
 
 
-    public function deleteGroup ($group_id)
-    {
-        $sql = "DELETE FROM GroupTable ".
-//            " (group_name, about, desired_skills, group_img) ".
-            "WHERE (group_id)=('$group_id') ";
-
-
-            if ($this->conn->query($sql))
-            {
-                echo "Successfully deleted group!";
-            }
-
+        if ($this->conn->query($sql)) {
+            echo "User profile update success!<br>";
+        }
         else {
-            echo "Not able to delete the group!";
+            echo "User profile update failure!<br>";
+        }
 
+    }
+
+
+
+    public function deleteGroup($group_id)
+    {
+        $sql = "DELETE FROM GroupTable WHERE group_id='$group_id'";
+        if ($this->conn->query($sql)) {
+            echo "LeaveGroup success!<br>";
+        } else {
+            echo "LeaveGroup Failure:";
+//            echo "LeaveGroup Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
 
     }//working
-    public function inviteUser ($user_email,$group_id,$user_role)
+
+
+
+    public function inviteUser($user_email, $group_id)
 
     {
 
 
-        $sql = "INSERT INTO UserGroupTable ".
-            " (user_email, group_id, user_role ) ".
-            "VALUES ('$user_email', '$group_id', '$user_role->APPLIED') ";
+        $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
+            "VALUES ('$user_email', $group_id, '$this->APPLIED')";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable insert success!<br>";
+        } else {
+            echo "UserGroupTable insert Failure:";
+        }
+
+    }//working
 
 
-            if ($this->conn->query($sql)) {
-                echo "Successfully inserted into usergroup table!";
-            }
-       else {
-
-           echo "Could not insert into UserGroupTable";
-       }
-    }
-    public function approveUser ($user_email,$group_id)
+    public function approveUser($user_email, $group_id)
 
     {
-
-
         $sql = "UPDATE UserGroupTable SET  ".
             "user_role='$this->MEMBER'".
-            "WHERE (user_email)=('$user_email') ".
-            "group_id='$group_id'";
+            "WHERE user_email='$user_email' AND group_id='$group_id'";
 
-        try {
-            if ($this->conn->query($sql)) {
-                echo "Success!";
-            }
-        } catch (Exception $e) {
-            echo $e . "<br>";
+
+        if ($this->conn->query($sql)) {
+            echo "Success!";
+        } else {
+            echo "Not able to update";
         }
-        echo "failure";
-    }
-    public function declineUserApplication ($user_email,$group_id)
+    }//WORKING
+
+
+
+
+    public function declineUserApplication($user_email, $group_id)
     {
-        $sql = "DELETE FROM UserGroupTable ".
-            " (user_group_id,user_email,group_id,user_role) ".
-            "WHERE (user_email)=('$user_email') ".
-            "group_id='$group_id'";
+        $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'" .
+            "AND user_role='$this->APPLIED'";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable delete success!<br>";
+        } else {
+            echo "UserGroupTable delete Failure:";
 
-        try {
-            if ($this->conn->query($sql)) {
-                echo "Success!";
-            }
-        } catch (Exception $e) {
-            echo $e . "<br>";
         }
-        echo "after if/else";
+
     }
 }
 
+//working
+
 $group = new Group();
-#$group->createGroup( "CSE GroupS", "Math","Query", "kasdnv");
-$group->updateGroup("CSEGROUP","Student","Perl PHP","pic.jpg",4);
-#$group->deleteGroup(3);
-#$group->inviteUser( "Bhargavi.k6@gmail.com", 4,"");
-#$group->approveUser( "Bhargavi.k6@gmail.com", 4);
-#$group->declineUserApplication( "Bhargavi.k6@gmail.com", 4);
+//$group->createGroup( "Group1", "Math","Query", "kasdnv");
+//$group->createGroup( "Group2", "Math","Query", "kasdnv");
+//$group->createGroup( "Group3", "Math","Query", "kasdnv");
+//$group->createGroup( "Group4", "Math","Query", "kasdnv");
+$group->updateGroup(8,"CSEGROUP","Student","PerlPHP","pic");
+//$group->deleteGroup(6);
+#$group->inviteUser("d.lindskog1@gmail.com", 4);
+#$group->approveUser( "d.lindskog1@gmail.com", 4);
+#$group->declineUserApplication( "d.lindskog1@gmail.com", 4);
