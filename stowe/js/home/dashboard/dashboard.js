@@ -4,8 +4,9 @@
 const APPLY_FOR_GROUP = "apply_for_group";
 const CANCEL_GROUP_APPLICATION = "cancel_group_application";
 const GET_APPLIED_GROUPS = "get_applied_groups";
-const GET_JOINED_GROUPS = "apply_for_group";
+const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
+const GET_USER_PROFILE = "get_user_profile";
 
 const JOINED_GROUP_TEMPLATE =
     '<div class="individualGrp">' +
@@ -33,11 +34,13 @@ function getJoinedGroups() {
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log("raw response: " + xmlhttp.responseText);
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str); // print json to console
+            console.log(json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error); // TODO return this from php
+                console.log(response.error);
+                // TODO do not generate any groups
             }
             else {
                 // TODO populate joined groups list
@@ -45,12 +48,12 @@ function getJoinedGroups() {
             }
         }
     };
-    xmlhttp.open("GET","../../../../php/user.php?" + GET_JOINED_GROUPS + "=" + user_email, true);
+    xmlhttp.open("GET","../../../php/user.php?" + GET_JOINED_GROUPS + "=" + user_email, true);
     xmlhttp.send();
 }
 
 function populateJoinedGroupsList(groups_list) {
-
+    console.log("success!");
 }
 
 /**
@@ -63,3 +66,5 @@ function extractJSONObject (string) {
     var json_end = string.indexOf('}');
     return string.substring(json_start, json_end + 1);
 }
+
+getJoinedGroups();
