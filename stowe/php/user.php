@@ -21,24 +21,6 @@ class User {
         $this->conn = TalentMeDB::getConnection();
     }
 
-    // TODO delete this later --
-//    public function test() {
-//        $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id=1");
-//        if ($result->num_rows != 0) {
-//            echo "GroupTable insert failure: group_id already exists in table<br>";
-//            return null;
-//        }
-//
-//        $sql = "INSERT INTO GroupTable (group_name, group_img, about, desired_skills) ".
-//            "VALUES ('group1', '', '', '')";
-//        if ($this->conn->query($sql)) {
-//            echo "GroupTable insert success!<br>";
-//        }
-//        else {
-//            echo "GroupTable insert Failure: $this->conn->error <br>";
-//        }
-//    }
-
     public function applyForGroup($user_email, $group_id) {
         // check for existence of user
         $result = $this->conn->query("SELECT * FROM UserTable WHERE user_email='$user_email'");
@@ -68,7 +50,6 @@ class User {
         }
         else {
             echo "UserGroupTable insert Failure:";
-//            echo "UserGroupTable insert Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
@@ -80,7 +61,6 @@ class User {
         }
         else {
             echo "UserGroupTable delete Failure:";
-//            echo "UserGroupTable delete Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
@@ -99,7 +79,6 @@ class User {
         else {
             echo "GetAppliedGroups Failure:";
             return null;
-//            echo "GetAppliedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
 
     }
@@ -119,7 +98,6 @@ class User {
         else {
             echo "GetJoinedGroups Failure:";
             return null;
-//            echo "GetJoinedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
@@ -131,7 +109,6 @@ class User {
         }
         else {
             echo "LeaveGroup Failure:";
-//            echo "LeaveGroup Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
@@ -149,7 +126,22 @@ class User {
 
 // check for which kind of request
 
-if (array_key_exists(GET_USER_PROFILE, $_GET)) {
-    $user = new User();
+$user = new User();
+if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
+
+}
+else if (array_key_exists(CANCEL_GROUP_APPLICATION, $_GET)) {
+
+}
+else if (array_key_exists(GET_APPLIED_GROUPS, $_GET)) {
+
+}
+else if (array_key_exists(GET_JOINED_GROUPS, $_GET)) {
+
+}
+else if (array_key_exists(LEAVE_GROUP, $_GET)) {
+
+}
+else if (array_key_exists(GET_USER_PROFILE, $_GET)) {
     $user->getUserProfile($_GET[GET_USER_PROFILE]);
 }
