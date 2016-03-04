@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="../../../../css/home/dashboard/profile/userProfile.css"/>
-    <link rel="shortcut icon" href="../../../../image/home/favicon.ico" type="image/x-icon" />
+    <title>Edit Profile</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/home/profileCreation.css"/>
+    <link rel="shortcut icon" href="../../../../image/home/favicon2.ico" type="image/x-icon" />
     <script src="../../../../js/jquery-1.12.0.min.js"></script>
-    <script src="../../../../js/home/dashboard/profile/Userprofile.js"></script>
+    <script src="../../../../js/home/dashboard/profile/edit_profile.js"></script>
 </head>
     <body id="bbody">
-        <label id="user_data" style="display: none;">user_data</label> <!-- hide the user data on the loaded page -->
         <div id="header_logo_container">
 			<img id="logo_image" src="../../../../image/home/logo.jpg" alt="Logo">
 		</div>
@@ -17,7 +16,7 @@
 		</div>
         <div id="bheader">
 
-                <form class="login" style="margin-top:2%; visibility:hidden;">
+                <form class="login" style="margin-top:2%;" >
 
                       <table id="buser" >
                           <tr>
@@ -33,7 +32,7 @@
                            <tr>
                               <td>
                                 </td>
-                               <td colspan="2"><a href="index.html">Forgot Password?</a></td>
+                               <td colspan="2"><a href="">Forgot Password?</a></td>
                           </tr>
                        
                       </table>
@@ -42,7 +41,7 @@
         
 	<!--<header id="header_content">
 		<div id="header_logo_container">
-			<img id="logo_image" src="../../../../image/home/logo.jpg" alt="Logo">
+			<img id="logo_image" src="../../image/home/logo.jpg" alt="Logo">
 		</div>
 		<div id="header_bar">
 			<p><a href="#">TalentMe</a></p>
@@ -89,85 +88,131 @@
                 </p>
                 <p class="submit"><input type="submit" name="commit" value="Login"></p>-->
           <div id="bsection">
-            <h1 style= "text-align:center;">TalentMe User Profile</h1>
+            <h1 style= "text-align:center;"> Update Profile</h1>
                 <form style="padding:5%;text-align:center;">
                     <table id="bforms">
                         <tr>
-                            <td>Name:</td>
-                                <td id="name"></td>
+                            <td>First Name**</td>
+                                <td><input class="button" type="text" name="firstname" placeholder="First Name"></td>
                         </tr>
                         
                         <tr>
-                            <td>Occupation:</td>
-                            <td id="occupation"></td>
+                            <td>Last Name**</td>
+                            <td><input class="button" type="text" name="lastname" placeholder="Last Name"></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
-                            <td rowspan="4" colspan="4"><img id="profile_img" class="bimg-circle" src="" alt="Upload picture" width=250px height=250px ></td>
+
+                            <td rowspan="4" colspan="4"><img class="bimg-circle" src="../../../../image/home/logo.jpg" alt="Upload picture" width=250 height=250 ></td>
+
+
+                            <!--<td rowspan="4" colspan="4"><img class="bimg-circle" src="../../../image/home/IMG_0808.jpg" alt="Upload picture" width=250  height=250 ></td>-->
+                       
+
                         </tr>
                         
-                        <tr><td>Objective:</td>
-                            <td id="objective"></td>
-                    
-                           
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td><input class="button" type="text" name="dob" placeholder="Day-Month-Year"></td>
          
                         </tr>
                         
                         <tr>
-                             <td>Birthday:</td>
-                            <td id="birthday">February 3, 1993</td>
-                            
+                            <td>Email**</td>
+                            <td><input class="button" type="text" name="email" placeholder="Email Address"></td>
                         </tr>
     
                         <tr>
-                           <td>Email</td>
-                            <td id="user_email"></td>
+                            <td>Phone Number</td>
+                            <td><input class="button" type="text" name="email" placeholder="Phone Number"></td>
                         </tr>
                         
                         <tr>
-                            <td>Skills:</td>
-                            <td> <ul id="skills"></ul></td>
+                            <td>Address</td>
+                            <td> <input class="button" type="text" name="skills" placeholder="Address"></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
                            
-                             
-                           
                             
-                            <td rowspan="4" colspan="4"><input class="button" type="Submit" value="Add to Talent Group!"></td>
-                              
+                            <td rowspan="4" colspan="4"><input class="button" type="Submit" value="Upload Picture"></td>     
                         </tr>
        
                         <tr>
-                            <td colspan="2"><a id="linkedin_url" href="#">LinkedIn profile</a> </td>
-                            <td></td>
+                            <td>LinkedIn profile</td>
+                            <!--<td><input class="button" type="Submit" value="LinkedIn"></td>-->
+                            <td><input class="button" type="text" name="linkedin" placeholder="Url"></td>
     
                         </tr>
                         
                         <tr>
-                             <td  colspan="2"><a href="#" >Facebook profile</a> </td>
-                            <td></td>
+                            <td>Facebook Profile</td>
+                            <!--<td><input class="button" type="Submit" value="Facebook"></td>-->
+                            <td><input class="button" type="text" name="facebook" placeholder="Url"></td>
                         </tr>
                         
                         <tr>
-                            <td  colspan="2"><a href="#">Github profile</a> </td>
+                            <td>GitHub</td>
+                            <!--<td><input class="button" type="Submit" value="Github"></td>-->
+                            <td><input class="button" type="text" name="github" placeholder="Url"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Occupation</td>
+                            <td><input class="button" name="occupation" type="text" placeholder="Occupation"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Objective</td>
+                            <td>  <textarea name="objective" rows="10" cols="30" placeholder="Objective"></textarea>
+                            </td>
                         </tr>
        
                         <tr>
-                            <td>Areas of Interest:</td>
-                            <td> <ul id="interests">
-                                </ul>
-                               
+                            <td>Skills</td>
+                            <td>  <textarea name="skills" rows="10" cols="30" placeholder="Enter your skills!"></textarea>
                             </td>
                         </tr>
-                         <tr>
-                            <td>Bhargavi's Groups:</td>
-                            <td> <ul id="groups">
-                                
-                                </ul>
-                               
+                        
+                        <tr>
+                            <td>Interests</td>
+                            <td>  <textarea name="interests" rows="10" cols="30" placeholder="Enter your interests!"></textarea>
                             </td>
                         </tr>
-                       
+       
+                        <tr>
+                            <td>Password**</td>
+                            <td><input class="button" type="text" name="password" placeholder="Enter Password"></td>
+                        </tr>
+       
+                        <tr>
+                            <td>Confirm Password</td>
+                            <td><input class="button" type="text" name="password_confirm" placeholder="Confirm Password"></td>
+                        </tr>
+   
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <table> 
+                                    <tr>
+                                        <td>Male</td> 
+                                        <td> <input type="radio" name="gender" value="male"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Female</td> 
+                                        <td><input type="radio" name="gender" value="female" checked> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prefer not to disclose</td> 
+                                        <td><input type="radio" name="gender" value="undisclosed"></td>
+                                    </tr>
+                                    <tr>
+                           <td></td>
+                            <td><input class="button" type="button" value="Register" onclick="validate()"></td>
+                        </tr>
+                        
+                                </table>
+                            </td>
+                        </tr>
                     </table>
               </form> 
             </div>

@@ -2,7 +2,7 @@
 'use strict';
 
 // request types: create_user, update_user, delete_user
-const CREATE_USER = "create_user";
+const UPDATE_USER = "update_user";
 
 function getFields () {
     var profile = {};
@@ -18,12 +18,6 @@ function getFields () {
         profile.profile_img = ""; // TODO need to use a button to select
         profile.objective = $('textarea[name="objective"]:checked').val();
     });
-    // convert whitespace to ""
-    for (var key in profile) {
-        if (profile.hasOwnProperty(key) && !/\S/.test(profile[key])) {
-            profile[key] = "";
-        }
-    }
     sessionStorage.setItem('saved_state', JSON.stringify(profile));
     console.log("profile obj: " + JSON.stringify(profile));
     return profile;
@@ -59,31 +53,10 @@ function validate () {
                 console.log(xmlhttp.responseText);
             }
         };
-        xmlhttp.open("GET","../../php/user_profile.php?" + CREATE_USER + "=" + JSON.stringify(profile), true);
+        xmlhttp.open("GET","../../../../php/user_profile.php?" + UPDATE_USER + "=" + JSON.stringify(profile), true);
         xmlhttp.send();
     }
     else {
         alert("Error!\n\n" + error_msg.requiredFields + "\n" + error_msg.password);
     }
 }
-
-//function repopulate () {
-//    var state = null;
-//    if ((state = JSON.parse(sessionStorage.getItem('saved_state'))) === null) {
-//        console.log("no saved state found");
-//        return;
-//    }
-//    console.log("saved state found!\n" + JSON.stringify(state));
-//    $(document).ready(function () {
-//        $('input[name="email"]').val(state.user_email);
-//        $('input[name="firstname"]').val(state.first_name);
-//        $('input[name="lastname"]').val(state.last_name);
-//        $('input[name="password"]').val(state.password);
-//        $('input[name="linkedin"]').val(state.linkedin_url);
-//        $('textarea[name="skills"]').val(state.skills);
-//        $('input[name="occupation"]').val(state.occupation);
-//        $('input[name="gender"]:checked').val(state.gender);
-//        // TODO profile_img
-//        $('textarea[name="objective"]:checked').val(state.objective);
-//    });
-//}

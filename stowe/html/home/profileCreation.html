@@ -4,6 +4,8 @@
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="../../css/home/profileCreation.css"/>
     <link rel="shortcut icon" href="../../image/home/favicon2.ico" type="image/x-icon" />
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <script src="../../js/home/profile_creation.js"></script>
 </head>
     <body id="bbody">
         <div id="header_logo_container">
@@ -90,12 +92,12 @@
                 <form style="padding:5%;text-align:center;">
                     <table id="bforms">
                         <tr>
-                            <td>First Name</td>
+                            <td>First Name**</td>
                                 <td><input class="button" type="text" name="firstname" placeholder="First Name"></td>
                         </tr>
                         
                         <tr>
-                            <td>Last Name</td>
+                            <td>Last Name**</td>
                             <td><input class="button" type="text" name="lastname" placeholder="Last Name"></td>
                             <td><p class="parahide">h</p></td>
                             <td><p class="parahide">h</p></td>
@@ -115,7 +117,7 @@
                         </tr>
                         
                         <tr>
-                            <td>Email</td>
+                            <td>Email**</td>
                             <td><input class="button" type="text" name="email" placeholder="Email Address"></td>
                         </tr>
     
@@ -137,42 +139,57 @@
        
                         <tr>
                             <td>LinkedIn profile</td>
-                            <td><input class="button" type="Submit" value="LinkedIn"></td>
+                            <!--<td><input class="button" type="Submit" value="LinkedIn"></td>-->
+                            <td><input class="button" type="text" name="linkedin" placeholder="Url"></td>
     
                         </tr>
                         
                         <tr>
                             <td>Facebook Profile</td>
-                            <td><input class="button" type="Submit" value="Facebook"></td>
+                            <!--<td><input class="button" type="Submit" value="Facebook"></td>-->
+                            <td><input class="button" type="text" name="facebook" placeholder="Url"></td>
                         </tr>
                         
                         <tr>
                             <td>GitHub</td>
-                            <td><input class="button" type="Submit" value="Github"></td>
+                            <!--<td><input class="button" type="Submit" value="Github"></td>-->
+                            <td><input class="button" type="text" name="github" placeholder="Url"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Occupation</td>
+                            <td><input class="button" name="occupation" type="text" placeholder="Occupation"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Objective</td>
+                            <td>  <textarea name="objective" rows="10" cols="30" placeholder="Objective">
+                                </textarea>
+                            </td>
                         </tr>
        
                         <tr>
                             <td>Skills</td>
-                            <td>  <textarea name="message" rows="10" cols="30" placeholder="Enter your skills!">
+                            <td>  <textarea name="skills" rows="10" cols="30" placeholder="Enter your skills!">
                                 </textarea>
                             </td>
                         </tr>
                         
                         <tr>
                             <td>Interests</td>
-                            <td>  <textarea name="message" rows="10" cols="30" placeholder="Enter your interests!">
+                            <td>  <textarea name="interests" rows="10" cols="30" placeholder="Enter your interests!">
                                     </textarea>
                             </td>
                         </tr>
        
                         <tr>
-                            <td>Password</td>
+                            <td>Password**</td>
                             <td><input class="button" type="text" name="password" placeholder="Enter Password"></td>
                         </tr>
        
                         <tr>
                             <td>Confirm Password</td>
-                            <td><input class="button" type="text" name="password" placeholder="Confirm Password"></td>
+                            <td><input class="button" type="text" name="password_confirm" placeholder="Confirm Password"></td>
                         </tr>
    
                         <tr>
@@ -181,19 +198,19 @@
                                 <table> 
                                     <tr>
                                         <td>Male</td> 
-                                        <td> <input type="radio" name="gender" value=""> </td> 
+                                        <td> <input type="radio" name="gender" value="male"> </td>
                                     </tr>
                                     <tr>
                                         <td>Female</td> 
-                                        <td><input type="radio" name="gender" value="" checked> </td> 
+                                        <td><input type="radio" name="gender" value="female" checked> </td>
                                     </tr>
                                     <tr>
                                         <td>Prefer not to disclose</td> 
-                                        <td><input type="radio" name="gender" value=""></td> 
+                                        <td><input type="radio" name="gender" value="undisclosed"></td>
                                     </tr>
                                     <tr>
                            <td></td>
-                            <td><input class="button" type="Submit" value="Register"></td>
+                            <td><input class="button" type="button" value="Register" onclick="validate()"></td>
                         </tr>
                         
                                 </table>

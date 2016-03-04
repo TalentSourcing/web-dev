@@ -21,20 +21,17 @@
 <br><br>
 <div id="body">
     <div id="topsearch">
-    <input id="topsearchtext"type="search" name="googlesearch" placeholder="Search chat...">
+    <input id="topsearchtext"type="search" name="search" placeholder="Search chat...">
     <input id="search" type="submit" value="Search"></div>
     <br>
     <div class="openedchats">
         <p id="chattitle">Opened Chats</p>
         <ul>
-            <li>Chat One</li>
-            <li>Chat Two</li>
-            <li>Chat Three</li>
-            <li>Chat Four</li>
-            <li>Chat Five</li>
-            <li>Chat Six</li>
-            <li>Chat Seven</li>
-            <li>Chat Eight</li>
+            <label><li><a>Chat One</a></li></label>
+            <label><li><a>Chat One</a></li></label>
+            <label><li><a>Chat One</a></li></label>
+            <label><li><a>Chat One</a></li></label>
+            <label><li><a>Chat One</a></li></label>
         </ul>
     </div>
     
@@ -65,11 +62,12 @@
             </div>
         </div>
 <br>
-
+        <form action="../../../../php/chat.php" method="get">
         <div id="input">
-            <input id="searchtext" type="search" name="googlesearch" placeholder="Type message here...">
+            <input id="searchtext" type="search" name="search" placeholder="Type message here..." maxlength="100">
             <input id="search" type="submit" value="Send">
         </div>
+        </form>
     </div>
 
 </div>
