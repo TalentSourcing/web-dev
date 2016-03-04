@@ -1,4 +1,3 @@
-
 'use strict';
 
 const APPLY_FOR_GROUP = "apply_for_group";
@@ -8,27 +7,19 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-const JOINED_GROUP_TEMPLATE =
-    '<div class="individualGrp">' +
-        '<label class="groupIn_id" style="display: none;"></label>' +
-        '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink">' +
-            '<div id="groupIn1">' +
-                '<div class="icon">' +
-                    '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="Group in 1">' +
-                '</div>' +
-                '<div class="content">' +
-                    '<p class="groupInContent"></p>' +
-                '</div>' +
-                '<div class="groupButtons">' +
-                    '<button onclick="">Chat</button>' +
-                    '<button onclick="">Leave</button>' +
-                '</div>' +
-            '</div>' +
-        '</a>' +
-    '</div>';
+if (sessionStorage.getItem('dashboard') !== null) {
+    sessionStorage.removeItem('dashboard');
+}
+sessionStorage.setItem('dashboard', JSON.stringify({
+    'user_email' : 'd.lindskog1@gmail.com',
+    'userProfile' : '',
+    'appliedGroups' : [],
+    'joinedGroups' : []
+}));
 
 function getJoinedGroups() {
-    var user_email = 'd.lindskog1@gmail.com';
+    var dashboard = JSON.parse(sessionStorage.getItem('dashboard'));
+    var user_email = dashboard.user_email;
     console.log(user_email);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
@@ -43,6 +34,7 @@ function getJoinedGroups() {
                 console.log(response.error);
             }
             else {
+                (JSON.parse(sessionStorage.getItem('dashboard'))).joinedGroups = response;
                 populateJoinedGroupsList(response);
             }
         }
@@ -55,16 +47,16 @@ function populateJoinedGroupsList(groups_list) {
     $(document).ready(function () {
         //$('#groupsIn').append(JOINED_GROUP_TEMPLATE);
         groups_list.forEach(function (group) {
-            var joinedGroupTemplate =
+            console.log(group.group_name);
+            var joinedGroup =
                 '<div class="individualGrp">' +
-                    '<label class="groupIn_id" style="display: none;"></label>' +
                     '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink">' +
                         '<div id="groupIn1">' +
                             '<div class="icon">' +
                                 '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="Group in 1">' +
                             '</div>' +
                             '<div class="content">' +
-                                '<p class="groupInContent"></p>' +
+                                '<p class="groupInContent">' + group.group_name + '</p>' +
                             '</div>' +
                             '<div class="groupButtons">' +
                                 '<button onclick="">Chat</button>' +
@@ -73,6 +65,7 @@ function populateJoinedGroupsList(groups_list) {
                         '</div>' +
                     '</a>' +
                 '</div>';
+            $('#groupsIn').append(joinedGroup);
         });
     });
 }

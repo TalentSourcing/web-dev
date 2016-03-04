@@ -90,11 +90,10 @@ class User {
             if ($result->num_rows > 0) {
                 $json_objs = array();
                 for ($i = 0; $row = $result->fetch_assoc(); $i++) {
-                    $json_objs[$i] = $row;
+                    $json_objs[$i] = $this->getGroup($row['group_id']);
                 }
                 echo json_encode($json_objs);
                 return json_encode($json_objs);
-                // TODO this is returning the wrong info!  need actual groups, not the usergrouptable values
             }
             else {
                 echo '{"error" : "No joined groups for user: '.$user_email.'"}';
@@ -130,7 +129,10 @@ class User {
     }
 
     public function getGroup($group_id) {
-
+        $sql = "SELECT * FROM GroupTable WHERE group_id='$group_id'";
+        if ($result = $this->conn->query($sql)) {
+            return $result->fetch_assoc();
+        }
     }
 
     public function generateTestData() {
