@@ -94,9 +94,10 @@ class User {
                 }
                 echo json_encode($json_objs);
                 return json_encode($json_objs);
+                // TODO this is returning the wrong info!  need actual groups, not the usergrouptable values
             }
             else {
-                echo '{"error" : "No joined groups"}';
+                echo '{"error" : "No joined groups for user: '.$user_email.'"}';
                 return null;
             }
         }
@@ -127,11 +128,59 @@ class User {
             echo '{"error" : "getUserProfile sql failure"}';
         }
     }
+
+    public function getGroup($group_id) {
+
+    }
+
+    public function generateTestData() {
+        // create some groups
+        $sql = "INSERT INTO GroupTable " .
+            "( group_name, group_img , about, desired_skills) " .
+            "VALUES ( 'group1', '', '', '') ";
+        if ($this->conn->query($sql)) {
+            echo "group1 created";
+        }
+        else {
+            echo "group1 creation error\n";
+        }
+
+        $sql = "INSERT INTO GroupTable " .
+            "( group_name, group_img , about, desired_skills) " .
+            "VALUES ( 'group2', '', '', '') ";
+        if ($this->conn->query($sql)) {
+            echo "group2 created\n";
+        }
+        else {
+            echo "group2 creation error\n";
+        }
+
+        // associate user with groups as member
+        $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
+            "VALUES ('d.lindskog1@gmail.com', '1', '$this->MEMBER')";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable insert success!\n";
+        } else {
+            echo "UserGroupTable insert Failure\n";
+        }
+
+        $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
+            "VALUES ('d.lindskog1@gmail.com', '2', '$this->MEMBER')";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable insert success!\n";
+        } else {
+            echo "UserGroupTable insert Failure\n";
+        }
+
+
+    }
 }
 
-// check for which kind of request
-
 $user = new User();
+// generate some fake data:
+//$user->generateTestData();
+
+// check for which kind of request
 if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
 //    $data = json_decode($_GET[APPLY_FOR_GROUP]);
 //    $user->applyForGroup($data->user_email, $data->group_id);
