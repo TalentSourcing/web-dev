@@ -1,8 +1,10 @@
 
-
 delete1(){
-var elem = document.getElementById("deleteme1");
-elem.parentNode.removeChild(elem);}
+var parent = document.getElementById("list_applicants");
+var child = document.getElementById("deleteme1");
+parent.removeChild(child);
+}
+
 
 delete2(){
 var elem = document.getElementById("deleteme2");
