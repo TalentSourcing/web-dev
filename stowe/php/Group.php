@@ -4,6 +4,7 @@
  */
 
 require 'init_database.php';
+const GET_GROUP_VIEW = "get_group_view";
 
 class Group
 {
@@ -18,6 +19,17 @@ class Group
     {
         $this->conn = TalentMeDB::getConnection();
     }
+
+    public function getGroupView($group_id) {
+        $sql = "SELECT * FROM GroupTable WHERE group_id='$group_id'";
+        if ($result = $this->conn->query($sql)) {
+            echo json_encode($result->fetch_assoc());
+            return json_encode($result->fetch_assoc());
+        }
+        else {
+            echo json_encode("{'error' : 'getGroupView Failure'}");
+        }
+    }//working
 
     public function createGroup($group_name, $about, $desired_skills, $group_img)
     {
@@ -121,12 +133,18 @@ class Group
 
 //working
 
-$group = new Group();
+if (array_key_exists(GET_USER_PROFILE, $_GET)) {
+    $group = new Group();
+    $user->getGroupView($_GET[GET_GROUP_VIEW]);
+}
+
+
+#$group->getGroupView(4);
 //$group->createGroup( "Group1", "Math","Query", "kasdnv");
 //$group->createGroup( "Group2", "Math","Query", "kasdnv");
 //$group->createGroup( "Group3", "Math","Query", "kasdnv");
 //$group->createGroup( "Group4", "Math","Query", "kasdnv");
-$group->updateGroup(8,"CSEGROUP","Student","PerlPHP","pic");
+//$group->updateGroup(8,"CSEGROUP","Student","PerlPHP","pic");
 //$group->deleteGroup(6);
 #$group->inviteUser("d.lindskog1@gmail.com", 4);
 #$group->approveUser( "d.lindskog1@gmail.com", 4);
