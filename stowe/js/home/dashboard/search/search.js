@@ -3,22 +3,12 @@ $(document).ready(function() {
 	$("#searchButton").on({
 		click: function() {
 			var searchFieldText = $("#searchField").val();
-
+			
 			$.ajax({
-				url: "http://localhost/search_test.php",
 				type: "POST",
-				data: {searchString:searchFieldText},
-				dataType: "json",
-				complete: display,
-				error: function(xhr, status, error) {	alert(status);	}
-			});
-		}
-	});
-});
-
-function display(response) {
-	alert("data received: " + response);
-/*
+				url: "../../../../php/init_database.php",
+				data: {searchFieldText:searchFieldText},
+				complete: function(response) {
 					var groupList = [
 							{
 								groupId: 1, 
@@ -52,20 +42,17 @@ function display(response) {
 								skills: "User skills"
 							}
 							];
-					
-	// var obj = JSON.parse(response);
-	// var groupList = obj.groups;
-	// var userList = obj.users;
 
-					
-	var groupList = 
-		'{"user_email":"bhargavi.k6@gmail.com","first_name":"Bhargavi","last_name":"K","skills":"C, Java, MySQL","profile_img":""}';
-	groupList = JSON.parse(response);
-
-	createGroupEntries(groupList);
-	createUserEntries(userList);
-*/
-}
+					// var obj = JSON.parse(response);
+					// var groupList = obj.groups;
+					// var userList = obj.users;
+					createGroupEntries(groupList);
+					createUserEntries(userList);
+				}
+			});
+		}
+	});
+});
 
 function createGroupEntries(groupList) {
 	var parentNode = $("#groups");
