@@ -7,15 +7,17 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-if (sessionStorage.getItem('dashboard') !== null) {
-    sessionStorage.removeItem('dashboard');
+var dashboard;
+if ((dashboard = sessionStorage.getItem('dashboard')) === null) {
+    dashboard = {
+        'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
+        'userProfile' : '',
+        'appliedGroups' : [],
+        'joinedGroups' : []
+    };
+    sessionStorage.setItem('dashboard', JSON.stringify(dashboard));
 }
-sessionStorage.setItem('dashboard', JSON.stringify({
-    'user_email' : 'd.lindskog1@gmail.com',
-    'userProfile' : '',
-    'appliedGroups' : [],
-    'joinedGroups' : []
-}));
+
 
 function getJoinedGroups() {
     var dashboard = JSON.parse(sessionStorage.getItem('dashboard'));
@@ -26,7 +28,6 @@ function getJoinedGroups() {
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            //console.log("raw response: " + xmlhttp.responseText);
             var json_str = extractJSONObject(xmlhttp.responseText);
             console.log(json_str);
             response = JSON.parse(json_str);
@@ -45,7 +46,6 @@ function getJoinedGroups() {
 
 function populateJoinedGroupsList(groups_list) {
     $(document).ready(function () {
-        //$('#groupsIn').append(JOINED_GROUP_TEMPLATE);
         groups_list.forEach(function (group) {
             console.log(group.group_name);
             var joinedGroup =
@@ -86,6 +86,5 @@ function extractJSONObject (string) {
     }
 }
 
-//$('#user_email').text('d.lindskog1@gmail.com');
 getJoinedGroups();
 
