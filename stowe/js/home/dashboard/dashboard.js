@@ -7,9 +7,8 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-var dashboardStorage;
-if ((dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'))) === null) {
-    dashboardStorage = {
+if (sessionStorage.getItem('dashboard') === null) {
+    var dashboardStorage = {
         'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
         'userProfile' : '',
         'appliedGroups' : [],
@@ -146,6 +145,16 @@ function leaveGroup (group_id) {
 
 function cancelGroupApplication (group_id) {
 
+}
+
+function openGroupsApplied () {
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    sessionStorage.setItem('groups_applied', JSON.stringify(dashboardStorage.appliedGroups));
+}
+
+function openGroupsJoined () {
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    sessionStorage.setItem('groups_current', JSON.stringify(dashboardStorage.joinedGroups));
 }
 
 /**
