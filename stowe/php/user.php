@@ -110,10 +110,10 @@ class User {
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->MEMBER'";
         if ($this->conn->query($sql)) {
-            echo "LeaveGroup success!\n";
+            echo '{"success" : "LeaveGroup success"}';
         }
         else {
-            echo "LeaveGroup Failure:";
+            echo '{"error" : "LeaveGroup failure"}';
         }
     }
 
@@ -197,7 +197,8 @@ else if (array_key_exists(GET_JOINED_GROUPS, $_GET)) {
     $user->getJoinedGroups($_GET[GET_JOINED_GROUPS]);
 }
 else if (array_key_exists(LEAVE_GROUP, $_GET)) {
-
+    $request = json_decode($_GET[LEAVE_GROUP]);
+    $user->leaveGroup($request->user_email, $request->group_id);
 }
 else if (array_key_exists(GET_USER_PROFILE, $_GET)) {
     $user->getUserProfile($_GET[GET_USER_PROFILE]);

@@ -51,22 +51,22 @@ function populateJoinedGroupsList(groups_list) {
             console.log(group.group_name);
             var joinedGroup =
                 '<div class="individualGrp">' +
-                    '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
-                            ' onclick="openGroup(' + group.group_id + ')">' +
                         '<div>' +
-                            '<label class="group_id" style="display: none;">' + group.group_id + '</label>' +
                             '<div class="icon">' +
                                 '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="Group in 1">' +
                             '</div>' +
                             '<div class="content">' +
-                                '<p class="groupInContent">' + group.group_name + '</p>' +
+                                '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
+                                ' onclick="openGroup('+ group.group_id +')">' +
+                                    '<p class="groupInContent">' + group.group_name + '</p>' +
+                                '</a>' +
                             '</div>' +
                             '<div class="groupButtons">' +
-                                '<button onclick="">Chat</button>' +
-                                '<button onclick="">Leave</button>' +
+                                '<a href="../../../php/chat1.php"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
+                                '<a><button onclick="leaveGroup('+ group.group_id +')">Leave</button></a>' +
                             '</div>' +
                         '</div>' +
-                    '</a>' +
+
                 '</div>';
             $('#groupsIn').append(joinedGroup);
         });
@@ -88,7 +88,17 @@ function openChat () {
 }
 
 function openGroupChat (group_id) {
-
+    var chatStorage;
+    if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
+        chatStorage = {
+            'user_email' : '',
+            'group_id' : ''
+        };
+    }
+    chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
+    chatStorage.group_id = group_id;
+    sessionStorage.setItem('chat', JSON.stringify(chatStorage));
+    window.location.href = "../../../php/home/dashboard/chat/chat.php";
 }
 
 function openGroup (group_id) {
@@ -105,7 +115,33 @@ function openGroup (group_id) {
 }
 
 function leaveGroup (group_id) {
-
+    // TODO make php call to remove user from group, refresh page
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var request = {
+        'user_email' : dashboardStorage.user_email,
+        'group_id' : group_id
+    };
+    console.log('leaveGroup user_email: ' + request.user_email);
+    // send request to php
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                alert('Leave group success!');
+                // reload the page
+                window.location.href = "../../../html/home/dashboard/dashboard.html";
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/user.php?" + LEAVE_GROUP + "=" + JSON.stringify(request), true);
+    xmlhttp.send();
 }
 
 function cancelGroupApplication (group_id) {
@@ -120,10 +156,14 @@ function cancelGroupApplication (group_id) {
 function extractJSONObject (string) {
     var curly = string.indexOf('{');
     var bracket = string.indexOf('[');
-    if (curly < bracket) {
+
+    if (curly < 0 && bracket < 0) {
+        return "no json in string";
+    }
+    if (curly < bracket || bracket < 0) {
         return string.substring(curly);
     }
-    else {
+    else if (bracket < curly || curly < 0) {
         return string.substring(bracket);
     }
 }

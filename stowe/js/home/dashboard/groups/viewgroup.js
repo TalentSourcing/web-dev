@@ -63,7 +63,7 @@ to work.  Right now, dashboard is passing user_email and group_id in th
 $(document).ready(function () { // this is giving the previous page time to set the variables
     var groupStorage;
     if ((groupStorage = JSON.parse(sessionStorage.getItem('group'))) === null) {
-        console.log('onono!!  No group data passed from previous page');
+        console.log('Error!!  No group data passed from previous page');
     }
     else {
         console.log('group_id passed from dashboard: ' + groupStorage.group_id);
