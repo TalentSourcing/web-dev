@@ -7,21 +7,21 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-var dashboard;
-if ((dashboard = sessionStorage.getItem('dashboard')) === null) {
-    dashboard = {
+var dashboardStorage;
+if ((dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'))) === null) {
+    dashboardStorage = {
         'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
         'userProfile' : '',
         'appliedGroups' : [],
         'joinedGroups' : []
     };
-    sessionStorage.setItem('dashboard', JSON.stringify(dashboard));
+    sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
 }
 
 
 function getJoinedGroups() {
-    var dashboard = JSON.parse(sessionStorage.getItem('dashboard'));
-    var user_email = dashboard.user_email;
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var user_email = dashboardStorage.user_email;
     console.log(user_email);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
@@ -35,7 +35,8 @@ function getJoinedGroups() {
                 console.log(response.error);
             }
             else {
-                (JSON.parse(sessionStorage.getItem('dashboard'))).joinedGroups = response;
+                dashboardStorage.joinedGroups = response;
+                sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
                 populateJoinedGroupsList(response);
             }
         }
@@ -50,8 +51,10 @@ function populateJoinedGroupsList(groups_list) {
             console.log(group.group_name);
             var joinedGroup =
                 '<div class="individualGrp">' +
-                    '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink">' +
-                        '<div id="groupIn1">' +
+                    '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
+                            ' onclick="openGroup(' + group.group_id + ')">' +
+                        '<div>' +
+                            '<label class="group_id" style="display: none;">' + group.group_id + '</label>' +
                             '<div class="icon">' +
                                 '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="Group in 1">' +
                             '</div>' +
@@ -68,6 +71,45 @@ function populateJoinedGroupsList(groups_list) {
             $('#groupsIn').append(joinedGroup);
         });
     });
+}
+
+/**
+ * Call this when navigating to chat page from dashboard.  This will search for an existing chat sessionStorage item, or
+ * create a new one and save the current user's email address in it.  The email address can then be accessed by the chat
+ * page and used to populate the necessary fields.
+ */
+function openChat () {
+    var chatStorage;
+    if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
+        chatStorage = {'user_email' : ''};
+    }
+    chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
+    sessionStorage.setItem('chat', JSON.stringify(chatStorage));
+}
+
+function openGroupChat (group_id) {
+
+}
+
+function openGroup (group_id) {
+    var groupStorage;
+    if ((groupStorage = JSON.parse(sessionStorage.getItem('group'))) === null) {
+        groupStorage = {
+            'user_email' : '',
+            'group_id' : ''
+        };
+    }
+    groupStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
+    groupStorage.group_id = group_id;
+    sessionStorage.setItem('group', JSON.stringify(groupStorage));
+}
+
+function leaveGroup (group_id) {
+
+}
+
+function cancelGroupApplication (group_id) {
+
 }
 
 /**

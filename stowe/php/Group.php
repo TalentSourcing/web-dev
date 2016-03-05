@@ -133,9 +133,9 @@ class Group
 
 //working
 
-if (array_key_exists(GET_USER_PROFILE, $_GET)) {
+if (array_key_exists(GET_GROUP_VIEW, $_GET)) {
     $group = new Group();
-    $user->getGroupView($_GET[GET_GROUP_VIEW]);
+    $group->getGroupView($_GET[GET_GROUP_VIEW]);
 }
 
 
