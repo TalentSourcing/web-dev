@@ -149,7 +149,11 @@ function cancelGroupApplication (group_id) {
 
 function openGroupsApplied () {
     var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
-    sessionStorage.setItem('groups_applied', JSON.stringify(dashboardStorage.appliedGroups));
+    var data = {
+        'pending' : dashboardStorage.appliedGroups,
+        'accepted' : dashboardStorage.joinedGroups
+    };
+    sessionStorage.setItem('groups_applied', JSON.stringify(data));
 }
 
 function openGroupsJoined () {
