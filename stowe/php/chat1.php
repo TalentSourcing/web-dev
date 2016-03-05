@@ -6,9 +6,10 @@ Specification: Chat application
 <html>
 	<title></title>
 	<head>
-	<link rel="stylesheet" href="../../../../css/home/dashboard/chat/chatstyle.css">
-	<link rel="stylesheet" href="../../../../css/header.css">
-	<link rel="stylesheet" href="../../../../css/footer.css">
+	<link rel="stylesheet" href="../css/home/dashboard/chat/chatstyle.css">
+	<link rel="stylesheet" href="../css/header.css">
+	<link rel="stylesheet" href="../css/footer.css">
+<!--  TODO why is jquery linked to google??	-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	</head>
 	
