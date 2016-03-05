@@ -68,16 +68,21 @@ class User {
         $sql = "SELECT * FROM UserGroupTable ".
                 "WHERE user_email='$user_email' AND user_role='$this->APPLIED'";
         if ($result = $this->conn->query($sql)) {
-            echo "GetAppliedGroups success!\n";
-            // turn each row into an assoc array, then convert each element into a json string
-            $json_objs = array();
-            for ($i = 0; $row = $result->fetch_assoc(); $i++) {
-                $json_objs[$i] = json_encode($row);
+            if ($result->num_rows > 0) {
+                $json_objs = array();
+                for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                    $json_objs[$i] = $this->getGroup($row['group_id']);
+                }
+                echo json_encode($json_objs);
+                return json_encode($json_objs);
             }
-            return $json_objs;
+            else {
+                echo '{"error" : "No applied groups for user: '.$user_email.'"}';
+                return null;
+            }
         }
         else {
-            echo "GetAppliedGroups Failure:";
+            echo '{"error" : "getJoinedGroups sql failure"}';
             return null;
         }
 
@@ -137,29 +142,29 @@ class User {
 
     public function generateTestData() {
         // create some groups
-        $sql = "INSERT INTO GroupTable " .
-            "( group_name, group_img , about, desired_skills) " .
-            "VALUES ( 'group1', '', '', '') ";
-        if ($this->conn->query($sql)) {
-            echo "group1 created";
-        }
-        else {
-            echo "group1 creation error\n";
-        }
-
-        $sql = "INSERT INTO GroupTable " .
-            "( group_name, group_img , about, desired_skills) " .
-            "VALUES ( 'group2', '', '', '') ";
-        if ($this->conn->query($sql)) {
-            echo "group2 created\n";
-        }
-        else {
-            echo "group2 creation error\n";
-        }
+//        $sql = "INSERT INTO GroupTable " .
+//            "( group_name, group_img , about, desired_skills) " .
+//            "VALUES ( 'group3', '', '', '') ";
+//        if ($this->conn->query($sql)) {
+//            echo "group3 created";
+//        }
+//        else {
+//            echo "group3 creation error\n";
+//        }
+//
+//        $sql = "INSERT INTO GroupTable " .
+//            "( group_name, group_img , about, desired_skills) " .
+//            "VALUES ( 'group4', '', '', '') ";
+//        if ($this->conn->query($sql)) {
+//            echo "group4 created\n";
+//        }
+//        else {
+//            echo "group4 creation error\n";
+//        }
 
         // associate user with groups as member
         $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
-            "VALUES ('d.lindskog1@gmail.com', '1', '$this->MEMBER')";
+            "VALUES ('d.lindskog1@gmail.com', '7', '$this->APPLIED')";
         if ($this->conn->query($sql)) {
             echo "UserGroupTable insert success!\n";
         } else {
@@ -167,7 +172,7 @@ class User {
         }
 
         $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
-            "VALUES ('d.lindskog1@gmail.com', '2', '$this->MEMBER')";
+            "VALUES ('d.lindskog1@gmail.com', '8', '$this->APPLIED')";
         if ($this->conn->query($sql)) {
             echo "UserGroupTable insert success!\n";
         } else {
@@ -184,14 +189,14 @@ $user = new User();
 
 // check for which kind of request
 if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
-//    $data = json_decode($_GET[APPLY_FOR_GROUP]);
-//    $user->applyForGroup($data->user_email, $data->group_id);
+
 }
 else if (array_key_exists(CANCEL_GROUP_APPLICATION, $_GET)) {
-
+    $request = json_decode($_GET[LEAVE_GROUP]);
+    $user->cancelGroupApplication($request->user_email, $request->group_id);
 }
 else if (array_key_exists(GET_APPLIED_GROUPS, $_GET)) {
-
+    $user->getAppliedGroups($_GET[GET_APPLIED_GROUPS]);
 }
 else if (array_key_exists(GET_JOINED_GROUPS, $_GET)) {
     $user->getJoinedGroups($_GET[GET_JOINED_GROUPS]);

@@ -47,27 +47,82 @@ function getJoinedGroups() {
 function populateJoinedGroupsList(groups_list) {
     $(document).ready(function () {
         groups_list.forEach(function (group) {
-            console.log(group.group_name);
+            if (group.group_img === "") {
+                group.group_img = "../../../image/default-placeholder.png";
+            }
             var joinedGroup =
                 '<div class="individualGrp">' +
-                        '<div>' +
-                            '<div class="icon">' +
-                                '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="Group in 1">' +
-                            '</div>' +
-                            '<div class="content">' +
-                                '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
-                                ' onclick="openGroup('+ group.group_id +')">' +
-                                    '<p class="groupInContent">' + group.group_name + '</p>' +
-                                '</a>' +
-                            '</div>' +
-                            '<div class="groupButtons">' +
-                                '<a href="../../../php/chat1.php"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
-                                '<a><button onclick="leaveGroup('+ group.group_id +')">Leave</button></a>' +
-                            '</div>' +
+                    '<div>' +
+                        '<div class="icon">' +
+                            '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="img">' +
                         '</div>' +
-
+                        '<div class="content">' +
+                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
+                            ' onclick="openGroup('+ group.group_id +')">' +
+                                '<p class="groupInContent">' + group.group_name + '</p>' +
+                            '</a>' +
+                        '</div>' +
+                        '<div class="groupButtons">' +
+                            '<a href="../../../php/chat1.php"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
+                            '<a><button onclick="leaveGroup('+ group.group_id +')">Leave</button></a>' +
+                        '</div>' +
+                    '</div>' +
                 '</div>';
             $('#groupsIn').append(joinedGroup);
+        });
+    });
+}
+
+function getAppliedGroups () {
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var user_email = dashboardStorage.user_email;
+    console.log(user_email);
+    // send request to php
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                dashboardStorage.appliedGroups = response;
+                sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
+                populateAppliedGroups(response);
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/user.php?" + GET_APPLIED_GROUPS + "=" + user_email, true);
+    xmlhttp.send();
+}
+
+function populateAppliedGroups (groups_list) {
+    $(document).ready(function () {
+        groups_list.forEach(function (group) {
+            if (group.group_img === "") {
+                group.group_img = "../../../image/default-placeholder.png";
+            }
+            var joinedGroup =
+                '<div class="individualGrp">' +
+                    '<div>' +
+                        '<div class="icon">' +
+                            '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="img">' +
+                        '</div>' +
+                        '<div class="content">' +
+                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
+                            ' onclick="openGroup('+ group.group_id +')">' +
+                                '<p class="groupInContent">' + group.group_name + '</p>' +
+                            '</a>' +
+                        '</div>' +
+                        '<div class="groupButtons">' +
+                            '<a><button onclick="cancelApp('+ group.group_id +')">Cancel Application</button></a>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            $('#groupsApplied').append(joinedGroup);
         });
     });
 }
@@ -114,7 +169,6 @@ function openGroup (group_id) {
 }
 
 function leaveGroup (group_id) {
-    // TODO make php call to remove user from group, refresh page
     var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
     var request = {
         'user_email' : dashboardStorage.user_email,
@@ -143,8 +197,33 @@ function leaveGroup (group_id) {
     xmlhttp.send();
 }
 
-function cancelGroupApplication (group_id) {
-
+function cancelApp (group_id) {
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var request = {
+        'user_email' : dashboardStorage.user_email,
+        'group_id' : group_id
+    };
+    console.log('cancel application user_email: ' + request.user_email);
+    // send request to php
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                alert('Cancelled group application!');
+                // reload the page
+                window.location.href = "../../../html/home/dashboard/dashboard.html";
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/user.php?" + CANCEL_GROUP_APPLICATION + "=" + JSON.stringify(request), true);
+    xmlhttp.send();
 }
 
 function openGroupsApplied () {
@@ -166,7 +245,7 @@ function openGroupsJoined () {
  * @param string {string}
  * @returns {string}
  */
-function extractJSONObject (string) {
+function extractJSONObject (string) { // TODO make return the message too
     var curly = string.indexOf('{');
     var bracket = string.indexOf('[');
 
@@ -182,4 +261,4 @@ function extractJSONObject (string) {
 }
 
 getJoinedGroups();
-
+getAppliedGroups();
