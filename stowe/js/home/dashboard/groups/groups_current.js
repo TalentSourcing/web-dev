@@ -18,6 +18,9 @@ function generateHtml () {
             if (group.about === "") {
                 group.about = "No info...";
             }
+            if (group.group_img === "") {
+                group.group_img = "default-placeholder.png";
+            }
             var list_item =
                 '<li class="groups_list_item">' +
                     '<img class="groups_list_img" src="../../../../image/'+ group.group_img +'" alt="img" />' +

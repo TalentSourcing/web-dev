@@ -11,24 +11,13 @@ function generateHtml () {
             return null;
         }
 
-        //appliedGroups.pending.push({
-        //    'group_name' : 'Group 3',
-        //    'group_img' : '',
-        //    'about' : 'blahblahblha',
-        //    'desired_skills' : ''
-        //});
-        //
-        //appliedGroups.pending.push({
-        //    'group_name' : 'Group 4',
-        //    'group_img' : '',
-        //    'about' : 'oinfosinfoiefneso',
-        //    'desired_skills' : ''
-        //});
-
         var groups_list = $('.groups_list');
         appliedGroups.pending.forEach(function (group) {
             if (group.about === "") {
                 group.about = "No info...";
+            }
+            if (group.group_img === "") {
+                group.group_img = "default-placeholder.png";
             }
             var list_item =
                 '<li class="groups_list_item">' +
@@ -47,6 +36,9 @@ function generateHtml () {
         appliedGroups.accepted.forEach(function (group) {
             if (group.about === "") {
                 group.about = "No info...";
+            }
+            if (group.group_img === "") {
+                group.group_img = "default-placeholder.png";
             }
             var list_item =
                 '<li class="groups_list_item">' +
