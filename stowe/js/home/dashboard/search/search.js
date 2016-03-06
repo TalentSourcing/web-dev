@@ -154,12 +154,15 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 
 	var button = $('<div/>').append(
 				$('<button/>', {
-					id: "button_apply_group",
 					class: "button_entry",
 					type: "button",
 					text: "Apply to join"
-					})
-				);
+				})
+	).click(function() {
+		var hostEmail = sessionStorage.getItem('hostEmail');
+		applyForGroup(hostEmail, groupId);
+	});
+
 	entry.append(button);
 	return entry;
 }
@@ -167,7 +170,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 
 /*
 <div class="entry">
-	<p hidden id="id">id</p>
+	//<p hidden>id</p>
 	<div class="image_container">
 		<img class="image" src="../../../../image/default-placeholder.png" alt="User image">
 	</div>
@@ -185,14 +188,13 @@ function createEntryForUser(email, userProfileImg, userName, skills, objective) 
 	var entry = $('<div/>', {
 				class: "entry"
 				});
-
+/*
 	var id = $('<p/>', {
-				id: "id",
 				hidden: true,
 				text: email
 			});
 	entry.append(id);
-
+*/
 	var image_container = $('<div/>', {
 					class: "image_container"
 					});
@@ -232,7 +234,6 @@ function createEntryForUser(email, userProfileImg, userName, skills, objective) 
 
 	var button = $('<div/>').append(
 				$('<button/>', {
-					id: "button_chat",
 					class: "button_entry",
 					type: "button",
 					text: "Chat",
