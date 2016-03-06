@@ -18,6 +18,10 @@ if (sessionStorage.getItem('dashboard') === null) {
 }
 
 
+function getProfile () {
+
+}
+
 function getJoinedGroups() {
     var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
     var user_email = dashboardStorage.user_email;
@@ -194,6 +198,33 @@ function leaveGroup (group_id) {
         }
     };
     xmlhttp.open("GET","../../../php/user.php?" + LEAVE_GROUP + "=" + JSON.stringify(request), true);
+    xmlhttp.send();
+}
+
+// TODO delete this when chuan has successfully integrated it
+function applyForGroup (group_id) {
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var request = {
+        'user_email' : dashboardStorage.user_email,
+        'group_id' : group_id
+    };
+    // send request to php
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                alert('Group application success!');
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/user.php?" + APPLY_FOR_GROUP + "=" + JSON.stringify(request), true);
     xmlhttp.send();
 }
 

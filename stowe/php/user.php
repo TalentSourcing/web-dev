@@ -25,31 +25,31 @@ class User {
         // check for existence of user
         $result = $this->conn->query("SELECT * FROM UserTable WHERE user_email='$user_email'");
         if ($result->num_rows < 1) {
-            echo "UserGroupTable insert failure: user with email '$user_email' does not exist in UserTable\n";
+            echo '{"error" : "UserGroupTable insert failure: user with email '. $user_email .' does not exist in UserTable"}';
             return null;
         }
 
         // check for existence of group
         $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id='$group_id'");
         if ($result->num_rows < 1) {
-            echo "UserGroupTable insert failure: Group with id '$group_id' does not exist in GroupTable\n";
+            echo '{"error" : "UserGroupTable insert failure: Group with id '. $group_id .' does not exist in GroupTable"}';
             return null;
         }
 
         // check for existence of UserGroupTable row already
         $result = $this->conn->query("SELECT * FROM UserGroupTable WHERE user_email='$user_email' AND group_id=$group_id");
         if ($result->num_rows != 0) {
-            echo "UserGroupTable insert failure: user_email/group_id row already exists in table\n";
+            echo '{"error" : "UserGroupTable insert failure: user_email/group_id row already exists in table"}';
             return null;
         }
 
         $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) ".
             "VALUES ('$user_email', $group_id, '$this->APPLIED')";
         if ($this->conn->query($sql)) {
-            echo "UserGroupTable insert success!\n";
+            echo '{"success" : "UserGroupTable insert success!"}';
         }
         else {
-            echo "UserGroupTable insert Failure:";
+            echo '{"error" : "UserGroupTable insert Failure"}';
         }
     }
 
@@ -57,10 +57,10 @@ class User {
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->APPLIED'";
         if ($this->conn->query($sql)) {
-            echo "UserGroupTable delete success!\n";
+            echo '{"success" : "UserGroupTable delete success!"}';
         }
         else {
-            echo "UserGroupTable delete Failure:";
+            echo '{"success" : "UserGroupTable delete Failure:"}';
         }
     }
 
@@ -187,9 +187,10 @@ $user = new User();
 // generate some fake data:
 //$user->generateTestData();
 
-// check for which kind of request
+// handle request type
 if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
-
+    $request = json_decode($_GET[APPLY_FOR_GROUP]);
+    $user->applyForGroup($request->user_email, $request->group_id);
 }
 else if (array_key_exists(CANCEL_GROUP_APPLICATION, $_GET)) {
     $request = json_decode($_GET[LEAVE_GROUP]);
