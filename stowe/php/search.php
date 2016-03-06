@@ -35,14 +35,17 @@ function searchForUsers($parserTokens) {
 
 		while ($row = $result->fetch_assoc()) {
 			$searchString = $row["first_name"]." ".$row["last_name"]." ".$row["skills"];
-			foreach ($parserTokens as $token) {
-				if (in_array($row, $json_objs_userlist)) {
-					continue;
-				}
+			$searchTokens = preg_split("/[\ \n\,\:]+/", $searchString);
 
-				if (stristr($searchString, $token) !== FALSE) {
-					$json_objs_userlist[] = $row;
-					$data[] = array('user' => $row);
+			foreach ($parserTokens as $token) {
+				foreach ($searchTokens as $searchToken) {
+					if (in_array($row, $json_objs_userlist)) {
+						continue;
+					}
+
+					if (strcasecmp($searchToken, $token) == 0) {
+						$json_objs_userlist[] = $row;
+					}
 				}
 			}
 		}
@@ -68,15 +71,17 @@ function searchForGroups($parserTokens) {
 
 		while ($row = $result->fetch_assoc()) {
 			$searchString = $row["group_name"]." ".$row["founder_name"]." ".$row["desired_skills"];
-			foreach ($parserTokens as $token) {
-				if (in_array($row, $json_objs_grouplist)) {
-					continue;
-				}
+			$searchTokens = preg_split("/[\ \n\,\:]+/", $searchString);
 
-				if (stristr($searchString, $token) !== FALSE) {
-					//$json_objs_grouplist[] = array('group' => $row);
-					$json_objs_grouplist[] = $row;
-					$data[] = array('group' => $row);
+			foreach ($parserTokens as $token) {
+				foreach ($searchTokens as $searchToken) {
+					if (in_array($row, $json_objs_grouplist)) {
+						continue;
+					}
+
+					if (strcasecmp($searchToken, $token) == 0) {
+						$json_objs_grouplist[] = $row;
+					}
 				}
 			}
 		}
