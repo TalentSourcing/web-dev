@@ -8,7 +8,7 @@ class Backend {
     private $conn = null;
     private $APPLIED = "applied";
 
-    public function Apply () {
+    public function Backend () {
         $this->conn = TalentMeDB::getConnection();
     }
 
@@ -50,5 +50,5 @@ $backend = new Backend();
 // handle request type
 if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
     $request = json_decode($_GET[APPLY_FOR_GROUP]);
-    $user->applyForGroup($request->user_email, $request->group_id);
+    $backend->applyForGroup($request->user_email, $request->group_id);
 }

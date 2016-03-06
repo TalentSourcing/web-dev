@@ -5,7 +5,7 @@ const APPLY_FOR_GROUP = "apply_for_group";
 function applyForGroup (group_id) {
     var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
     var request = {
-        'user_email' : dashboardStorage.user_email, // TODO get email somehow (this is how it is done in dashboard)
+        'user_email' : 'd.lindskog1@gmail.com', // dashboardStorage.user_email, // TODO get email somehow (this is how it is done in dashboard)
         'group_id' : group_id
     };
     // send request to php
@@ -14,6 +14,7 @@ function applyForGroup (group_id) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log("raw response: " + xmlhttp.responseText);
             console.log(json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
@@ -49,3 +50,5 @@ function extractJSONObject (string) {
         return string.substring(bracket);
     }
 }
+
+applyForGroup(1);
