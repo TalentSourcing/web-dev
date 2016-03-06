@@ -10,7 +10,7 @@ const GET_USER_PROFILE = "get_user_profile";
 if (sessionStorage.getItem('dashboard') === null) {
     var dashboardStorage = {
         'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
-        'userProfile' : '',
+        'userProfile' : {},
         'appliedGroups' : [],
         'joinedGroups' : []
     };
@@ -19,7 +19,57 @@ if (sessionStorage.getItem('dashboard') === null) {
 
 
 function getProfile () {
+    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var user_email = dashboardStorage.user_email;
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                populateProfile(response);
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/user.php?" + GET_USER_PROFILE + "=" + user_email, true);
+    xmlhttp.send();
+}
 
+/**
+ * user_email
+ * first_name
+ * last_name
+ * password
+ * linkedin_url
+ * skills
+ * occupation
+ * gender
+ * profile_img
+ * objective
+ */
+function populateProfile (user) {
+    $(document).ready(function () {
+        var p1 = $('#p1');
+        var p2 = $('#p2');
+        p1.text(user.first_name + " " + user.last_name);
+        p1.append('<br>');
+        p2.text(user.occupation);
+        p2.append('<br>');
+
+        var profile = $('#profile');
+        profile.append('Skills: ' + user.skills);
+        profile.append('');
+
+        if (user.profile_img === "") {
+            user.profile_img = "../../../image/default-placeholder.png";
+        }
+        $('#profilePic').attr('src', user.profile_img);
+    });
 }
 
 function getJoinedGroups() {
@@ -291,5 +341,6 @@ function extractJSONObject (string) { // TODO make return the message too
     }
 }
 
+getProfile();
 getJoinedGroups();
 getAppliedGroups();
