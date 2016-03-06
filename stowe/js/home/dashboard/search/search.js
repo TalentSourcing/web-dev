@@ -4,51 +4,48 @@ $(document).ready(function() {
 	$("#searchButton").on({
 		click: function() {
 			var searchFieldText = $("#searchField").val();
-
-			generateList(" ");
+			generateList(searchFieldText);
 		}
 	});
 
 });
 
-function generateList(response) {
+function generateList(searchFieldText) {
+	if (searchFieldText.length == 0) { 
+		alert("Please input search");
+        	return;
+    	} else {
+		var xmlhttp = new XMLHttpRequest();
+	        xmlhttp.onreadystatechange = function() {
+	        	if (xmlhttp.readyState == 3 && xmlhttp.status == 200) {
+				var response = JSON.parse(xmlhttp.responseText);
+				//alert(response[0]['user'].user_email);
 
-					var groupList = [
-							{
-								groupId: 1, 
-								groupImg: "../../../../image/default-placeholder.png",
-								groupName: "Group Name",
-								founderName: "Founder Name",
-								groupIntro: "Group intro"
-							},
-							{
-								groupId: 2, 
-								groupImg: "../../../../image/default-placeholder.png",
-								groupName: "Group Name",
-								founderName: "Founder Name",
-								groupIntro: "Group intro"
-							}
-							];
+				createGroupEntries(getList(response, "group"));
+				createUserEntries(getList(response, "user"));
+        		}
+		};
+        	xmlhttp.open("GET", "http://localhost/search.php?q=" + searchFieldText, true);
+        	xmlhttp.send();
+    	}
+}
 
-					var userList = [
-							{
-								email: "abc@gmail.com",
-								userProfileImg: "../../../../image/default-placeholder.png",
-								firstName: "User",
-								lastName: "name",
-								skills: "User skills"
-							}, 
-							{
-								email: "xyz@gmail.com",
-								userProfileImg: "../../../../image/default-placeholder.png",
-								firstName: "User",
-								lastName: "name",
-								skills: "User skills"
-							}
-							];
+function getList(response, type) {
+	var list = new Array();
 
-	createGroupEntries(groupList);
-	createUserEntries(userList);
+/*	// for separated return
+	for (var i in response) {
+		if (type in response[i]) {
+			list.push(response[i][type]);
+		}
+
+	}
+*/
+	if (response[type].length > 0) {
+		return response[type];
+	}
+
+	return list;
 }
 
 function createGroupEntries(groupList) {
@@ -56,12 +53,13 @@ function createGroupEntries(groupList) {
 	parentNode.empty();
 
 	for (var i = 0; i < groupList.length; i++) {
-		var groupId = groupList[i].groupId;
-		var groupImg = groupList[i].groupImg;
-		var groupName = groupList[i].groupName;
-		var founderName = groupList[i].founderName;
-		var groupIntro = groupList[i].groupIntro;
-		var groupEntry = createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro);
+		var groupId = groupList[i].group_id;
+		var groupImg = groupList[i].group_img;
+		var groupName = groupList[i].group_name;
+		var founderName = groupList[i].founder_name;
+		var groupIntro = groupList[i].about;
+		var desiredSkills = groupList[i].desired_skills;
+		var groupEntry = createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro, desiredSkills);
 		parentNode.append(groupEntry);
 	}
 }
@@ -71,11 +69,12 @@ function createUserEntries(userList) {
 	parentNode.empty();
 
 	for (var i = 0; i < userList.length; i++) {
-		var email = userList[i].email;
-		var userProfileImg = userList[i].userProfileImg;
-		var userName = userList[i].firstName + " " + userList[i].lastName;
+		var email = userList[i].user_email;
+		var userProfileImg = userList[i].profile_img;
+		var userName = userList[i].first_name + " " + userList[i].last_name;
 		var skills = userList[i].skills;
-		var userEntry = createEntryForUser(email, userProfileImg, userName, skills);
+		var objective = userList[i].objective;
+		var userEntry = createEntryForUser(email, userProfileImg, userName, skills, objective);
 		parentNode.append(userEntry);
 	}
 }
@@ -86,16 +85,17 @@ function createUserEntries(userList) {
         	<img class="image" src="../../../../image/default-placeholder.png" alt="Group image">
 	</div>
 	<div class="content">
-	    	<h2><a class="name_entry" href="../groups/view_group_external.html">Group Name</a></h2>
-	    	<h3>Fouder: <a class="name_founder" href="../profile/userProfile.html">Founder name</a></h3>    
-	        <p>Group Intro</p> 
+	    	<h2><a class="name_entry" href="../groups/view_group_external.html" target="_blank">Group Name</a></h2>
+	    	<h3>Founder: <a class="name_founder" href="../profile/userProfile.html" target="_blank">Founder name</a></h3>   
+		<p class="description">Desired skills: <p>
+		<p class="description">Group Intro</p> 
 	</div>
 	<div>
 		<button class="button_entry" type="button">Apply to join</button>
 	</div>
 </div>
 */
-function createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro) {
+function createEntryForGroup(groupId, groupImg, groupName, founderName, groupIntro, desiredSkills) {
 	var entry = $('<div/>', {
 				class: "entry",
 				id: "group_" + groupId
@@ -106,7 +106,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 					});
 	var image = $('<img/>', {
 				class: "image",
-				src: groupImg,
+				src: (groupImg != null) ? groupImg : "../../../../image/default-placeholder.png",
 				alt: "Group image"
 				});
 
@@ -120,6 +120,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 					$('<a/>', {
 						class: "name_entry",
 						href: "../groups/view_group_external.html",
+						target: "_blank",
 						text: groupName
 						})
 					);
@@ -131,6 +132,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 					$('<a/>', {
 						class: "name_founder",
 						href: "../profile/userProfile.html",
+						target: "_blank",
 						text: founderName
 					})
 				);
@@ -141,6 +143,13 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 				text: groupIntro
 				});
 	content.append(group_intro);
+	entry.append(content);
+
+	var desired_skills = $('<p/>', {
+				class: "description",
+				text: "Desired skills: " + desiredSkills
+				});
+	content.append(desired_skills);
 	entry.append(content);
 
 	var button = $('<div/>').append(
@@ -157,35 +166,41 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 
 
 /*
-<div class="entry" id="abc@gmail.com">
+<div class="entry">
+	<p hidden id="id">id</p>
 	<div class="image_container">
 		<img class="image" src="../../../../image/default-placeholder.png" alt="User image">
 	</div>
 	<div class="content">
-		<h2><a class="name_entry" href="../profile/userProfile.html">User name</a></h2>
-		<h3>Skills</h3>
-		<p>User skills</p>
+		<h2><a class="name_entry" href="../profile/userProfile.html" target="_blank">User name</a></h2>
+		<p class="user_skill">Skills: </p>
+		<p class="description">User's objective</p>
 	</div>
 	<div>
 		<button class="button_entry" type="button" onclick="window.open('../chat/chat.html')">Chat</button>
 	</div>
 </div>
 */
-function createEntryForUser(email, userProfileImg, userName, skills) {
+function createEntryForUser(email, userProfileImg, userName, skills, objective) {
 	var entry = $('<div/>', {
-				class: "entry",
-				id: email
+				class: "entry"
 				});
+
+	var id = $('<p/>', {
+				id: "id",
+				hidden: true,
+				text: email
+			});
+	entry.append(id);
 
 	var image_container = $('<div/>', {
 					class: "image_container"
 					});
 	var image = $('<img/>', {
 				class: "image",
-				src: userProfileImg,
-				alt: "Group image"
+				src: (userProfileImg == null) ? userProfileImg : "../../../../image/default-placeholder.png",
+				alt: "User image"
 				});
-
 	image_container.append(image);
 	entry.append(image_container);
 
@@ -196,19 +211,21 @@ function createEntryForUser(email, userProfileImg, userName, skills) {
 					$('<a/>', {
 						class: "name_entry",
 						href: "../profile/userProfile.html",
+						target: "_blank",
 						text: userName
 						})
 					);
 	content.append(name_entry);
 
-	var skill_header = $('<h3/>', {
-				text: "Skills: "
+	var skill_header = $('<p/>', {
+				class: "user_skills",
+				text: "Skills: " + skills
 				});
 	content.append(skill_header);
 
 	var user_skills = $('<p/>', {
 				class: "description",
-				text: skills
+				text: objective
 				});
 	content.append(user_skills);
 	entry.append(content);
