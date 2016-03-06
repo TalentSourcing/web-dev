@@ -21,6 +21,8 @@ if (strlen($q) < 1) {
 	echo json_encode($searchResult);
 }
 
+TalentMeDB::close();
+
 
 function searchForUsers($parserTokens) {
 	global $conn;
