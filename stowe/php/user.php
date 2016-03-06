@@ -112,14 +112,25 @@ class User {
     }
 
     public function leaveGroup($user_email, $group_id) {
+        $response = array();
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->MEMBER'";
         if ($this->conn->query($sql)) {
-            echo '{"success" : "LeaveGroup success"}';
+            $response["UserGroupTable"] = "UserGroupTable remove success";
         }
         else {
-            echo '{"error" : "LeaveGroup failure"}';
+            $response["UserGroupTableError"] = "LeaveGroup failure";
         }
+
+        // TODO test this...
+        $sql = "DELETE FROM ChatLineTable WHERE user_email='$user_email' AND group_id='$group_id'";
+        if ($this->conn->query($sql)) {
+            $response["ChatLineTable"] = "Chat entries removed successfully";
+        }
+        else {
+            $response["ChatLineTableError"] = "LeaveGroup failure";
+        }
+        echo json_encode($response);
     }
 
     public function getUserProfile($user_email) {

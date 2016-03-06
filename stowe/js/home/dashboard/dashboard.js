@@ -228,7 +228,7 @@ function leaveGroup (group_id) {
         'user_email' : dashboardStorage.user_email,
         'group_id' : group_id
     };
-    console.log('leaveGroup user_email: ' + request.user_email);
+    console.log('leaveGroup group_id: ' + group_id);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
     var response = null;
@@ -278,13 +278,14 @@ function applyForGroup (group_id) {
     xmlhttp.send();
 }
 
+// TODO this is not working right
 function cancelApp (group_id) {
     var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
     var request = {
         'user_email' : dashboardStorage.user_email,
         'group_id' : group_id
     };
-    console.log('cancel application user_email: ' + request.user_email);
+    console.log('cancel application group_id: ' + group_id);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
     var response = null;
