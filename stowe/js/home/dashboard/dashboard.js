@@ -193,6 +193,7 @@ function openChat () {
     }
     chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
+    window.location.href = "../../../php/home/dashboard/chat/chat1.php?" + "sender_data=" + JSON.stringify(chatStorage);
 }
 
 function openGroupChat (group_id) {
@@ -206,7 +207,7 @@ function openGroupChat (group_id) {
     chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
     chatStorage.group_id = group_id;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
-    window.location.href = "../../../php/home/dashboard/chat/chat.php";
+    window.location.href = "../../../php/home/dashboard/chat/chat1.php?" + "sender_data=" + JSON.stringify(chatStorage);
 }
 
 function openGroup (group_id) {

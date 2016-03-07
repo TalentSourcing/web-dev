@@ -19,3 +19,5 @@ $(document).ready(function() {
 		i = (i + 1) % images.length;
 	}, 5000);
 });
+
+
