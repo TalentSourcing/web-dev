@@ -17,6 +17,7 @@ body {
         height:15%;
         min-width:42%;
         color: #E8EDF9;
+/*         color: black;*/
         overflow:auto;
     }
 /*Bhargavi's stuff*/
@@ -25,7 +26,8 @@ body {
         border-radius: 5px;
         height:25px;
         width:175px;
-        color: #E8EDF9;
+/*        color: #E8EDF9;*/
+        color: black;
     }
 
 #header_content {
