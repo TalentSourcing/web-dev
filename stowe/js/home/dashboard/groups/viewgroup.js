@@ -26,12 +26,12 @@ function getGroupView (group_id) {
 function populateGroupView (group_data) {
     $(document).ready(function () {
         $('#group_data').text(JSON.stringify(group_data)); // store user data right on the page
-        $('#img_group').text(group_data.group_img);
-        $('#group_title').text(group_data.group_name); // first + last
-        $('#about_info').text( group_data.linkedin_url);
+        $('#group_img').text(group_data.group_img);//image id must be changed in html
+        $('#group_name').text(group_data.group_name); // first + last
+        $('#about').text( group_data.linkedin_url);
 
-        group_data.desired_skills.split(/\s/).forEach(function (skill) {
-            $('#skill_list').append("<li>" + skill + "</li>");
+        group_data.desired_skills.split(/\s/).forEach(function (desired_skills) {
+            $('#desired_skills').append("<li>" + skill + "</li>");
         });
 
         // TODO no such table column called 'experience'.  Need to populate list based on available data, or no items if there isn't any data
