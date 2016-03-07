@@ -34,8 +34,14 @@ Specification: Chat application
 	<?php 
 		require 'init_database.php';            //the data connection file
 		$conn = TalentMeDB::getConnection();    //get connection object
-		$senderEmail = 'naina@gmail.com';       //the sender email
-		$senderName = 'Naina Raut';             //the sender name
+		
+		if(isset($_GET['sender_data']))
+		{
+			$result = json_decode($_GET['sender_data']);   
+			$senderEmail = $result->user_email;            //the sender email
+			$senderGroupId = $result->group_id;            //the sender group Id
+			$senderName = 'Naina Raut';             	   //the sender name
+		}
 		
 		//send the current message to DB
 		function sendMessage($sentMsg,$senderChatId,$senderEmail,$groupId)
