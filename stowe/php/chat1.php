@@ -130,9 +130,19 @@ Specification: Chat application
 		<?php
 					while($row = $result->fetch_assoc())
 					{
+						$img;
+						if($row['profile_img'] == NULL)
+						{
+							$img = '../../../chat/defaultPic.png';
+						}
+						else
+						{
+							$img = $row['profile_img'];
+						}
+						
 						$fullName = $row['first_name']." ".$row['last_name'];
 					    echo "<li class='names' onclick='location.href=\"getHint.php?receiver={$row['user_email']}&sender={$senderEmail}&recName=$fullName\"'>
-							<div id='listPic'><img src='{$row['profile_img']}' width='20%' height='10%'></div>
+							<div id='listPic'><img src='$img' width='20%' height='10%'></div>
 							<div id='listName'>$fullName</div>
 							</li>";
 					}
@@ -149,6 +159,16 @@ Specification: Chat application
 			{
 				while($row2 = $result2->fetch_assoc())
 				{
+					$img;
+						if($row['group_img'] == NULL)
+						{
+							$img = '../../../chat/defaultPic.png';
+						}
+						else
+						{
+							$img = $row['group_img'];
+						}
+					
 					echo "<li class='names' onclick='location.href=\"getHint.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}\"'><div id='listPic'><img src='{$row2['group_img']}' width='20%' height='10%'></div>
 					<div id='listName'>{$row2['group_name']}</div></li>";
 				}
