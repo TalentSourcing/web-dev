@@ -132,9 +132,9 @@ class Group
 }
 
 //working
-
+$group = new Group();
 if (array_key_exists(GET_GROUP_VIEW, $_GET)) {
-    $group = new Group();
+
     $group->getGroupView($_GET[GET_GROUP_VIEW]);
 }
 
