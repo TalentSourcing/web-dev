@@ -184,14 +184,14 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 	</div>
 </div>
 */
-function createEntryForUser(email, userProfileImg, userName, skills, objective) {
+function createEntryForUser(userEmail, userProfileImg, userName, skills, objective) {
 	var entry = $('<div/>', {
 				class: "entry"
 				});
 /*
 	var id = $('<p/>', {
 				hidden: true,
-				text: email
+				text: userEmail
 			});
 	entry.append(id);
 */
@@ -236,10 +236,14 @@ function createEntryForUser(email, userProfileImg, userName, skills, objective) 
 				$('<button/>', {
 					class: "button_entry",
 					type: "button",
-					text: "Chat",
-					onClick: "window.open('../chat/chat.html')"
-					})
-				);
+					text: "Chat"
+				})
+	).click(function() {
+		//var hostEmail = sessionStorage.getItem('hostEmail');
+		var hostEmail = "xc5211@gmail.com";
+		initChat(hostEmail, userEmail);
+		window.open('../chat/chat.html');
+	});
 	entry.append(button);
 	return entry;
 }
