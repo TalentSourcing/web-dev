@@ -34,11 +34,6 @@ function populateGroupView (group_data) {
             $('#desired_skills').append("<li>" + skill + "</li>");
         });
 
-        // TODO no such table column called 'experience'.  Need to populate list based on available data, or no items if there isn't any data
-
-        //group_data.experience.split(/\s/).forEach(function (skill) {
-        //    $('#experience_skill_list').append("<li>" + skill + "</li>");
-        //});
 
     });
 }
