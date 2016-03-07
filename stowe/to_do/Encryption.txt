@@ -1,0 +1,1 @@
+Make sure all sensative data through url is encrypted by using str_rot13.js file. 
