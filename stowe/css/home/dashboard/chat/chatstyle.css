@@ -154,7 +154,7 @@ p{
 	color: #E8EDF9;
 }
 
-.names.selected{
+.listData li.selected{
 	background-color: #7094A8;
 	color: #E8EDF9;
 }
@@ -170,8 +170,27 @@ p{
 #sender{
 	background-color: #7094A8;
 	color: #E8EDF9;
-	position:fixed;
-	width: 67.2%;
 	padding: 1%;
 	margin: 0;
+	float: right;
+}
+
+.senderName{
+	width: 68%;
+	background-color: #7094A8;
+	color: #E8EDF9;
+	float: right;
+	position: absolute;
+}
+
+#listName{
+	width: 70%;
+	height: 10%;
+	border: 1px ;
+}
+
+#listPic img{
+	float: left;
+	width: 20%;
+	border: 1px ;
 }

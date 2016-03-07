@@ -1,7 +1,7 @@
 
 'use strict';
 
-// request types: create_user, update_user, delete_user
+
 const EDIT_GROUP = "edit_group";
 
 function geteditgroupFields () {
@@ -29,7 +29,7 @@ function validate () {
     var profile = getFields();
 
 
-    // if checks pass, go to dashboard, else stay on same page to fix problems
+
     if (valid) {
         sessionStorage.removeItem('saved_state');
 

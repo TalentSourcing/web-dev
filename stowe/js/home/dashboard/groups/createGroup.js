@@ -1,16 +1,16 @@
 
 'use strict';
 
-// request types: create_user, update_user, delete_user
+
 const CREATE_GROUP = "create_group";
 
 function getFields () {
     var groupprofile = {};
     $(document).ready(function () {
-        groupprofile.group_title = $('input[name="email"]').val();
-        groupprofile.about_info = $('input[name="firstname"]').val();
-        groupprofile.skill_list = $('input[name="lastname"]').val();
-        groupprofile.experience_list = $('input[name="password"]').val();
+        groupprofile.group_title = $('input[name="group_title"]').val();
+        groupprofile.about_info = $('input[name="about"]').val();
+        groupprofile.skill_list = $('input[name="desired_skills"]').val();
+        groupprofile.experience_list = $('input[name="experience"]').val();
 
     });
 
@@ -29,7 +29,7 @@ function validate () {
     var groupprofile = getFields();
 
 
-    // if checks pass, go to dashboard, else stay on same page to fix problems
+
     if (valid) {
         sessionStorage.removeItem('saved_state');
 
