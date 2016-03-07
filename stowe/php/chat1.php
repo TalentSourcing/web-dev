@@ -9,7 +9,7 @@ Specification: Chat application
 	<link rel="stylesheet" href="../css/home/dashboard/chat/chatstyle.css">
 	<link rel="stylesheet" href="../css/header.css">
 	<link rel="stylesheet" href="../css/footer.css">
-	<script src="../../../js/jquery-1.12.0.min.js"></script>	
+	<script src="../js/jquery-1.12.0.min.js"></script>
 	</head>
 	
 	<script>
@@ -34,10 +34,10 @@ Specification: Chat application
 	<?php 
 		require 'init_database.php';            //the data connection file
 		$conn = TalentMeDB::getConnection();    //get connection object
-		
+
 		if(isset($_GET['sender_data']))
 		{
-			$result = json_decode($_GET['sender_data']);   
+			$result = json_decode($_GET['sender_data']);
 			$senderEmail = $result->user_email;            //the sender email
 			$senderGroupId = $result->group_id;            //the sender group Id
 			$senderName = 'Naina Raut';             	   //the sender name
@@ -87,7 +87,7 @@ Specification: Chat application
 <!--		Header section-->
 		<header id="header_content">
 			<div id="header_logo_container">
-				<img id="logo_image" src="logo.jpg" alt="Logo">
+				<img id="logo_image" src="../image/home/logo.jpg" alt="Logo">
 			</div>
 			<div id="header_bar">
 				<p><a href="#">TalentMe</a></p>
@@ -100,7 +100,7 @@ Specification: Chat application
 			
 <!--			search section-->
 			<div id="topsearch">
-				<input id="topsearchtext"type="search" name="googlesearch" placeholder="Search chat...">
+				<input id="topsearchtext" type="search" name="googlesearch" placeholder="Search chat...">
 				<input id="search" type="submit" value="Search">
 			</div>
 		<br>
@@ -133,7 +133,7 @@ Specification: Chat application
 						$img;
 						if($row['profile_img'] == NULL)
 						{
-							$img = '../../../chat/defaultPic.png';
+							$img = '../image/default-placeholder.png';
 						}
 						else
 						{
@@ -162,7 +162,7 @@ Specification: Chat application
 					$img;
 						if($row['group_img'] == NULL)
 						{
-							$img = '../../../chat/defaultPic.png';
+							$img = '../image/default-placeholder.png';
 						}
 						else
 						{
