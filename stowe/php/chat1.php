@@ -9,8 +9,6 @@ Specification: Chat application
 	<link rel="stylesheet" href="../css/home/dashboard/chat/chatstyle.css">
 	<link rel="stylesheet" href="../css/header.css">
 	<link rel="stylesheet" href="../css/footer.css">
-<!--  TODO why is jquery linked to google??	-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	</head>
 	
 	<script>
@@ -56,7 +54,7 @@ Specification: Chat application
 						getGroupData($_COOKIE['groupId']);
 					}
 					else if(isset($_COOKIE['sender']) && isset($_COOKIE['receiver'])){
-						getMessages($_COOKIE['sender'],$_COOKIE['receiver']);
+						getMessages($_COOKIE['sender'],$_COOKIE['receiver'],$_COOKIE['recName']);
 					}
 				}
 				else{
@@ -115,7 +113,11 @@ Specification: Chat application
 		<?php
 					while($row = $result->fetch_assoc())
 					{
-					    echo "<li class='names' onclick='location.href=\"getHint.php?receiver={$row['user_email']}&sender={$senderEmail}\"'> {$row['first_name']}&nbsp;{$row['last_name']}</li>";
+						$fullName = $row['first_name']." ".$row['last_name'];
+					    echo "<li class='names' onclick='location.href=\"getHint.php?receiver={$row['user_email']}&sender={$senderEmail}&recName=$fullName\"'>
+							<div id='listPic'><img src='{$row['profile_img']}' width='20%' height='10%'></div>
+							<div id='listName'>$fullName</div>
+							</li>";
 					}
 				}
 				else{
@@ -130,7 +132,8 @@ Specification: Chat application
 			{
 				while($row2 = $result2->fetch_assoc())
 				{
-					echo "<li class='names' onclick='location.href=\"getHint.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}\"'>{$row2['group_name']}</li>";
+					echo "<li class='names' onclick='location.href=\"getHint.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}\"'><div id='listPic'><img src='{$row2['group_img']}' width='20%' height='10%'></div>
+					<div id='listName'>{$row2['group_name']}</div></li>";
 				}
 		?>
 			</ul>
@@ -153,30 +156,34 @@ Specification: Chat application
 		
 <!--		the sender name displayed-->
 		<div class='senderName'>
-			<p id='sender'><?php echo $senderName; ?></p>
+		<p id='sender'><?php echo $senderName; ?></p>
 		</div>	
 		
 		<div class="messages">
 		<?php
 			
 			//check if individual is selected
-			if(isset($_GET['receiver']) && isset($_GET['sender']))
+			if(isset($_GET['receiver']) && isset($_GET['sender']) && isset($_GET['recName']))
 			{
 				setcookie("sender", "", time() - 3600);       //delete cookie
 				setcookie("receiver", "", time() - 3600);     //delete cookie
+				setcookie("recName", "", time() - 3600);     //delete cookie
+				
 
 				setcookie('sender', $_GET['sender'], time() + (86400 * 30), "/"); // 86400 = 1 day
 				setcookie('receiver', $_GET['receiver'], time() + (86400 * 30), "/"); // 86400 = 1 day
+				setcookie('recName', $_GET['recName'], time() + (86400 * 30), "/"); // 86400 = 1 day
 				setcookie('groupId', NULL, time() + (86400 * 30), "/"); // 86400 = 1 day
 
-				getMessages($_GET['sender'],$_GET['receiver']);				
+				getMessages($_GET['sender'],$_GET['receiver'],$_GET['recName']);				
 			}
 			
 			//get the recent messages of individual to display
-			function getMessages($idSender,$idReceiver)
+			function getMessages($idSender,$idReceiver,$recName)
 			{
 				global $conn;
 				global $rowData;
+				global $senderName;
 
 				//to get the chat id of the top row
 				$sql2 = "SELECT * FROM CHATLINETABLE LIMIT 1";
@@ -193,6 +200,7 @@ Specification: Chat application
 						$row = $result2->fetch_assoc();
 						$globalChatId = $row['chat_id'];
 						setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); // 86400 = 1 day
+
 					}
 					else
 					{
@@ -213,7 +221,7 @@ Specification: Chat application
 			?>
 								<div id='m1'>
 								   <div id='m1-1'>
-										<p><?php echo $rowData['text_line']; ?></p>
+									   <p><?php echo "<b>$recName: </b>{$rowData['text_line']}"; ?></p>
 								   </div>
 								</div>
 			<?php
@@ -223,7 +231,7 @@ Specification: Chat application
 			?>
 								<div id='m2'>
 									<div id='m2-1'>
-										<p><?php echo $rowData['text_line']; ?></p>
+										<p><?php echo "{$rowData['text_line']}<b> :$senderName</b>"; ?></p>
 									</div>
 								</div>
 			<?php
@@ -245,10 +253,17 @@ Specification: Chat application
 			//check if group is selected
 			if(isset($_GET['groupId']) && isset($_GET['groupName']))
 			{
+				//delete the previous group Id
 				setcookie("groupId", "", time() - 3600);
-
-				setcookie('groupId', $_GET['groupId'], time() + (86400 * 30), "/"); // 86400 = 1 day
-				setcookie('receiver', NULL, time() + (86400 * 30), "/"); // 86400 = 1 day
+				
+				//set the latest group Id
+				setcookie('groupId', $_GET['groupId'], time() + (86400 * 30), "/"); 
+				
+				//set the previous receiver email and receiver name to null
+				setcookie('receiver', NULL, time() + (86400 * 30), "/"); 
+				setcookie('recName', NULL, time() + (86400 * 30), "/"); 
+				
+				//get the group Data using group Id
 				getGroupData($_GET['groupId']);
 			}
 			
@@ -259,44 +274,69 @@ Specification: Chat application
 
 					//to get the chat id of the top row
 				   $sql2 = "SELECT * FROM CHATLINETABLE LIMIT 1";
-
+					
+					//get all the group chats specific to group id
 				   $sql = "SELECT * FROM CHATLINETABLE as t1 WHERE group_id = $groupId AND ".
 						  "(SELECT COUNT(*) FROM CHATLINETABLE as t2 where t1.chat_id = t2.chat_id) > 1";
+					
+					//get all the user names and user emails in the same group
+				   $sql3 = "select first_name,last_name,t1.user_email ".
+					   	   "from usertable as t1 inner join usergrouptable as t2 ".
+					       "on t1.user_email = t2.user_email ".
+					       "where group_id = $groupId";
 				   try
 				   {
-					   $result = $conn->query($sql);
-					   if($result)
-					   {
-						   while($row = $result->fetch_assoc())
-						   {
-			?>
-							<div id='m1'>
-								<div id='m1-1'>
-									<p><?php echo $row['text_line']; ?></p>
-								</div>
-							</div>
-			<?php
-						   }
-					   }
-					   else
-					   {
-						   echo "Error while selecting group data from chat table";
-					   }
-
-					   //execute the query for chat id selection
+					    //execute the query for chat id selection
 						$result2 = $conn->query($sql2);
 						if($result2)
 						{
-							$row = $result2->fetch_assoc();
-							$globalChatId = $row['chat_id'] + 1;
-							setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); // 86400 = 1 day
+							$row2 = $result2->fetch_assoc();
+							$globalChatId = $row2['chat_id'] + 1;
+							
+							//set the new group Id
+							setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); 
 
 						}
 						else
 						{
 							$globalChatId = 1;
-							setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); // 86400 = 1 day
+							//set initial group Id as 1
+							setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); 
 						}
+					   
+					   $result = $conn->query($sql);
+					   $result3 = $conn->query($sql3);
+					   $userData = array();
+					   
+					   if($result3)
+						{
+						   while($row3 = $result3->fetch_assoc())
+							{
+							   $userData[$row3['user_email']] = $row3['first_name']." ".$row3['last_name'];
+						   	}
+						}
+						else
+						{
+							echo "Error while selecting group and user data";
+						}
+					   
+					   if($result)
+					   {   
+							while($row = $result->fetch_assoc())
+							{
+				?>
+								<div id='m1'>
+									<div id='m1-1'>
+										<p><?php echo "<b>{$userData[$row['user_email']]}: </b>{$row['text_line']}"; ?></p>
+									</div>
+								</div>
+				<?php
+							}  
+					   }
+					   else
+					   {
+						   echo "Error while selecting group data from chat table";
+					   }
 				   }
 				   catch(Exception $e)
 				   {
@@ -314,7 +354,7 @@ Specification: Chat application
 					sendMessage($_GET['msg'],$_COOKIE['globalChatId'],$_COOKIE['sender'],$id);
 				}
 				 //check whether its an individual message
-				else if(isset($_COOKIE['sender']) && isset($_COOKIE['receiver']))
+				else if(isset($_COOKIE['sender']) && isset($_COOKIE['receiver']) && isset($_COOKIE['recName']))
 				{
 					$id = NULL;
 					sendMessage($_GET['msg'],$_COOKIE['globalChatId'],$_COOKIE['sender'],$id);
