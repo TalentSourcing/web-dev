@@ -57,6 +57,10 @@ function validate () {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 console.log(xmlhttp.responseText);
+                window.location.href = "dashboard/dashboard.html"; // TODO this is not working
+                //$(document).ready(function () {
+                //    $('#register_button').attr('href', 'dashboard/dashboard.html');
+                //});
             }
         };
         xmlhttp.open("GET","../../php/user_profile.php?" + CREATE_USER + "=" + JSON.stringify(profile), true);
@@ -67,23 +71,3 @@ function validate () {
     }
 }
 
-//function repopulate () {
-//    var state = null;
-//    if ((state = JSON.parse(sessionStorage.getItem('saved_state'))) === null) {
-//        console.log("no saved state found");
-//        return;
-//    }
-//    console.log("saved state found!\n" + JSON.stringify(state));
-//    $(document).ready(function () {
-//        $('input[name="email"]').val(state.user_email);
-//        $('input[name="firstname"]').val(state.first_name);
-//        $('input[name="lastname"]').val(state.last_name);
-//        $('input[name="password"]').val(state.password);
-//        $('input[name="linkedin"]').val(state.linkedin_url);
-//        $('textarea[name="skills"]').val(state.skills);
-//        $('input[name="occupation"]').val(state.occupation);
-//        $('input[name="gender"]:checked').val(state.gender);
-//        // TODO profile_img
-//        $('textarea[name="objective"]:checked').val(state.objective);
-//    });
-//}
