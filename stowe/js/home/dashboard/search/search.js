@@ -18,6 +18,7 @@ function generateList(searchFieldText) {
 		var xmlhttp = new XMLHttpRequest();
 	        xmlhttp.onreadystatechange = function() {
 	        	if (xmlhttp.readyState == 3 && xmlhttp.status == 200) {
+				console.log(xmlhttp.responseText);
 				var response = JSON.parse(xmlhttp.responseText);
 				//alert(response[0]['user'].user_email);
 
@@ -25,7 +26,8 @@ function generateList(searchFieldText) {
 				createUserEntries(getList(response, "user"));
         		}
 		};
-        	xmlhttp.open("GET", "http://localhost/search.php?q=" + searchFieldText, true);
+        	//xmlhttp.open("GET", "http://localhost/search.php?q=" + searchFieldText, true);
+			xmlhttp.open("GET", "../../../../php/search.php?q=" + searchFieldText, true);
         	xmlhttp.send();
     	}
 }
