@@ -115,7 +115,7 @@ Specification: Chat application
 		<?php
 					while($row = $result->fetch_assoc())
 					{
-					    echo "<li class='names'><a href='getHint.php?receiver={$row['user_email']}&sender={$senderEmail}' class='list' name='display' value='display'> {$row['first_name']}&nbsp;{$row['last_name']}</a></li>";
+					    echo "<li class='names' onclick='location.href=\"getHint.php?receiver={$row['user_email']}&sender={$senderEmail}\"'> {$row['first_name']}&nbsp;{$row['last_name']}</li>";
 					}
 				}
 				else{
@@ -130,8 +130,7 @@ Specification: Chat application
 			{
 				while($row2 = $result2->fetch_assoc())
 				{
-					//$names[$count++] = $row2['group_name'];
-					echo "<li class='names'><a href='getHint.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}' class='list'>{$row2['group_name']}</a></li>";
+					echo "<li class='names' onclick='location.href=\"getHint.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}\"'>{$row2['group_name']}</li>";
 				}
 		?>
 			</ul>
@@ -153,7 +152,9 @@ Specification: Chat application
 	<div class="chat">
 		
 <!--		the sender name displayed-->
-		<p id='sender'><?php echo $senderName; ?></p>
+		<div class='senderName'>
+			<p id='sender'><?php echo $senderName; ?></p>
+		</div>	
 		
 		<div class="messages">
 		<?php

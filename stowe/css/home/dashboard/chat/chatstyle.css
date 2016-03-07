@@ -154,7 +154,7 @@ p{
 	color: #E8EDF9;
 }
 
-.names.selected{
+.listData li.selected{
 	background-color: #7094A8;
 	color: #E8EDF9;
 }
