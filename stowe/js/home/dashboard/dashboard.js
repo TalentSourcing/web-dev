@@ -7,15 +7,15 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-if (sessionStorage.getItem('dashboard') === null) {
-    var dashboardStorage = {
-        'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
-        'userProfile' : {},
-        'appliedGroups' : [],
-        'joinedGroups' : []
-    };
-    sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
-}
+//if (sessionStorage.getItem('dashboard') === null) {
+//    var dashboardStorage = {
+//        'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
+//        'userProfile' : {},
+//        'appliedGroups' : [],
+//        'joinedGroups' : []
+//    };
+//    sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
+//}
 
 
 function getProfile () {
