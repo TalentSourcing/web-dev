@@ -10,7 +10,18 @@
   //   example 3: str_rot13(33);
   //   returns 3: '33'
 
-// Use this function to encode sensitive data in url and decode using "str_rot13()" in PHP
+/*
+	Use this function to encode sensitive data in url.
+
+	Only need to ensure this file is linked in corresponding HTML page. And this JS file should be 
+	the FIRST JS file to be linked except for jQuery lib. 
+
+	Example to encrypt/decrypt:
+		On JS side, 
+			str_rot13(JSON.stringify(request))
+		On PHP side,
+			$request = json_decode(str_rot13($_GET[INIT_CHAT]));
+*/
 function str_rot13(str) {
   return (str + '')
     .replace(/[a-z]/gi, function(s) {
