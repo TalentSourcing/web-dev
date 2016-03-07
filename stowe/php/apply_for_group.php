@@ -10,7 +10,7 @@ define("APPLY_FOR_GROUP", "apply_for_group");
 $conn = TalentMeDB::getConnection();
 
 if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
-    $request = json_decode($_GET[APPLY_FOR_GROUP]);
+    $request = json_decode(str_rot13($_GET[APPLY_FOR_GROUP]));
     applyForGroup($request->user_email, $request->group_id);
 }
 
@@ -42,7 +42,7 @@ function applyForGroup($user_email, $group_id) {
         }
 
         $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) ".
-            "VALUES ('$user_email', $group_id, 'APPLIED')";
+            "VALUES ('$user_email', '$group_id', 'APPLIED')";
         if ($conn->query($sql)) {
             echo '{"success" : "UserGroupTable insert success!"}';
         }
