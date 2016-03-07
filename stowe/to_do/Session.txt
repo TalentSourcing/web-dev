@@ -1,0 +1,1 @@
+1. Set user email into window.sessionStorage, once the user's logged in or finished registration, with key value of "hostEmail".

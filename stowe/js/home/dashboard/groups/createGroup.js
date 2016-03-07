@@ -7,10 +7,10 @@ const CREATE_GROUP = "create_group";
 function getFields () {
     var groupprofile = {};
     $(document).ready(function () {
-        groupprofile.group_title = $('input[name="email"]').val();
-        groupprofile.about_info = $('input[name="firstname"]').val();
-        groupprofile.skill_list = $('input[name="lastname"]').val();
-        groupprofile.experience_list = $('input[name="password"]').val();
+        groupprofile.group_title = $('input[name="group_title"]').val();
+        groupprofile.about_info = $('input[name="about"]').val();
+        groupprofile.skill_list = $('input[name="desired_skills"]').val();
+        groupprofile.experience_list = $('input[name="experience"]').val();
 
     });
 

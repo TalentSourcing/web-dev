@@ -1,3 +1,5 @@
+'use strict';
+
 
 // php requests:
 const GET_USER_PROFILE = "get_user_profile";
@@ -28,7 +30,7 @@ function populateProfile (user_data) {
         $('#user_data').text(JSON.stringify(user_data)); // store user data right on the page
         $('#user_email').text(user_data.user_email);
         $('#name').text(user_data.first_name + " " + user_data.last_name); // first + last
-        $('#linkedin_url').attr('src', user_data.linkedin_url);
+        $('#linkedin_url').attr('href', user_data.linkedin_url);
 
         user_data.skills.split(/\s/).forEach(function (skill) {
             $('#skills').append("<li>" + skill + "</li>");
@@ -51,4 +53,5 @@ function extractJSONObject (string) {
     return string.substring(json_start, json_end + 1);
 }
 
+// TODO email address needs to be passed to this!  sessonStorage perhaps
 getUserProfile('d.lindskog1@gmail.com');

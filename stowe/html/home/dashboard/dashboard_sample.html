@@ -6,8 +6,9 @@
 		<script src="../../../js/jquery-1.12.0.min.js"></script>
 		<script src="../../../js/home/dashboard/dashboard.js"></script>
 	</head>
-
+	
 	<body>
+		<label id="user_email" style="display: none;"></label> <!-- store user email on the page -->
 		<!--header section of the page-->
 		
 		<header id="header_content">
@@ -18,23 +19,25 @@
 				<p><a href="#">TalentMe</a></p>
 			</div>
 		</header>
+		
 		<!--main div for the whole page-->
 		<div class="DashboardMain">
+			
 			<!--profile section-->
 			<div class="profileSection">
 				
 				<!--profile pic-->
 				<div id="pic">
-					<img id="profilePic" alt="Profile Picture">
+					<img src="../../../image/home/pic.jpg" id="profilePic" alt="Profile Picture">
 				</div>
 				
 				<!--summary of the user-->
 				<div id="summary">
 					<p id="profile">
-						<span id="p1"><b></b></span><br>
-						<span id="p2"></span><br>
-						<!--Skill Sets &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Java, C, C++, HTML, CSS, Javascript<br>-->
-						<!--Areas of Interest &nbsp;  Virtualization, Data Protection, Cloud Computing<br>-->
+						<span id="p1"><b>Naina Raut</b></span><br>
+						<span id="p2">Graduate student at Santa Clara University</span><br>
+						Skill Sets &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Java, C, C++, HTML, CSS, Javascript<br>
+						Areas of Interest &nbsp;  Virtualization, Data Protection, Cloud Computing<br>
 					</p>
 				</div>
 				
@@ -43,7 +46,7 @@
 			<!-- Search/Chat -->
 			<div class="commSection">
 				<a href="search/search.html" target="_blank"><button>Search</button></a>
-				<a href="../../../php/chat1.php" target="_blank" onclick="openChat()"><button>Chat</button></a>
+				<a href="chat/chat.html" target="_blank"><button>Chat</button></a>
 			</div>
 			
 			<!--created group section-->
@@ -51,8 +54,6 @@
 				
 				<div class="groupHeading">
 					<p class="heading">Created Groups</p>
-                    <a href="../../../html/home/dashboard/groups/create_group.html"> <button>Create Group</button></a>
-                    
 				</div>
 				
 				<div class="individualGrp">
@@ -100,57 +101,100 @@
 
 			
 			<!--groups you are in section-->
-			<div class="groupsIn" id="groupsIn">
+			<div class="groupsIn">
 				<div class="groupHeading">
-					<p class="heading"><a href="groups/groups_current.html" onclick="openGroupsJoined()">Groups you are In</a></p>
+					<p class="heading"><a href="groups/groups_current.html">Groups you are In</a></p>
+				</div>
+				<div class="individualGrp">
+					<label class="groupIn_id" style="display: none;"></label> <!-- to store group id -->
+					<!--link for each group-->
+					<a href="groups/view_group_external.html" class="groupInLink">
+						<!--section of a single group in-->
+						<div id="groupIn1">
+							<!--group in icon-->
+							<div class="icon">
+								<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="Group in 1">
+							</div>
+							<!--group in content-->
+							<div class="content">
+								<p class="groupInContent">Group 1 you are in</p>
+							</div>
+							<div class="groupButtons">
+								<button onclick="">Chat</button>
+								<button onclick="">Leave</button>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="individualGrp">
+					<label class="groupIn_id" style="display: none;"></label> <!-- to store group id -->
+					<!--link for each group-->
+					<a href="groups/view_group_external.html" class="groupInLink">
+						<!--section of a single group in-->
+						<div id="groupIn2">
+							<!--group in icon-->
+							<div class="icon">
+								<img src="../../../image/home/groupIn2.jpg" class="groupInIcon" alt="Group in 2">
+							</div>
+							<!--group in content-->
+							<div class="content">
+								<p class="groupInContent">Group 2 you are in</p>
+							</div>
+							<div class="groupButtons">
+								<button onclick="">Chat</button>
+								<button onclick="">Leave</button>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
 			
 			
 			<!--groups applied section-->
-			<div class="groupsApplied" id="groupsApplied">
+			<div class="groupsApplied">
 				<div class="groupHeading">
-					<p class="heading"><a href="groups/groups_applied.html" onclick="openGroupsApplied()">Applied Groups</a></p>
+					<p class="heading"><a href="groups/groups_applied.html">Applied Groups</a></p>
 				</div>
-				<!--<div class="individualGrp">-->
-					<!--&lt;!&ndash;link for each group&ndash;&gt;-->
-					<!--<a href="groups/view_group_external.html" class="groupAppliedLink">-->
-						<!--&lt;!&ndash;section of a single applied group&ndash;&gt;-->
-						<!--<div id="groupApplied1">-->
-							<!--&lt;!&ndash;group applied icon&ndash;&gt;-->
-							<!--<div class="icon">-->
-								<!--<img src="../../../image/home/groupApplied1.jpg" class="groupAppliedIcon" alt="Applied Group 1">-->
-							<!--</div>-->
-							<!--&lt;!&ndash;applied group content&ndash;&gt;-->
-							<!--<div class="content">-->
-								<!--<p class="groupAppliedContent">Applied group 1</p>-->
-							<!--</div>-->
-							<!--<div class="groupButtons">-->
-								<!--<button onclick="">Cancel Application</button>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
-				<!---->
-				<!--<div class="individualGrp">-->
-					<!--&lt;!&ndash;link for each group&ndash;&gt;-->
-					<!--<a href="groups/view_group_external.html" class="groupAppliedLink">-->
-						<!--&lt;!&ndash;section of a single applied group&ndash;&gt;-->
-						<!--<div id="groupApplied2">-->
-							<!--&lt;!&ndash;group applied icon&ndash;&gt;-->
-							<!--<div class="icon">-->
-								<!--<img src="../../../image/home/groupApplied2.jpg" class="groupAppliedIcon" alt="Applied Group 2">-->
-							<!--</div>-->
-							<!--&lt;!&ndash;applied group content&ndash;&gt;-->
-							<!--<div class="content">-->
-								<!--<p class="groupAppliedContent">Applied group 2</p>-->
-							<!--</div>-->
-							<!--<div class="groupButtons">-->
-								<!--<button onclick="">Cancel Application</button>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</a>-->
-				<!--</div>-->
+				<div class="individualGrp">
+					<!--link for each group-->
+					<a href="groups/view_group_external.html" class="groupAppliedLink">
+						<!--section of a single applied group-->
+						<div id="groupApplied1">
+							<!--group applied icon-->
+							<div class="icon">
+								<img src="../../../image/home/groupApplied1.jpg" class="groupAppliedIcon" alt="Applied Group 1">
+							</div>
+							<!--applied group content-->
+							<div class="content">
+								<p class="groupAppliedContent">Applied group 1</p>
+							</div>
+							<div class="groupButtons">
+								<button onclick="">Cancel Application</button>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="individualGrp">
+					<!--link for each group-->
+					<a href="groups/view_group_external.html" class="groupAppliedLink">
+						<!--section of a single applied group-->
+						<div id="groupApplied2">
+							<!--group applied icon-->
+							<div class="icon">
+								<img src="../../../image/home/groupApplied2.jpg" class="groupAppliedIcon" alt="Applied Group 2">
+							</div>
+							<!--applied group content-->
+							<div class="content">
+								<p class="groupAppliedContent">Applied group 2</p>
+							</div>
+							<div class="groupButtons">
+								<button onclick="">Cancel Application</button>
+							</div>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
 		

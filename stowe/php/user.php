@@ -5,7 +5,7 @@ require 'init_database.php';
 const APPLY_FOR_GROUP = "apply_for_group";
 const CANCEL_GROUP_APPLICATION = "cancel_group_application";
 const GET_APPLIED_GROUPS = "get_applied_groups";
-const GET_JOINED_GROUPS = "apply_for_group";
+const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
@@ -21,54 +21,35 @@ class User {
         $this->conn = TalentMeDB::getConnection();
     }
 
-    // TODO delete this later --
-//    public function test() {
-//        $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id=1");
-//        if ($result->num_rows != 0) {
-//            echo "GroupTable insert failure: group_id already exists in table<br>";
-//            return null;
-//        }
-//
-//        $sql = "INSERT INTO GroupTable (group_name, group_img, about, desired_skills) ".
-//            "VALUES ('group1', '', '', '')";
-//        if ($this->conn->query($sql)) {
-//            echo "GroupTable insert success!<br>";
-//        }
-//        else {
-//            echo "GroupTable insert Failure: $this->conn->error <br>";
-//        }
-//    }
-
     public function applyForGroup($user_email, $group_id) {
         // check for existence of user
         $result = $this->conn->query("SELECT * FROM UserTable WHERE user_email='$user_email'");
         if ($result->num_rows < 1) {
-            echo "UserGroupTable insert failure: user with email '$user_email' does not exist in UserTable<br>";
+            echo '{"error" : "UserGroupTable insert failure: user with email '. $user_email .' does not exist in UserTable"}';
             return null;
         }
 
         // check for existence of group
         $result = $this->conn->query("SELECT * FROM GroupTable WHERE group_id='$group_id'");
         if ($result->num_rows < 1) {
-            echo "UserGroupTable insert failure: Group with id '$group_id' does not exist in GroupTable<br>";
+            echo '{"error" : "UserGroupTable insert failure: Group with id '. $group_id .' does not exist in GroupTable"}';
             return null;
         }
 
         // check for existence of UserGroupTable row already
         $result = $this->conn->query("SELECT * FROM UserGroupTable WHERE user_email='$user_email' AND group_id=$group_id");
         if ($result->num_rows != 0) {
-            echo "UserGroupTable insert failure: user_email/group_id row already exists in table<br>";
+            echo '{"error" : "UserGroupTable insert failure: user_email/group_id row already exists in table"}';
             return null;
         }
 
         $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) ".
             "VALUES ('$user_email', $group_id, '$this->APPLIED')";
         if ($this->conn->query($sql)) {
-            echo "UserGroupTable insert success!<br>";
+            echo '{"success" : "UserGroupTable insert success!"}';
         }
         else {
-            echo "UserGroupTable insert Failure:";
-//            echo "UserGroupTable insert Failure: $this->conn->error <br>"; // this may not be working for some reason
+            echo '{"error" : "UserGroupTable insert Failure"}';
         }
     }
 
@@ -76,11 +57,10 @@ class User {
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->APPLIED'";
         if ($this->conn->query($sql)) {
-            echo "UserGroupTable delete success!<br>";
+            echo '{"success" : "UserGroupTable delete success!"}';
         }
         else {
-            echo "UserGroupTable delete Failure:";
-//            echo "UserGroupTable delete Failure: $this->conn->error <br>"; // this may not be working for some reason
+            echo '{"success" : "UserGroupTable delete Failure:"}';
         }
     }
 
@@ -88,18 +68,22 @@ class User {
         $sql = "SELECT * FROM UserGroupTable ".
                 "WHERE user_email='$user_email' AND user_role='$this->APPLIED'";
         if ($result = $this->conn->query($sql)) {
-            echo "GetAppliedGroups success!<br>";
-            // turn each row into an assoc array, then convert each element into a json string
-            $json_objs = array();
-            for ($i = 0; $row = $result->fetch_assoc(); $i++) {
-                $json_objs[$i] = json_encode($row);
+            if ($result->num_rows > 0) {
+                $json_objs = array();
+                for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                    $json_objs[$i] = $this->getGroup($row['group_id']);
+                }
+                echo json_encode($json_objs);
+                return json_encode($json_objs);
             }
-            return $json_objs;
+            else {
+                echo '{"error" : "No applied groups for user: '.$user_email.'"}';
+                return null;
+            }
         }
         else {
-            echo "GetAppliedGroups Failure:";
+            echo '{"error" : "getJoinedGroups sql failure"}';
             return null;
-//            echo "GetAppliedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
 
     }
@@ -108,31 +92,45 @@ class User {
         $sql = "SELECT * FROM UserGroupTable ".
             "WHERE user_email='$user_email' AND user_role='$this->MEMBER'";
         if ($result = $this->conn->query($sql)) {
-            echo "GetJoinedGroups success!<br>";
-            // turn each row into an assoc array, then convert each element into a json string
-            $json_objs = array();
-            for ($i = 0; $row = $result->fetch_assoc(); $i++) {
-                $json_objs[$i] = json_encode($row);
+            if ($result->num_rows > 0) {
+                $json_objs = array();
+                for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                    $json_objs[$i] = $this->getGroup($row['group_id']);
+                }
+                echo json_encode($json_objs);
+                return json_encode($json_objs);
             }
-            return $json_objs;
+            else {
+                echo '{"error" : "No joined groups for user: '.$user_email.'"}';
+                return null;
+            }
         }
         else {
-            echo "GetJoinedGroups Failure:";
+            echo '{"error" : "getJoinedGroups sql failure"}';
             return null;
-//            echo "GetJoinedGroups Failure: $this->conn->error <br>"; // this may not be working for some reason
         }
     }
 
     public function leaveGroup($user_email, $group_id) {
+        $response = array();
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->MEMBER'";
         if ($this->conn->query($sql)) {
-            echo "LeaveGroup success!<br>";
+            $response["UserGroupTable"] = "UserGroupTable remove success";
         }
         else {
-            echo "LeaveGroup Failure:";
-//            echo "LeaveGroup Failure: $this->conn->error <br>"; // this may not be working for some reason
+            $response["UserGroupTableError"] = "LeaveGroup failure";
         }
+
+        // TODO test this...
+        $sql = "DELETE FROM ChatLineTable WHERE user_email='$user_email' AND group_id='$group_id'";
+        if ($this->conn->query($sql)) {
+            $response["ChatLineTable"] = "Chat entries removed successfully";
+        }
+        else {
+            $response["ChatLineTableError"] = "LeaveGroup failure";
+        }
+        echo json_encode($response);
     }
 
     public function getUserProfile($user_email) {
@@ -142,14 +140,83 @@ class User {
             return json_encode($result->fetch_assoc());
         }
         else {
-            echo json_encode("{'error' : 'getUserProfile Failure'}");
+            echo '{"error" : "getUserProfile sql failure"}';
         }
+    }
+
+    public function getGroup($group_id) {
+        $sql = "SELECT * FROM GroupTable WHERE group_id='$group_id'";
+        if ($result = $this->conn->query($sql)) {
+            return $result->fetch_assoc();
+        }
+    }
+
+    public function generateTestData() {
+        // create some groups
+//        $sql = "INSERT INTO GroupTable " .
+//            "( group_name, group_img , about, desired_skills) " .
+//            "VALUES ( 'group3', '', '', '') ";
+//        if ($this->conn->query($sql)) {
+//            echo "group3 created";
+//        }
+//        else {
+//            echo "group3 creation error\n";
+//        }
+//
+//        $sql = "INSERT INTO GroupTable " .
+//            "( group_name, group_img , about, desired_skills) " .
+//            "VALUES ( 'group4', '', '', '') ";
+//        if ($this->conn->query($sql)) {
+//            echo "group4 created\n";
+//        }
+//        else {
+//            echo "group4 creation error\n";
+//        }
+
+        // associate user with groups as member
+        $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
+            "VALUES ('d.lindskog1@gmail.com', '7', '$this->APPLIED')";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable insert success!\n";
+        } else {
+            echo "UserGroupTable insert Failure\n";
+        }
+
+        $sql = "INSERT INTO UserGroupTable (user_email, group_id, user_role) " .
+            "VALUES ('d.lindskog1@gmail.com', '8', '$this->APPLIED')";
+        if ($this->conn->query($sql)) {
+            echo "UserGroupTable insert success!\n";
+        } else {
+            echo "UserGroupTable insert Failure\n";
+        }
+
+
     }
 }
 
-// check for which kind of request
+$user = new User();
+// generate some fake data:
+//$user->generateTestData();
 
-if (array_key_exists(GET_USER_PROFILE, $_GET)) {
-    $user = new User();
+// handle request type
+if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
+    $request = json_decode($_GET[APPLY_FOR_GROUP]);
+    $user->applyForGroup($request->user_email, $request->group_id);
+}
+else if (array_key_exists(CANCEL_GROUP_APPLICATION, $_GET)) {
+    $request = json_decode($_GET[LEAVE_GROUP]);
+    $user->cancelGroupApplication($request->user_email, $request->group_id);
+}
+else if (array_key_exists(GET_APPLIED_GROUPS, $_GET)) {
+    $user->getAppliedGroups($_GET[GET_APPLIED_GROUPS]);
+}
+else if (array_key_exists(GET_JOINED_GROUPS, $_GET)) {
+    $user->getJoinedGroups($_GET[GET_JOINED_GROUPS]);
+}
+else if (array_key_exists(LEAVE_GROUP, $_GET)) {
+    $request = json_decode($_GET[LEAVE_GROUP]);
+    $user->leaveGroup($request->user_email, $request->group_id);
+}
+else if (array_key_exists(GET_USER_PROFILE, $_GET)) {
     $user->getUserProfile($_GET[GET_USER_PROFILE]);
 }

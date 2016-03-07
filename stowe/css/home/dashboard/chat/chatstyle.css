@@ -14,16 +14,29 @@ background-color: #E8EDF9;
 }
 
 .openedchats{
+	border: 1px solid #000000;
+	height: 92%;
+	width: 25%;
+	float: left;
+	background-color: #E8EDF9;
+	overflow: auto;  	/*naina*/
+}
+       
+ul{
+    list-style: none;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
 
-height: 100%;
-width: 25%;
-float: left;
-background-color: #E8EDF9;
+li{
+	text-align: center;
+	color: #7094A8;
+	padding: 5px;
 }
 
 
 #footer{
-
     padding: 0px;
     margin: 0;
     text-align: center;
@@ -32,137 +45,152 @@ background-color: #E8EDF9;
 }
 
 .chat{
-
-border: 1px solid #000000;
-text-align: left;
-padding: 10px;
-width: 70%;
-float: right;
-height: 100%;
-margin-bottom: 10px;
-    background-color: #E8EDF9;
+	border: 1px solid #000000;
+	text-align: left;
+	width: 70%;
+	float: right;
+	height: 75%;      /*naina*/
+	margin-bottom: 10px;
+	background-color: #E8EDF9;
+	overflow: auto;
 }
 
-
 #chattitle{
-text-align:center;
-font-size: 150%;
-color: #E8EDF9;
-margin:0px;
-width:100%;
-padding:1%;
-padding-bottom: 10px;
-padding-top: 10px;
-background-color: #5B5E63;
-
+	text-align:center;
+	font-size: 150%;
+	padding: 0px;
+	margin:0px;
+	padding: 5%;
+	background-color: #7094A8;
+	color: #E8EDF9;
 }
 
 #input{
-border-top: thin solid #5B5E63;
-    border-width: 100%;
-padding: 5px;
-float: left;
-width: 95%;
-
+	border-top: thin solid #5B5E63;
+	border-width: 100%;
+	padding: 5px;
+	float: right;
+	width: 95%;
+	position:static;	
+	width: 70%;
 }
 
 body #body #input #searchtext{
-width: 75%;
+	width: 75%;
 }
 
 body #body #input #search{
-width: 20%;
-float: right;
-background-color: #7094A8;
-    color: #E8EDF9;
+	width: 20%;
+	float: right;
+	background-color: #7094A8;
+	color: #E8EDF9;
 }
 
 body #body #search{
-    width: 15%;
-background-color: #7094A8;
-    color: #E8EDF9;
+	width: 15%;
+	background-color: #7094A8;
+	color: #E8EDF9;
 }
-
-
 
 .chat #m1{
-border: thin solid #E8EDF9;
-border-radius: 10px;
-float: left;
-width: 95%;
+	border: thin solid #E8EDF9;
+	border-radius: 10px;
+	float: left;
+	width: 95%;
 }
 .chat #m2{
-width:95%
-border: thin solid #E8EDF9;
-border-radius: 10px;
-float: right;
+	width:95%;
+	border: thin solid #E8EDF9;
+	border-radius: 10px;
+	float: right;	
 }
 
 .chat #m3{
-border: thin solid #E8EDF9;
-border-radius: 10px;
-float: left;
-width: 95%;
+	border: thin solid #E8EDF9;
+	border-radius: 10px;
+	float: left;
+	width: 95%;
 }
 
 .chat #m4{
-width:95%
-border: thin solid #E8EDF9;
-border-radius: 10px;
-float: right;
+	width:95%;
+	border: thin solid #E8EDF9;
+	border-radius: 10px;
+	float: right;
 }
 
 .chat #m5{
-border: thin solid #E8EDF9;
-border-radius: 10px;
-float: left;
-width: 95%;
+	border: thin solid #E8EDF9;
+	border-radius: 10px;
+	float: left;
+	width: 95%;
 }
 
 p{
     color: #7094A8;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
-    width: 25%;
-    background-color: #E8EDF9;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
+/*Changes by naina*/
+.messages{
+	overflow: auto;
+	padding: 1%;
+	padding-top: 4%;
 }
 
-li{
-    text-align: center;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
+#topsearch{
+	width: 100%;
+	padding-top: 3%;
 }
 
-
-li a {
-    display: block;
-    color: #5B5E63;
-    text-decoration: none;
-padding-bottom: 10px;
-padding-top:10px;
-text-align: center;
-}
-/* unvisited link */
-
-/* visited link */
-
-/* mouse over link */
-
-li a:hover {
-    background-color: #ededed;
-    color: white;}
-
-/* selected link */
-li a.active {
-    background-color: #4CAF50;
-    color: white;
+.names{
+	padding: 5%;
+	border-bottom: thin solid #7094A8;
 }
 
+#groupTitle{
+	padding: 5%;
+	border-bottom: thin solid #7094A8;
+	background-color: #7094A8;
+	color: #E8EDF9;
+}
+
+.listData li.selected{
+	background-color: #7094A8;
+	color: #E8EDF9;
+}
+
+#m1-1{
+	float: left;
+}
+
+#m2-1{
+	float: right;
+}
+
+#sender{
+	background-color: #7094A8;
+	color: #E8EDF9;
+	padding: 1%;
+	margin: 0;
+	float: right;
+}
+
+.senderName{
+	width: 68%;
+	background-color: #7094A8;
+	color: #E8EDF9;
+	float: right;
+	position: absolute;
+}
+
+#listName{
+	width: 70%;
+	height: 10%;
+	border: 1px ;
+}
+
+#listPic img{
+	float: left;
+	width: 20%;
+	border: 1px ;
+}

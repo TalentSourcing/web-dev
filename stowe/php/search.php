@@ -2,72 +2,99 @@
 
 require 'init_database.php';
 
-class Search {
-    private $conn = null;
+header('content-type: application/json; charset=utf-8');
+header("access-control-allow-origin: *");
 
-    public function DatabaseInterface() {
-        $this->conn = TalentMeDB::getConnection();
-        if (!$conn) {
-            die('Could not connect: ' . mysql_error());
-	}
-	echo "get database!";
-    }
+$conn = TalentMeDB::getConnection();
 
-	function searchForGroups(searchText) {
-		
-	}
+// get the q parameter from URL
+$q = $_REQUEST["q"];
+$parserTokens = preg_split("/[\ \n\,]+/", $q);
 
-	funtion searchForUsers(searchText) {
-		
-	}
+if (strlen($q) < 1) {
+	echo "Search term too short";
+} else {
+       	$json_objs_users = searchForUsers($parserTokens);
+	$json_objs_groups = searchForGroups($parserTokens);
 
-/*
-    function search(searchText) {
-        $button = $_GET ['submit'];
-        $search = searchText;//$_GET ['search'];
+	$searchResult = array('user' => $json_objs_users, 'group' => $json_objs_groups);
+	echo json_encode($searchResult);
+}
 
-        if(!$button) {
-            echo "Please submit a valid search.";
-	} else {
-		if(strlen($search)<=1) {
-			echo "Search term too short";
-		} else {
-                	echo "You searched for <b>$search</b> <hr size='1'></br>";
+TalentMeDB::close();
 
-                	$search_exploded = explode (" ", $search);
 
-                	foreach($search_exploded as $search_each) {
-	                        $x++;
-	                        if($x==1) {
-	                        	$construct .="keywords LIKE '%$search_each%'";
-				} else {
-	                            $construct .="AND keywords LIKE '%$search_each%'";
-				}
-	                }
-	
-	                $construct ="SELECT * FROM TalentMeDB WHERE $construct";
-	
-	                $run = mysql_query($construct);
-	
-	                $foundnum = mysql_num_rows($run);
-	
-	                if ($foundnum==0) {
-	                    echo "Sorry, there are no matching results for <b>$search</b>.</br></br>1.
-	                    Try a more general search.</br>2. Try different words with similar meaning</br>3. Please check your spelling.";
-			} else {
-				echo "$foundnum results found !<p>";
-	
-				while($runrows = mysql_fetch_assoc($run)) {
-					$title = $runrows ['title'];
-					$desc = $runrows ['description'];
-					$url = $runrows ['url'];
-	                                echo "<a href='$url'><b>$title</b></a><br>$desc<br><a href='$url'>$url</a><p>";
+function searchForUsers($parserTokens) {
+	global $conn;
+
+	$sql = "SELECT user_email, first_name, last_name, skills, profile_img, objective FROM UserTable";
+	$result = $conn->query($sql);
+
+	if ($result->num_rows != 0) {
+		//echo "Found $result->num_rows users!<br>";
+		$json_objs_userlist = array();
+		$data = array();
+
+		while ($row = $result->fetch_assoc()) {
+			$searchString = $row["first_name"]." ".$row["last_name"]." ".$row["skills"];
+			$searchTokens = preg_split("/[\ \n\,\:]+/", $searchString);
+
+			foreach ($parserTokens as $token) {
+				foreach ($searchTokens as $searchToken) {
+					if (in_array($row, $json_objs_userlist)) {
+						continue;
+					}
+
+					if (strcasecmp($searchToken, $token) == 0) {
+						$json_objs_userlist[] = $row;
+					}
 				}
 			}
 		}
-        }
-    }
-*/
+
+		foreach ($json_objs_userlist as $key => $value) {
+			//echo "Key: ".$key."<br>Value: ".$value."<br>";
+		}
+		//echo json_encode($data);	// for separated return
+		return $json_objs_userlist;
+	}
+}
+
+function searchForGroups($parserTokens) {
+	global $conn;
+
+	$sql = "SELECT * FROM GroupTable"; 
+	$result = $conn->query($sql);
+
+	if ($result->num_rows != 0) {
+		//echo "Found $result->num_rows groups!<br>";
+		$json_objs_grouplist = array();
+		$data = array();
+
+		while ($row = $result->fetch_assoc()) {
+			$searchString = $row["group_name"]." ".$row["founder_name"]." ".$row["desired_skills"];
+			$searchTokens = preg_split("/[\ \n\,\:]+/", $searchString);
+
+			foreach ($parserTokens as $token) {
+				foreach ($searchTokens as $searchToken) {
+					if (in_array($row, $json_objs_grouplist)) {
+						continue;
+					}
+
+					if (strcasecmp($searchToken, $token) == 0) {
+						$json_objs_grouplist[] = $row;
+					}
+				}
+			}
+		}
+
+		foreach ($json_objs_grouplist as $key => $value) {
+			//echo "Key: ".$key."<br>Value: ".$value."<br>";
+		}
+		//echo json_encode($data);	// for separated return
+		return $json_objs_grouplist;
+	}
+	return null;
 }
 
 ?>
