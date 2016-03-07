@@ -1,47 +1,43 @@
-<!--
-Author:Naina Raut
-Date Modified:3/3/2014
-Specification: Chat application
--->
 <html>
 	<title></title>
 	<head>
 	<link rel="stylesheet" href="../css/home/dashboard/chat/chatstyle.css">
 	<link rel="stylesheet" href="../css/header.css">
 	<link rel="stylesheet" href="../css/footer.css">
-	<script src="../../../js/jquery-1.12.0.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	</head>
 	
 	<script>
 		function adjustScroll(){	
 			$(".chat").animate({ scrollTop: $(document).height() }, "fast");
-			setInterval(callRepeat(),2000);
+//			setInterval(callRepeat(),2000);
   			return false;
 		}
 		
-		function callRepeat(){
-		$.ajax({
-               type: "GET",
-                url: "chat1.php",
-                success: function(response){
-                console.log("In function");
-                }
-			});
+//		function callRepeat(){
+//		$.ajax({
+//               	type: "GET",
+//                url: "test.php?funName=pollMsg",
+////				dataType: "json",
+////				data:{funName:'pollMsg'},
+//                success: function(response){
+//                console.log(response);
+////					alert(response);
+//                }
+//			});
+//			
+//		}
+		
 	</script>
 	
 	<body onload="adjustScroll()">
 		
-	<?php 
-		require 'init_database.php';            //the data connection file
+		<?php 
+
+		require 'newTest.php';                  //thee data connection file
 		$conn = TalentMeDB::getConnection();    //get connection object
-		
-		if(isset($_GET['sender_data']))
-		{
-			$result = json_decode($_GET['sender_data']);   
-			$senderEmail = $result->user_email;            //the sender email
-			$senderGroupId = $result->group_id;            //the sender group Id
-			$senderName = 'Naina Raut';             	   //the sender name
-		}
+		$senderEmail = 'naina@gmail.com';       //the sender email
+		$senderName = 'Naina Raut';             //the sender name
 		
 		//send the current message to DB
 		function sendMessage($sentMsg,$senderChatId,$senderEmail,$groupId)
@@ -87,7 +83,7 @@ Specification: Chat application
 <!--		Header section-->
 		<header id="header_content">
 			<div id="header_logo_container">
-				<img id="logo_image" src="logo.jpg" alt="Logo">
+				<img id="logo_image" src="../image/home/logo.jpg" alt="Logo">
 			</div>
 			<div id="header_bar">
 				<p><a href="#">TalentMe</a></p>
@@ -133,7 +129,7 @@ Specification: Chat application
 						$img;
 						if($row['profile_img'] == NULL)
 						{
-							$img = '../../../chat/defaultPic.png';
+							$img = '../image/home/dashboard/chat/defaultPic.png';
 						}
 						else
 						{
@@ -159,10 +155,10 @@ Specification: Chat application
 			{
 				while($row2 = $result2->fetch_assoc())
 				{
-					$img;
+						$img;
 						if($row['group_img'] == NULL)
 						{
-							$img = '../../../chat/defaultPic.png';
+							$img = '../image/home/dashboard/chat/defaultPic.png';
 						}
 						else
 						{
@@ -211,23 +207,21 @@ Specification: Chat application
 				setcookie('receiver', $_GET['receiver'], time() + (86400 * 30), "/"); // 86400 = 1 day
 				setcookie('recName', $_GET['recName'], time() + (86400 * 30), "/"); // 86400 = 1 day
 				setcookie('groupId', NULL, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-				getMessages($_GET['sender'],$_GET['receiver'],$_GET['recName']);				
+				
+				//get the chat Id for the corresponding sender and receiver
+				getSessionChatId();
+				
+				//get the messages for the corresponding sender and receiver
+				getMessages($_GET['sender'],$_GET['receiver'],$_GET['recName']);	
 			}
 			
-			//get the recent messages of individual to display
-			function getMessages($idSender,$idReceiver,$recName)
+			function getSessionChatId()
 			{
 				global $conn;
-				global $rowData;
-				global $senderName;
-
+				
 				//to get the chat id of the top row
 				$sql2 = "SELECT * FROM CHATLINETABLE LIMIT 1";
-
-				//to get all messages for the sender and receiver having same chat id
-				$sql = "SELECT * FROM CHATLINETABLE as t1 where ( user_email='$idSender' OR user_email='$idReceiver' ) AND group_id IS NULL".    " AND (SELECT COUNT(*) FROM CHATLINETABLE as t2 where t1.chat_id = t2.chat_id) > 1";
-
+				
 				try
 				{
 					//execute the query for chat id selection
@@ -244,6 +238,26 @@ Specification: Chat application
 						$globalChatId = 1;
 						setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); // 86400 = 1 day
 					}
+				}
+				catch(Exception $e)
+				{
+					echo 'Exception in getMessage() :'.$e->getMessage();
+				}
+				
+			}
+			
+			//get the recent messages of individual to display
+			function getMessages($idSender,$idReceiver,$recName)
+			{
+				global $conn;
+				global $rowData;
+				global $senderName;
+
+				//to get all messages for the sender and receiver having same chat id
+				$sql = "SELECT * FROM CHATLINETABLE as t1 where ( user_email='$idSender' OR user_email='$idReceiver' ) AND group_id IS NULL".    " AND (SELECT COUNT(*) FROM CHATLINETABLE as t2 where t1.chat_id = t2.chat_id) > 1";
+
+				try
+				{
 
 					//get all the data from the table
 					$result = $conn->query($sql);
@@ -286,21 +300,21 @@ Specification: Chat application
 					echo 'Exception in getMessage() :'.$e->getMessage();
 				}
 			}
+			
 
 			//check if group is selected
-			if(isset($_GET['groupId']) && isset($_GET['groupName']))
+			if(isset($_GET['groupId']) && isset($_GET['groupName'])) 
 			{
-				//delete the previous group Id
 				setcookie("groupId", "", time() - 3600);
+
+				setcookie('groupId', $_GET['groupId'], time() + (86400 * 30), "/"); // 86400 = 1 day
+				setcookie('receiver', NULL, time() + (86400 * 30), "/"); // 86400 = 1 day
+				setcookie('recName', NULL, time() + (86400 * 30), "/"); // 86400 = 1 day
 				
-				//set the latest group Id
-				setcookie('groupId', $_GET['groupId'], time() + (86400 * 30), "/"); 
+				//get the chat Id for the corresponding group
+				getSessionChatId();
 				
-				//set the previous receiver email and receiver name to null
-				setcookie('receiver', NULL, time() + (86400 * 30), "/"); 
-				setcookie('recName', NULL, time() + (86400 * 30), "/"); 
-				
-				//get the group Data using group Id
+				//get the messages for the corresponding group
 				getGroupData($_GET['groupId']);
 			}
 			
@@ -308,9 +322,6 @@ Specification: Chat application
 			function getGroupData($groupId)
 			{
 				   global $conn;
-
-					//to get the chat id of the top row
-				   $sql2 = "SELECT * FROM CHATLINETABLE LIMIT 1";
 					
 					//get all the group chats specific to group id
 				   $sql = "SELECT * FROM CHATLINETABLE as t1 WHERE group_id = $groupId AND ".
@@ -323,23 +334,6 @@ Specification: Chat application
 					       "where group_id = $groupId";
 				   try
 				   {
-					    //execute the query for chat id selection
-						$result2 = $conn->query($sql2);
-						if($result2)
-						{
-							$row2 = $result2->fetch_assoc();
-							$globalChatId = $row2['chat_id'] + 1;
-							
-							//set the new group Id
-							setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); 
-
-						}
-						else
-						{
-							$globalChatId = 1;
-							//set initial group Id as 1
-							setcookie('globalChatId', $globalChatId, time() + (86400 * 30), "/"); 
-						}
 					   
 					   $result = $conn->query($sql);
 					   $result3 = $conn->query($sql3);
