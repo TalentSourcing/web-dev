@@ -22,7 +22,7 @@ Specification: Chat application
 		function callRepeat(){
 		$.ajax({
                type: "GET",
-                url: "getHint.php",
+                url: "chat1.php",
                 success: function(response){
                 console.log("In function");
                 }
@@ -141,7 +141,7 @@ Specification: Chat application
 						}
 						
 						$fullName = $row['first_name']." ".$row['last_name'];
-					    echo "<li class='names' onclick='location.href=\"getHint.php?receiver={$row['user_email']}&sender={$senderEmail}&recName=$fullName\"'>
+					    echo "<li class='names' onclick='location.href=\"chat1.php?receiver={$row['user_email']}&sender={$senderEmail}&recName=$fullName\"'>
 							<div id='listPic'><img src='$img' width='20%' height='10%'></div>
 							<div id='listName'>$fullName</div>
 							</li>";
@@ -169,7 +169,7 @@ Specification: Chat application
 							$img = $row['group_img'];
 						}
 					
-					echo "<li class='names' onclick='location.href=\"getHint.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}\"'><div id='listPic'><img src='{$row2['group_img']}' width='20%' height='10%'></div>
+					echo "<li class='names' onclick='location.href=\"chat1.php?groupName={$row2['group_name']}&groupId={$row2['group_id']}\"'><div id='listPic'><img src='{$row2['group_img']}' width='20%' height='10%'></div>
 					<div id='listName'>{$row2['group_name']}</div></li>";
 				}
 		?>
