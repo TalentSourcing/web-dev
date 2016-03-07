@@ -9,6 +9,7 @@ Specification: Chat application
 	<link rel="stylesheet" href="../css/home/dashboard/chat/chatstyle.css">
 	<link rel="stylesheet" href="../css/header.css">
 	<link rel="stylesheet" href="../css/footer.css">
+	<script src="../../../js/jquery-1.12.0.min.js"></script>	
 	</head>
 	
 	<script>
