@@ -239,8 +239,7 @@ function createEntryForUser(userEmail, userProfileImg, userName, skills, objecti
 					text: "Chat"
 				})
 	).click(function() {
-		//var hostEmail = sessionStorage.getItem('hostEmail');
-		var hostEmail = "xc5211@gmail.com";
+		var hostEmail = sessionStorage.getItem('hostEmail');
 		initChat(hostEmail, userEmail);
 		window.open('../chat/chat.html');
 	});
