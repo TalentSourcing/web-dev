@@ -15,8 +15,18 @@ Specification: Chat application
 	<script>
 		function adjustScroll(){	
 			$(".chat").animate({ scrollTop: $(document).height() }, "fast");
+			setInterval(callRepeat(),2000);
   			return false;
 		}
+		
+		function callRepeat(){
+		$.ajax({
+               type: "GET",
+                url: "getHint.php",
+                success: function(response){
+                console.log("In function");
+                }
+			});
 	</script>
 	
 	<body onload="adjustScroll()">
