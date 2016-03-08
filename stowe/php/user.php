@@ -58,10 +58,10 @@ class User {
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
             "AND user_role='$this->APPLIED'";
         if ($this->conn->query($sql)) {
-            echo '{"success" : "UserGroupTable delete success!"}';
+            echo '{"success" : "email: '. $user_email .', group: '. $group_id .'"}';
         }
         else {
-            echo '{"success" : "UserGroupTable delete Failure:"}';
+            echo '{"error" : "UserGroupTable delete Failure:"}';
         }
     }
 
@@ -239,7 +239,7 @@ if (array_key_exists(APPLY_FOR_GROUP, $_GET)) {
     $user->applyForGroup($request->user_email, $request->group_id);
 }
 else if (array_key_exists(CANCEL_GROUP_APPLICATION, $_GET)) {
-    $request = json_decode($_GET[LEAVE_GROUP]);
+    $request = json_decode($_GET[CANCEL_GROUP_APPLICATION]);
     $user->cancelGroupApplication($request->user_email, $request->group_id);
 }
 else if (array_key_exists(GET_APPLIED_GROUPS, $_GET)) {

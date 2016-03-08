@@ -321,7 +321,6 @@ function leaveGroup (group_id) {
     xmlhttp.send();
 }
 
-// TODO this is not working right
 function cancelApp (group_id) {
     //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
     var request = {
