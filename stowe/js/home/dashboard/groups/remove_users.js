@@ -1,30 +1,39 @@
 'use strict';
 
-delete1(){
-var parent = document.getElementById("list_invited");
-var child = document.getElementById("deleteme1");
-parent.removeChild(child);
+$document.ready(function()){
+
+    function remove1(removeme1){
+    /*
+    var parent = document.getElementById("list_applicants");
+    var child = document.getElementById("deleteme1");
+    parent.removeChild(child);
+    */
+
+    document.getElementById("removeme1").innerHTML = "User has been removed";
+    }
+
+
+    function remove2(removeme2){
+        /*
+        var parent = document.getElementById("list_applicants");
+        var child = document.getElementById("deleteme2");
+        parent.removeChild(child);
+        */
+        document.getElementById("removeme1").innerHTML = "User has been removed";
+    }
+
+    function remove3(removeme3){
+        var parent =    document.getElementById("list_applicants");
+        var child = document.getElementById("removeme3");
+        parent.removeChild(child);
+    }
+
+    function remove4(removeme4){
+        var parent = document.getElementById("list_applicants");
+        var child = document.getElementById("removeme4");
+        parent.removeChild(child);
+    }
 }
-
-
-delete2(){
-var parent = document.getElementById("list_invited");
-var child = document.getElementById("deleteme2");
-parent.removeChild(child);
-}
-
-delete3(){
-var parent = document.getElementById("list_invited");
-var child = document.getElementById("deleteme3");
-parent.removeChild(child);
-}
-
-delete4(){
-var parent = document.getElementById("list_invited");
-var child = document.getElementById("deleteme4");
-parent.removeChild(child);
-}
-
 
 var xmlhttp = new XMLHttpRequest();
     var response = null;
@@ -38,7 +47,7 @@ var xmlhttp = new XMLHttpRequest();
                 alert('Error: ' + response.error);
             }
             else {
-                alert('User successfully removed!');
+                alert('Group application success!');
 
             }
         }

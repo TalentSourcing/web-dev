@@ -44,7 +44,6 @@ var xmlhttp = new XMLHttpRequest();
             }
             else {
                 alert('Group application success!');
-
             }
         }
     };
