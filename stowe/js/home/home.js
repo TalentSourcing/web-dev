@@ -23,17 +23,23 @@
 
 function login () {
 	$(document).ready(function () {
-		//var user_email = $('#user_email').val();
+		var user_email = $('#user_email').val();
 		var password = $('#password').val();
 
-		var user_email = 'd.lindskog1@gmail.com';
+		//var user_email = 'd.lindskog1@gmail.com';
 
 		if (!/\S/.test(user_email) || !/\S/.test(password)) {
 			alert('Could not find username or invalid password');
 			return null;
 		}
 		else {
-			$('#sign_in').attr('href', 'dashboard/dashboard.html');
+			if (user_email === "d.lindskog1@gmail.com" && password === "password") {
+				$('#sign_in').attr('href', 'dashboard/dashboard.html');
+			}
+			else {
+				alert('Could not find username or invalid password');
+				return null;
+			}
 		}
 
 		// TODO create getUser php function to pull all user data from various tables
