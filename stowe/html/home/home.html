@@ -12,6 +12,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 	<script src="../../js/jquery-1.12.0.min.js"></script>
+	<script src="../../js/home/home.js"></script>
 <!--
 	<script type="text/javascript" src="../../js/home/home.js"></script>
 -->
@@ -27,26 +28,70 @@
 
 <body>
 	<header id="header_content">
-		<div id="header_logo_container">
-			<img id="logo_image" src="../../image/home/logo.jpg" alt="Logo">
+		<div id="header_logo_container"   >
+			<img id="logo_image" src="../../image/home/logo.jpg" alt="Logo" >
+<!--            <p><a href="#" style="text-decoration:none;font-size:1.8em;color:white;font-family:raleway;">TalentMe</a></p>-->
 		</div>
+
+		
+        
 		<div id="header_bar">
-			<p><a href="#">TalentMe</a></p>
+            <form class="login" style="margin-top:2%;" >
+
+                      <table id="buser" style="min-width:70%;" >
+                          <tr>
+                              <td>   
+                                  <input id="user_email" class="button2" type="text" placeholder="User Name">
+                              </td>
+                              <td>
+                                <input id="password" class="button2" type="text" placeholder="Password">
+                              </td>
+                              <td > 
+<!--                                  <input class="button2" type="submit" value="Sign in" >-->
+                                  <ul class="navigation">
+                                  <li class="nav_item"><a id="sign_in" href="" onclick="login()">Sign In</a></li></ul>
+                                  
+                            
+                              </td>
+                              <td>    <ul class="navigation">
+                                  <li class="nav_item"><a href="profileCreation.html">Sign Up</a></li></ul></td>
+                              </tr>
+                           <tr>
+                              <td>
+                                </td>
+                               <td colspan="2">
+                                   
+<!--                                   <a href="">Forgot Password?</a></td>-->
+                               <td>
+                                
+<!--                                   <a href="profileCreation.html">Sign Up</a>-->
+                               </td>
+                          </tr>
+                       
+                      </table>
+            </form>
+<!--			<p><a href="#">TalentMe</a></p>-->
+<!--
 			<ul class="navigation">
 				<li class="nav_item"><a href="profileCreation.html">Sign Up</a></li>
-				<li class="nav_item"><a href="dashboard/dashboard.html">Log In</a></li>
-			</ul>
+-->
+<!--				<li class="nav_item"><a href="dashboard/dashboard.html">Log In</a></li>-->
+<!--			</ul>-->
 		</div>
 	</header>
 	
 	<div id="content">
 		<div id="background_images_container">
 			<div id="background_images">
+                
 			</div>
 		</div>
 
 		<div class="content_inner_odd">
+            
 			<div class="content_text_odd">
+                <h1 style="align:center;"><a href="#" style="text-decoration:none;font-size:1.8em;color:white;font-family:raleway;">TalentMe</a></h1>
+                 
 				<h2 class="content_header">Bring talents to build your idea</h2>
 				<p class="content_text">TalentMe helps you gather talented people <br>based on skill sets you need to implement <br>
 				your innovative idea. No matter what scale <br> or area of project you are planning, TalentMe <br>always provides you with 						the easiest way <br>to acquire the best human resource.</p>

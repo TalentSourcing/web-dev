@@ -7,15 +7,15 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-if (sessionStorage.getItem('dashboard') === null) {
-    var dashboardStorage = {
-        'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
-        'userProfile' : {},
-        'appliedGroups' : [],
-        'joinedGroups' : []
-    };
-    sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
-}
+//if (sessionStorage.getItem('dashboard') === null) {
+//    var dashboardStorage = {
+//        'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
+//        'userProfile' : {},
+//        'appliedGroups' : [],
+//        'joinedGroups' : []
+//    };
+//    sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
+//}
 
 
 function getProfile () {
@@ -193,6 +193,24 @@ function openChat () {
     }
     chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                console.log("open chat success");
+                window.location.href = "../../../php/home/dashboard/chat/chat1.php"
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/home/dashboard/chat/chat1.php?" + "sender_data=" + JSON.stringify(chatStorage), true);
+    xmlhttp.send();
 }
 
 function openGroupChat (group_id) {
@@ -206,7 +224,24 @@ function openGroupChat (group_id) {
     chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
     chatStorage.group_id = group_id;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
-    window.location.href = "../../../php/home/dashboard/chat/chat.php";
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+            }
+            else {
+                console.log("open chat success");
+                window.location.href = "../../../php/home/dashboard/chat/chat1.php"
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/home/dashboard/chat/chat1.php?" + "sender_data=" + JSON.stringify(chatStorage), true);
+    xmlhttp.send();
 }
 
 function openGroup (group_id) {

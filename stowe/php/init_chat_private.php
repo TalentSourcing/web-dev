@@ -93,7 +93,7 @@ function getAvailableChatId() {
 	$id;
 	
 	$sql = "SELECT * FROM ChatLineTable ORDER BY chat_id DESC";
-	$result = $conn->$query($sql);
+	$result = $conn->query($sql);
 	if ($result->num_rows == 0) {
 		$id = 1;
 	} else {

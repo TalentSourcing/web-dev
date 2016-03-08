@@ -8,6 +8,27 @@ body {
 	min-width: 1000px;
 	background: #E8EDF9;
 }
+.login
+    {
+        vertical-align:middle;
+        margin-left:40%;
+        margin-top:0%;
+        width:50%;
+        height:15%;
+        min-width:42%;
+        color: #E8EDF9;
+/*         color: black;*/
+        overflow:auto;
+    }
+/*Bhargavi's stuff*/
+.button2
+    {
+        border-radius: 5px;
+        height:25px;
+        width:175px;
+/*        color: #E8EDF9;*/
+        color: black;
+    }
 
 #header_content {
 	margin: auto;

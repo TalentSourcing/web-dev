@@ -1,7 +1,7 @@
 
 'use strict';
 
-// request types: create_user, update_user, delete_user
+
 const CREATE_GROUP = "create_group";
 
 function getFields () {
@@ -29,7 +29,7 @@ function validate () {
     var groupprofile = getFields();
 
 
-    // if checks pass, go to dashboard, else stay on same page to fix problems
+
     if (valid) {
         sessionStorage.removeItem('saved_state');
 
