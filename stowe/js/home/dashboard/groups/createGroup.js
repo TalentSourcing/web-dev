@@ -7,7 +7,7 @@ const CREATE_GROUP = "create_group";
 function getFields () {
     var groupprofile = {};
     $(document).ready(function () {
-        groupprofile.group_title = $('input[name="group_title"]').val();
+        groupprofile.group_name = $('input[name="group_name"]').val();
         groupprofile.about_info = $('input[name="about"]').val();
         groupprofile.skill_list = $('input[name="desired_skills"]').val();
         groupprofile.experience_list = $('input[name="experience"]').val();
@@ -19,13 +19,13 @@ function getFields () {
     console.log("groupprofile obj: " + JSON.stringify(groupprofile));
     return groupprofile;
 }
-
-function validate () {
-    var valid = true;
-    var error_msg = {
-        'requiredFields' : "",
-        'password' : ""
-    };
+//
+//function validate () {
+//    var valid = true;
+//    var error_msg = {
+//        'requiredFields' : "",
+//        'password' : ""
+//    };
     var groupprofile = getFields();
 
 
@@ -40,7 +40,7 @@ function validate () {
                 console.log(xmlhttp.responseText);
             }
         };
-        xmlhttp.open("GET","../../php/Group.php?" + CREATE_USER + "=" + JSON.stringify(groupprofile), true);
+        xmlhttp.open("GET","../../php/Group.php?" + CREATE_group + "=" + JSON.stringify(groupprofile), true);
         xmlhttp.send();
     }
     else {

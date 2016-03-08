@@ -6,6 +6,8 @@
 require 'init_database.php';
 const GET_GROUP_VIEW = "get_group_view";
 const CREATE_GROUP = "create_group";
+const DELETE_GROUP = "delete_group";
+const UPDATE_GROUP = "update_group";
 
 class Group
 {
@@ -138,27 +140,24 @@ if (array_key_exists(GET_GROUP_VIEW, $_GET)) {
 
     $group->getGroupView($_GET[GET_GROUP_VIEW]);
 }//working
+
+
 if (array_key_exists(CREATE_GROUP, $_GET)) {
     $html_data = json_decode($_GET[CREATE_GROUP]);
     if ($html_data != null) {
-        $user_profile = new Group();
-        $user_profile->createGroup($html_data->user_email,
-            $html_data->first_name,
-            $html_data->last_name,
-            $html_data->password,
-            $html_data->linkedin_url,
-            $html_data->skills,
-            $html_data->occupation,
-            $html_data->gender,
-            $html_data->profile_img,
-            $html_data->objective);
+        $group_profile = new Group();
+        $group_profile->createGroup($html_data->group_id,
+            $html_data->group_name,
+            $html_data->about,
+            $html_data->desired_skills,
+            $html_data->group_img);
     }
 }
-else if (array_key_exists(UPDATE_USER, $_GET)) {
-    $html_data = json_decode($_GET[UPDATE_USER]);
+else if (array_key_exists(UPDATE_GROUP, $_GET)) {
+    $html_data = json_decode($_GET[UPDATE_GROUP]);
     if ($html_data != null) {
-        $user_profile = new Group();
-        $user_profile->updateGroup($html_data->group_id,
+        $group_profile = new Group();
+        $group_profile->updateGroup($html_data->group_id,
             $html_data->group_name,
             $html_data->about,
             $html_data->desired_skills,
@@ -166,11 +165,11 @@ else if (array_key_exists(UPDATE_USER, $_GET)) {
            );
     }
 }
-else if (array_key_exists(DELETE_USER, $_GET)) {
-    $html_data = json_decode($_GET[DELETE_USER]);
+else if (array_key_exists(DELETE_GROUP, $_GET)) {
+    $html_data = json_decode($_GET[DELETE_GROUP]);
     if ($html_data != null) {
-        $user_profile = new UserProfile();
-        $user_profile->deleteUser($html_data->user_email);
+        $group_profile = new UserProfile();
+        $group_profile->deleteGroup($html_data->group_id);
     }
 }
 
