@@ -90,7 +90,7 @@ function populateJoinedGroupsList(groups_list) {
                 '<div class="individualGrp">' +
                     '<div>' +
                         '<div class="icon">' +
-                            '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="img">' +
+                            '<img src="../../../image/'+ group.group_img +'" class="groupInIcon" alt="img">' +
                         '</div>' +
                         '<div class="content">' +
                             '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
@@ -144,7 +144,7 @@ function populateAppliedGroups (groups_list) {
                 '<div class="individualGrp">' +
                     '<div>' +
                         '<div class="icon">' +
-                            '<img src="../../../image/home/groupIn1.jpg" class="groupAppliedIcon" alt="img">' +
+                            '<img src="../../../image/'+ group.group_img +'" class="groupAppliedIcon" alt="img">' +
                         '</div>' +
                         '<div class="content">' +
                             '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupAppliedLink"' +
@@ -195,7 +195,7 @@ function populateCreatedGroups (groups_list) {
                 '<div class="individualGrp">' +
                     '<div>' +
                         '<div class="icon">' +
-                            '<img src="../../../image/home/groupIn1.jpg" class="createGroupIcon" alt="img">' +
+                            '<img src="../../../image/'+ group.group_img +'" class="createGroupIcon" alt="img">' +
                         '</div>' +
                         '<div class="content">' +
                             '<a href="../../../html/home/dashboard/groups/edit_group.html" class="createGroupLink"' +

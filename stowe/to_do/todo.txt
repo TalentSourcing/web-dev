@@ -1,1 +1,4 @@
- - Link search entries to actual user profil pages
+ - Link search entries to actual user profile pages
+ - Link search entries to group pages
+ - fix image display in search
+ - Apply buttons on search
