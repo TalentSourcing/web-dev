@@ -51,7 +51,7 @@ function populateProfile (user) {
         if (user.profile_img === "") {
             user.profile_img = "../../../image/default-placeholder.png";
         }
-        $('#profilePic').attr('src', user.profile_img);
+        $('#profilePic').attr('src', "../../../image/" + user.profile_img);
     });
 }
 
