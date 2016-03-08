@@ -151,6 +151,13 @@ class User {
         }
     }
 
+//    public function getUser($user_email) {
+//        $sql = "SELECT * FROM UserTable WHERE user_email='$user_email'";
+//        if ($result = $this->conn->query($sql)) {
+//            return $result->fetch_assoc();
+//        }
+//    }
+
     public function generateTestData() {
         // create some groups
 //        $sql = "INSERT INTO GroupTable " .

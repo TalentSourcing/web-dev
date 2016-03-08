@@ -1,5 +1,7 @@
 'use strict';
 
+const DASHBOARD_KEY = 'dashboard';
+
 const APPLY_FOR_GROUP = "apply_for_group";
 const CANCEL_GROUP_APPLICATION = "cancel_group_application";
 const GET_APPLIED_GROUPS = "get_applied_groups";
@@ -7,31 +9,23 @@ const GET_JOINED_GROUPS = "get_joined_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
-//if (sessionStorage.getItem('dashboard') === null) {
-//    var dashboardStorage = {
-//        'user_email' : 'd.lindskog1@gmail.com', // TODO this should be received from previous page
-//        'userProfile' : {},
-//        'appliedGroups' : [],
-//        'joinedGroups' : []
-//    };
-//    sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
-//}
-
+var dashboardStorage;
 
 function getProfile () {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
     var user_email = dashboardStorage.user_email;
     var xmlhttp = new XMLHttpRequest();
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("getProfile: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+                console.log("getProfile: " + response.error);
             }
             else {
+                dashboardStorage.userProfile = response;
                 populateProfile(response);
             }
         }
@@ -73,23 +67,22 @@ function populateProfile (user) {
 }
 
 function getJoinedGroups() {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
     var user_email = dashboardStorage.user_email;
-    console.log(user_email);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("getJoinedGroups: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+                console.log("getJoinedGroups: " + response.error);
             }
             else {
                 dashboardStorage.joinedGroups = response;
-                sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
+                //sessionStorage.setItem(DASHBOARD_KEY, JSON.stringify(dashboardStorage));
                 populateJoinedGroupsList(response);
             }
         }
@@ -128,23 +121,22 @@ function populateJoinedGroupsList(groups_list) {
 }
 
 function getAppliedGroups () {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
     var user_email = dashboardStorage.user_email;
-    console.log(user_email);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("getAppliedGroups: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+                console.log("getAppliedGroups: " + response.error);
             }
             else {
                 dashboardStorage.appliedGroups = response;
-                sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
+                //sessionStorage.setItem(DASHBOARD_KEY, JSON.stringify(dashboardStorage));
                 populateAppliedGroups(response);
             }
         }
@@ -187,25 +179,25 @@ function populateAppliedGroups (groups_list) {
  * page and used to populate the necessary fields.
  */
 function openChat () {
-    var chatStorage;
-    if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
-        chatStorage = {'user_email' : ''};
-    }
-    chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
+    var chatStorage = {'user_email' : (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email};
+    //if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
+    //    chatStorage = {'user_email' : ''};
+    //}
+    //chatStorage.user_email = (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
     var xmlhttp = new XMLHttpRequest();
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("openChat: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+
+                console.log("openChat: " + response.error);
             }
             else {
                 console.log("open chat success");
-                window.location.href = "../../../php/home/dashboard/chat/chat1.php"
             }
         }
     };
@@ -221,7 +213,7 @@ function openGroupChat (group_id) {
             'group_id' : ''
         };
     }
-    chatStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
+    chatStorage.user_email = (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email;
     chatStorage.group_id = group_id;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
     var xmlhttp = new XMLHttpRequest();
@@ -229,14 +221,13 @@ function openGroupChat (group_id) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("openGroupChat: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+                console.log("openGroupChat: " + response.error);
             }
             else {
-                console.log("open chat success");
-                window.location.href = "../../../php/home/dashboard/chat/chat1.php"
+                console.log("open group chat success");
             }
         }
     };
@@ -252,28 +243,27 @@ function openGroup (group_id) {
             'group_id' : ''
         };
     }
-    groupStorage.user_email = (JSON.parse(sessionStorage.getItem('dashboard'))).user_email;
+    groupStorage.user_email = (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email;
     groupStorage.group_id = group_id;
     sessionStorage.setItem('group', JSON.stringify(groupStorage));
 }
 
 function leaveGroup (group_id) {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
     var request = {
         'user_email' : dashboardStorage.user_email,
         'group_id' : group_id
     };
-    console.log('leaveGroup group_id: ' + group_id);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("leavGroup: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+                console.log("leaveGroup: " + response.error);
             }
             else {
                 alert('Leave group success!');
@@ -286,51 +276,23 @@ function leaveGroup (group_id) {
     xmlhttp.send();
 }
 
-// TODO delete this when chuan has successfully integrated it
-function applyForGroup (group_id) {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
-    var request = {
-        'user_email' : dashboardStorage.user_email,
-        'group_id' : group_id
-    };
-    // send request to php
-    var xmlhttp = new XMLHttpRequest();
-    var response = null;
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
-            response = JSON.parse(json_str);
-            if ('error' in response) {
-                console.log(response.error);
-            }
-            else {
-                alert('Group application success!');
-            }
-        }
-    };
-    xmlhttp.open("GET","../../../php/user.php?" + APPLY_FOR_GROUP + "=" + JSON.stringify(request), true);
-    xmlhttp.send();
-}
-
 // TODO this is not working right
 function cancelApp (group_id) {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
     var request = {
         'user_email' : dashboardStorage.user_email,
         'group_id' : group_id
     };
-    console.log('cancel application group_id: ' + group_id);
     // send request to php
     var xmlhttp = new XMLHttpRequest();
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json_str = extractJSONObject(xmlhttp.responseText);
-            console.log(json_str);
+            console.log("cancelApp: " + json_str);
             response = JSON.parse(json_str);
             if ('error' in response) {
-                console.log(response.error);
+                console.log("cancelApp: " + response.error);
             }
             else {
                 alert('Cancelled group application!');
@@ -344,7 +306,8 @@ function cancelApp (group_id) {
 }
 
 function openGroupsApplied () {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
+    //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
+    sessionStorage.setItem(DASHBOARD_KEY, JSON.stringify(dashboardStorage));
     var data = {
         'pending' : dashboardStorage.appliedGroups,
         'accepted' : dashboardStorage.joinedGroups
@@ -353,8 +316,10 @@ function openGroupsApplied () {
 }
 
 function openGroupsJoined () {
-    var dashboardStorage = JSON.parse(sessionStorage.getItem('dashboard'));
-    sessionStorage.setItem('groups_current', JSON.stringify(dashboardStorage.joinedGroups));
+    //var dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
+    console.log(dashboardStorage.joinedGroups);
+    sessionStorage.setItem(DASHBOARD_KEY, JSON.stringify(dashboardStorage));
+    sessionStorage.setItem('groups_current', dashboardStorage.user_email);
 }
 
 /**
@@ -377,6 +342,14 @@ function extractJSONObject (string) { // TODO make return the message too
     }
 }
 
-getProfile();
-getJoinedGroups();
-getAppliedGroups();
+
+$(document).ready(function () {
+    dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
+
+    getProfile();
+    getJoinedGroups();
+    getAppliedGroups();
+
+    console.log(dashboardStorage);
+});
+
