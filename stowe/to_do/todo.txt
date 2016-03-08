@@ -1,0 +1,1 @@
+ - Link search entries to actual user profil pages
