@@ -2,15 +2,15 @@
 'use strict';
 
 
-const EDIT_GROUP = "edit_group";
+const UPDATE_GROUP = "update_group";
 
 function geteditgroupFields () {
     var editgroupprofile = {};
     $(document).ready(function () {
-        editgroupprofile.group_title = $('input[name="email"]').val();
-        editgroupprofile.about_info = $('input[name="firstname"]').val();
-        editgroupprofile.skill_list = $('input[name="lastname"]').val();
-        editgroupprofile.experience_list = $('input[name="password"]').val();
+        editgroupprofile.group_title = $('input[name="group_name"]').val();
+        editgroupprofile.about_info = $('input[name="about"]').val();
+        editgroupprofile.skill_list = $('input[name="desired_skills]').val();
+        editgroupprofile.experience_list = $('input[name="experience"]').val();
 
     });
 
@@ -20,12 +20,12 @@ function geteditgroupFields () {
     return editgroupprofile;
 }
 
-function validate () {
-    var valid = true;
-    var error_msg = {
-        'requiredFields' : "",
-        'password' : ""
-    };
+//function validate () {
+//    var valid = true;
+//    var error_msg = {
+//        'requiredFields' : "",
+//        'password' : ""
+//    };
     var profile = getFields();
 
 
@@ -40,7 +40,7 @@ function validate () {
                 console.log(xmlhttp.responseText);
             }
         };
-        xmlhttp.open("GET","../../php/Group.php?" + EDIT_GROUP + "=" + JSON.stringify(editgroupprofile), true);
+        xmlhttp.open("GET","../../php/Group.php?" + UPDATE_GROUP + "=" + JSON.stringify(editgroupprofile), true);
         xmlhttp.send();
     }
     else {
