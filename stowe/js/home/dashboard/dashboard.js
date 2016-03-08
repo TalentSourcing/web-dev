@@ -198,7 +198,7 @@ function populateCreatedGroups (groups_list) {
                             '<img src="../../../image/home/groupIn1.jpg" class="createGroupIcon" alt="img">' +
                         '</div>' +
                         '<div class="content">' +
-                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="createGroupLink"' +
+                            '<a href="../../../html/home/dashboard/groups/edit_group.html" class="createGroupLink"' +
                             ' onclick="editGroup('+ group.group_id +')">' +
                                 '<p class="groupInContent">' + group.group_name + '</p>' +
                             '</a>' +
