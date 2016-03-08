@@ -1,6 +1,6 @@
 'use strict';
 
-$document.ready(function()){
+$(document).ready(function() {
     function delete1(deleteme1){
     /*
     var parent = document.getElementById("list_applicants");
@@ -29,9 +29,10 @@ $document.ready(function()){
         var child = document.getElementById("deleteme4");
         parent.removeChild(child);
     }
-}
+});
 
 var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -49,4 +50,4 @@ var xmlhttp = new XMLHttpRequest();
     };
     xmlhttp.open("GET","http://localhost/apply_for_group.php?" + APPLY_FOR_GROUP + "=" + str_rot13(JSON.stringify(request)), true);
     xmlhttp.send();
-}
+};
