@@ -35,7 +35,7 @@
 		
 		<?php 
 
-		require 'newTest.php';                  //thee data connection file
+		require 'init_database.php';                  //thee data connection file
 		$conn = TalentMeDB::getConnection();    //get connection object
 
 //		if(isset($_GET['sender_data']))
