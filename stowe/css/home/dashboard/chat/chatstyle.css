@@ -52,7 +52,7 @@ li{
 	height: 75%;      /*naina*/
 	margin-bottom: 10px;
 	background-color: #E8EDF9;
-	overflow: auto;
+	overflow-y: scroll;
 }
 
 #chattitle{
