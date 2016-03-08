@@ -30,11 +30,11 @@ function populateGroupView (group_data) {
         $('#group_name').text(group_data.group_name); // first + last
         $('#about').text( group_data.linkedin_url);
 
-        group_data.desired_skills.split(/\s/).forEach(function (desired_skills) {
-            $('#desired_skills').append("<li>" + group_data.skills + "</li>");
-        });
-
-
+        if (group_data.desired_skills !== "") {
+            group_data.desired_skills.split(/\s/).forEach(function (skill) {
+                $('#desired_skills').append("<li>" + skill + "</li>");
+            });
+        }
     });
 }
 
