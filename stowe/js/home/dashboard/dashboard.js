@@ -144,10 +144,10 @@ function populateAppliedGroups (groups_list) {
                 '<div class="individualGrp">' +
                     '<div>' +
                         '<div class="icon">' +
-                            '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="img">' +
+                            '<img src="../../../image/home/groupIn1.jpg" class="groupAppliedIcon" alt="img">' +
                         '</div>' +
                         '<div class="content">' +
-                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
+                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupAppliedLink"' +
                             ' onclick="openGroup('+ group.group_id +')">' +
                                 '<p class="groupInContent">' + group.group_name + '</p>' +
                             '</a>' +
@@ -161,9 +161,6 @@ function populateAppliedGroups (groups_list) {
         });
     });
 }
-
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 function getCreatedGroups () {
     var user_email = dashboardStorage.user_email;
@@ -198,11 +195,11 @@ function populateCreatedGroups (groups_list) {
                 '<div class="individualGrp">' +
                     '<div>' +
                         '<div class="icon">' +
-                            '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="img">' +
+                            '<img src="../../../image/home/groupIn1.jpg" class="createGroupIcon" alt="img">' +
                         '</div>' +
                         '<div class="content">' +
-                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
-                            ' onclick="openGroup('+ group.group_id +')">' +
+                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="createGroupLink"' +
+                            ' onclick="editGroup('+ group.group_id +')">' +
                                 '<p class="groupInContent">' + group.group_name + '</p>' +
                             '</a>' +
                         '</div>' +
@@ -215,9 +212,6 @@ function populateCreatedGroups (groups_list) {
         });
     });
 }
-
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 /**
  * Call this when navigating to chat page from dashboard.  This will search for an existing chat sessionStorage item, or
@@ -256,12 +250,6 @@ function openGroupChat (group_id) {
         'user_email' : '',
         'group_id' : ''
     };
-    //if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
-    //    chatStorage = {
-    //        'user_email' : '',
-    //        'group_id' : ''
-    //    };
-    //}
     chatStorage.user_email = (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email;
     chatStorage.group_id = group_id;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
@@ -295,6 +283,14 @@ function openGroup (group_id) {
     groupStorage.user_email = (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email;
     groupStorage.group_id = group_id;
     sessionStorage.setItem('group', JSON.stringify(groupStorage));
+}
+
+function editGroup (group_id) {
+    var editGroupStorage = {
+        'group_id' : group_id
+    };
+    sessionStorage.setItem('edit_group', JSON.stringify(editGroupStorage));
+    window.location.href = "../../../html/home/dashboard/groups/edit_group.html";
 }
 
 function leaveGroup (group_id) {

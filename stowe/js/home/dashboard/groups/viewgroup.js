@@ -31,7 +31,7 @@ function populateGroupView (group_data) {
         $('#about').text( group_data.linkedin_url);
 
         group_data.desired_skills.split(/\s/).forEach(function (desired_skills) {
-            $('#desired_skills').append("<li>" + skill + "</li>");
+            $('#desired_skills').append("<li>" + group_data.skills + "</li>");
         });
 
 
@@ -49,21 +49,17 @@ function extractJSONObject (string) {
     return string.substring(json_start, json_end + 1);
 }
 
-//getGroupView(4);
-
 /*
 get group id and user_email from previous page.  Group storage item should contain whatever data is needed for this page
 to work.  Right now, dashboard is passing user_email and group_id in th
  */
-//$(document).ready(function () { // this is giving the previous page time to set the variables
-//    var groupStorage;
-//    if ((groupStorage = JSON.parse(sessionStorage.getItem('group'))) === null) {
-//        console.log('Error!!  No group data passed from previous page');
-//    }
-//    else {
-//        console.log('group_id passed from dashboard: ' + groupStorage.group_id);
-//        getGroupView(groupStorage.group_id);
-//    }
-//});
-
-getGroupView ('4');
+$(document).ready(function () {
+    var groupStorage;
+    if ((groupStorage = JSON.parse(sessionStorage.getItem('group'))) === null) {
+        console.log('Error!!  No group data passed from previous page');
+    }
+    else {
+        console.log('group_id passed from dashboard: ' + groupStorage.group_id);
+        getGroupView(groupStorage.group_id);
+    }
+});
