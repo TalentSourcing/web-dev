@@ -1,31 +1,35 @@
 'use strict';
 
+$document.ready(function()){
+    function delete1(deleteme1){
+    /*
+    var parent = document.getElementById("list_applicants");
+    var child = document.getElementById("deleteme1");
+    parent.removeChild(child);
+    */
 
-delete1(){
-var parent = document.getElementById("list_applicants");
-var child = document.getElementById("deleteme1");
-parent.removeChild(child);
+    document.getElementById("deleteme1").innerHTML = "User has been declined";
+    }
+
+
+    function delete2(deleteme2){
+        var parent = document.getElementById("list_applicants");
+        var child = document.getElementById("deleteme2");
+        parent.removeChild(child);
+    }
+
+    function delete3(deleteme3){
+        var parent =    document.getElementById("list_applicants");
+        var child = document.getElementById("deleteme3");
+        parent.removeChild(child);
+    }
+
+    function delete4(deleteme4){
+        var parent = document.getElementById("list_applicants");
+        var child = document.getElementById("deleteme4");
+        parent.removeChild(child);
+    }
 }
-
-
-delete2(){
-var parent = document.getElementById("list_applicants");
-var child = document.getElementById("deleteme2");
-parent.removeChild(child);
-}
-
-delete3(){
-var parent = document.getElementById("list_applicants");
-var child = document.getElementById("deleteme3");
-parent.removeChild(child);
-}
-
-delete4(){
-var parent = document.getElementById("list_applicants");
-var child = document.getElementById("deleteme4");
-parent.removeChild(child);
-}
-
 
 var xmlhttp = new XMLHttpRequest();
     var response = null;
