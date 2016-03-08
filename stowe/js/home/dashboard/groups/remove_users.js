@@ -1,6 +1,6 @@
 'use strict';
 
-$document.ready(function()){
+$(document).ready(function() {
 
     function remove1(removeme1){
     /*
@@ -33,9 +33,10 @@ $document.ready(function()){
         var child = document.getElementById("removeme4");
         parent.removeChild(child);
     }
-}
+});
 
 var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
     var response = null;
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -52,6 +53,7 @@ var xmlhttp = new XMLHttpRequest();
             }
         }
     };
+    // TODO what is the request being made here??  'request' variable doesn't exist
     xmlhttp.open("GET","http://localhost/apply_for_group.php?" + APPLY_FOR_GROUP + "=" + str_rot13(JSON.stringify(request)), true);
     xmlhttp.send();
-}
+};
