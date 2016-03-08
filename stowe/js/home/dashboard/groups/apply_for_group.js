@@ -25,7 +25,7 @@ function applyForGroup (user_email, group_id) {
             }
         }
     };
-    xmlhttp.open("GET","http://localhost/apply_for_group.php?" + APPLY_FOR_GROUP + "=" + str_rot13(JSON.stringify(request)), true);
+    xmlhttp.open("GET","../../../../php/apply_for_group.php?" + APPLY_FOR_GROUP + "=" + str_rot13(JSON.stringify(request)), true);
     xmlhttp.send();
 }
 

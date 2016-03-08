@@ -93,4 +93,4 @@ function extractJSONObject (string) { // TODO make return the message too
 
 
 //generateHtml();
-getJoinedGroups()
+getJoinedGroups();

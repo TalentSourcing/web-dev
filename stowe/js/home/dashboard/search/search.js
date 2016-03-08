@@ -243,7 +243,8 @@ function createEntryForUser(userEmail, userProfileImg, userName, skills, objecti
 	).click(function() {
 		var hostEmail = sessionStorage.getItem('hostEmail');
 		initChat(hostEmail, userEmail);
-		window.open('../chat/chat.html');
+		//window.open('../chat/chat.html');
+		window.open('../../../../php/chat1.php');
 	});
 	entry.append(button);
 	return entry;
