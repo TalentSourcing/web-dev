@@ -26,14 +26,14 @@ function login () {
 		var user_email = $('#user_email').val();
 		var password = $('#password').val();
 
-		//var user_email = 'd.lindskog1@gmail.com';
+		// user_email = "naina.raut1911@gmail.com", password = "pwd1"
 
 		if (!/\S/.test(user_email) || !/\S/.test(password)) {
 			alert('Could not find username or invalid password');
 			return null;
 		}
 		else {
-			if (user_email === "d.lindskog1@gmail.com" && password === "password") {
+			if (user_email === "naina.raut1911@gmail.com" && password === "pwd1") {
 				$('#sign_in').attr('href', 'dashboard/dashboard.html');
 			}
 			else {

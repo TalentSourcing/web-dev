@@ -46,4 +46,4 @@ function geteditgroupFields () {
     else {
         alert("Error!\n\n" + error_msg.requiredFields + "\n" + error_msg.password);
     }
-}
+//}
