@@ -6,6 +6,7 @@ const APPLY_FOR_GROUP = "apply_for_group";
 const CANCEL_GROUP_APPLICATION = "cancel_group_application";
 const GET_APPLIED_GROUPS = "get_applied_groups";
 const GET_JOINED_GROUPS = "get_joined_groups";
+const GET_CREATED_GROUPS = "get_created_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
@@ -111,6 +112,29 @@ class User {
         }
     }
 
+    public function getCreatedGroups($user_email) {
+        $sql = "SELECT * FROM UserGroupTable ".
+            "WHERE user_email='$user_email' AND user_role='$this->FOUNDER'";
+        if ($result = $this->conn->query($sql)) {
+            if ($result->num_rows > 0) {
+                $json_objs = array();
+                for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                    $json_objs[$i] = $this->getGroup($row['group_id']);
+                }
+                echo json_encode($json_objs);
+                return json_encode($json_objs);
+            }
+            else {
+                echo '{"error" : "No created groups for user: '.$user_email.'"}';
+                return null;
+            }
+        }
+        else {
+            echo '{"error" : "getCreatedGroups sql failure"}';
+            return null;
+        }
+    }
+
     public function leaveGroup($user_email, $group_id) {
         $response = array();
         $sql = "DELETE FROM UserGroupTable WHERE user_email='$user_email' AND group_id='$group_id'".
@@ -152,9 +176,13 @@ class User {
     }
 
 //    public function getUser($user_email) {
+//        $user = array();
 //        $sql = "SELECT * FROM UserTable WHERE user_email='$user_email'";
 //        if ($result = $this->conn->query($sql)) {
-//            return $result->fetch_assoc();
+//            $user['profile'] = $result->fetch_assoc();
+//        }
+//        else {
+//            $user['profile_error'] = 'error selecting user from UserTable';
 //        }
 //    }
 
@@ -219,6 +247,9 @@ else if (array_key_exists(GET_APPLIED_GROUPS, $_GET)) {
 }
 else if (array_key_exists(GET_JOINED_GROUPS, $_GET)) {
     $user->getJoinedGroups($_GET[GET_JOINED_GROUPS]);
+}
+else if (array_key_exists(GET_CREATED_GROUPS, $_GET)) {
+    $user->getCreatedGroups($_GET[GET_CREATED_GROUPS]);
 }
 else if (array_key_exists(LEAVE_GROUP, $_GET)) {
     $request = json_decode($_GET[LEAVE_GROUP]);

@@ -6,6 +6,7 @@ const APPLY_FOR_GROUP = "apply_for_group";
 const CANCEL_GROUP_APPLICATION = "cancel_group_application";
 const GET_APPLIED_GROUPS = "get_applied_groups";
 const GET_JOINED_GROUPS = "get_joined_groups";
+const GET_CREATED_GROUPS = "get_created_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
@@ -34,18 +35,6 @@ function getProfile () {
     xmlhttp.send();
 }
 
-/**
- * user_email
- * first_name
- * last_name
- * password
- * linkedin_url
- * skills
- * occupation
- * gender
- * profile_img
- * objective
- */
 function populateProfile (user) {
     $(document).ready(function () {
         var p1 = $('#p1');
@@ -95,7 +84,7 @@ function populateJoinedGroupsList(groups_list) {
     $(document).ready(function () {
         groups_list.forEach(function (group) {
             if (group.group_img === "") {
-                group.group_img = "../../../image/default-placeholder.png";
+                group.group_img = "default-placeholder.png";
             }
             var joinedGroup =
                 '<div class="individualGrp">' +
@@ -149,9 +138,9 @@ function populateAppliedGroups (groups_list) {
     $(document).ready(function () {
         groups_list.forEach(function (group) {
             if (group.group_img === "") {
-                group.group_img = "../../../image/default-placeholder.png";
+                group.group_img = "default-placeholder.png";
             }
-            var joinedGroup =
+            var appliedGroup =
                 '<div class="individualGrp">' +
                     '<div>' +
                         '<div class="icon">' +
@@ -168,10 +157,67 @@ function populateAppliedGroups (groups_list) {
                         '</div>' +
                     '</div>' +
                 '</div>';
-            $('#groupsApplied').append(joinedGroup);
+            $('#groupsApplied').append(appliedGroup);
         });
     });
 }
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+function getCreatedGroups () {
+    var user_email = dashboardStorage.user_email;
+    // send request to php
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log("getCreatedGroups: " + json_str);
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log("getCreatedGroups: " + response.error);
+            }
+            else {
+                dashboardStorage.createdGroups = response;
+                populateCreatedGroups(response);
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../php/user.php?" + GET_CREATED_GROUPS + "=" + user_email, true);
+    xmlhttp.send();
+}
+
+function populateCreatedGroups (groups_list) {
+    $(document).ready(function () {
+        groups_list.forEach(function (group) {
+            if (group.group_img === "") {
+                group.group_img = "default-placeholder.png";
+            }
+            var createdGroup =
+                '<div class="individualGrp">' +
+                    '<div>' +
+                        '<div class="icon">' +
+                            '<img src="../../../image/home/groupIn1.jpg" class="groupInIcon" alt="img">' +
+                        '</div>' +
+                        '<div class="content">' +
+                            '<a href="../../../html/home/dashboard/groups/view_group_external.html" class="groupInLink"' +
+                            ' onclick="openGroup('+ group.group_id +')">' +
+                                '<p class="groupInContent">' + group.group_name + '</p>' +
+                            '</a>' +
+                        '</div>' +
+                        '<div class="groupButtons">' +
+                            '<a href="../../../php/chat1.php"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            $('#groupsCreated').append(createdGroup);
+        });
+    });
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 /**
  * Call this when navigating to chat page from dashboard.  This will search for an existing chat sessionStorage item, or
@@ -206,13 +252,16 @@ function openChat () {
 }
 
 function openGroupChat (group_id) {
-    var chatStorage;
-    if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
-        chatStorage = {
-            'user_email' : '',
-            'group_id' : ''
-        };
-    }
+    var chatStorage = {
+        'user_email' : '',
+        'group_id' : ''
+    };
+    //if ((chatStorage = JSON.parse(sessionStorage.getItem('chat'))) === null) {
+    //    chatStorage = {
+    //        'user_email' : '',
+    //        'group_id' : ''
+    //    };
+    //}
     chatStorage.user_email = (JSON.parse(sessionStorage.getItem(DASHBOARD_KEY))).user_email;
     chatStorage.group_id = group_id;
     sessionStorage.setItem('chat', JSON.stringify(chatStorage));
@@ -327,7 +376,7 @@ function openGroupsJoined () {
  * @param string {string}
  * @returns {string}
  */
-function extractJSONObject (string) { // TODO make return the message too
+function extractJSONObject (string) {
     var curly = string.indexOf('{');
     var bracket = string.indexOf('[');
 
@@ -347,6 +396,7 @@ $(document).ready(function () {
     dashboardStorage = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
 
     getProfile();
+    getCreatedGroups();
     getJoinedGroups();
     getAppliedGroups();
 

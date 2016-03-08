@@ -43,7 +43,8 @@ function login () {
 			'user_email' : user_email,
 			'userProfile' : {},
 			'appliedGroups' : [],
-			'joinedGroups' : []
+			'joinedGroups' : [],
+			'createdGroups' : []
 		};
 		sessionStorage.setItem('dashboard', JSON.stringify(dashboardStorage));
 		//window.location.href = 'dashboard/dashboard.html';
