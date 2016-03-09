@@ -125,7 +125,7 @@
 			$names = [];
 			$count = 0;	
 			$sql = "SELECT * FROM USERTABLE WHERE user_email <> '$senderEmail'";
-			$sql2 = "SELECT * FROM GROUPTABLE";
+			$sql2 = "SELECT  DISTINCT t1.group_name, t1.group_id, t1.group_img FROM GROUPTABLE as t1 inner join USERGROUPTABLE as t2 on t1.group_id = t2.group_id WHERE user_email = '$senderEmail'";
 
 			try{
 				//get all the user names from USERTABLE table
