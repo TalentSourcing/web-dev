@@ -53,7 +53,7 @@
 		function sendMessage($sentMsg,$senderChatId,$senderEmail,$groupId)
 		{
 			global $conn;
-			
+			writeToFile("msg: $sentMsg, chat_id: $senderChatId, email: $senderEmail, group_id: $groupId");
 			//get the current timestamp
 			$timeStamp = date("Y-m-d H:i:s");
 				
@@ -87,6 +87,13 @@
 			catch(Exception $e){
 				echo 'Exception in sendMessage() :'.$e->getMessage();
 			}
+		}
+
+		// TODO DELTE THIS! =======================================================================================
+		function writeToFile($text) {
+			$file = fopen("debug.txt", "w+");
+			fwrite($file, $text);
+			fclose($file);
 		}
 		?>
 		
@@ -206,7 +213,8 @@
 		
 		<div class="messages">
 		<?php
-			
+
+			// TODO none of the cookies are being set...
 			//check if individual is selected
 			if(isset($_GET['receiver']) && isset($_GET['sender']) && isset($_GET['recName']))
 			{
@@ -329,7 +337,7 @@
 				//get the messages for the corresponding group
 				getGroupData($_GET['groupId']);
 			}
-			
+
 			//function to get the group messages
 			function getGroupData($groupId)
 			{
@@ -388,6 +396,7 @@
 			 }
 			
 			 //check if send button is pressed
+			 writeToFile($_GET['msg']);  // TODO delete
 			 if(isset($_GET['send']) && isset($_GET['msg']))
 			 {
 				 //check whether its a group message
@@ -397,7 +406,8 @@
 					sendMessage($_GET['msg'],$_COOKIE['globalChatId'],$_COOKIE['sender'],$id);
 				}
 				 //check whether its an individual message
-				else if(isset($_COOKIE['sender']) && isset($_COOKIE['receiver']) && isset($_COOKIE['recName']))
+//				else if(isset($_COOKIE['sender']) && isset($_COOKIE['receiver']) && isset($_COOKIE['recName']))
+				else
 				{
 					$id = NULL;
 					sendMessage($_GET['msg'],$_COOKIE['globalChatId'],$_COOKIE['sender'],$id);
@@ -409,10 +419,11 @@
 			
 <!--			the send message section-->
 		<div id="input">
+			<script>function logg(str) {console.log(str); alert("");} // TODO delete</script>
 			<form action="<?=$_SERVER['PHP_SELF'];?>" method="get">
 				<textarea id="searchtext" name="msg" placeholder="Type message here..." rows="3" cols="75"></textarea>
 				<input type="hidden" name="sender" value="">
-            	<input id="search" type="submit" value="Send" name="send">
+            	<input id="search" type="submit" value="Send" name="send" onclick="logg($('#searchtext').val())">
 			</form>
         </div>
 
