@@ -60,10 +60,7 @@ function validate () {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 console.log(xmlhttp.responseText);
-                window.location.href = "dashboard/dashboard.html"; // TODO this is not working
-                //$(document).ready(function () {
-                //    $('#register_button').attr('href', 'dashboard/dashboard.html');
-                //});
+                window.location.href = "dashboard/dashboard.html";
             }
         };
         xmlhttp.open("GET","../../php/user_profile.php?" + CREATE_USER + "=" + JSON.stringify(profile), true);

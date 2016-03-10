@@ -10,6 +10,8 @@ const GET_CREATED_GROUPS = "get_created_groups";
 const LEAVE_GROUP = "leave_group";
 const GET_USER_PROFILE = "get_user_profile";
 
+const PROFILE_KEY = 'profile';
+
 var dashboardStorage;
 
 function getProfile () {
@@ -37,6 +39,11 @@ function getProfile () {
 
 function populateProfile (user) {
     $(document).ready(function () {
+        var pic = $('#pic');
+        pic.click(function () {
+            openProfile(user.user_email);
+        });
+
         var p1 = $('#p1');
         var p2 = $('#p2');
         p1.text(user.first_name + " " + user.last_name);
@@ -211,6 +218,10 @@ function populateCreatedGroups (groups_list) {
             $('#groupsCreated').append(createdGroup);
         });
     });
+}
+
+function openProfile(user_email) {
+    sessionStorage.setItem(PROFILE_KEY, JSON.stringify({'user_email' : user_email}));
 }
 
 /**

@@ -1,4 +1,6 @@
 
+const PROFILE_KEY = 'profile';
+
 $(document).ready(function() {
 
 	$("#searchButton").on({
@@ -219,7 +221,7 @@ function createEntryForUser(userEmail, userProfileImg, userName, skills, objecti
 						text: userName
 					}).click(function() {
 						console.log('email: ' + userEmail);
-						sessionStorage.setItem('profile', JSON.stringify({'user_email': userEmail}));
+						sessionStorage.setItem(PROFILE_KEY, JSON.stringify({'user_email': userEmail}));
 					})
 					);
 	content.append(name_entry);

@@ -4,6 +4,10 @@
 // php requests:
 const GET_USER_PROFILE = "get_user_profile";
 
+const PROFILE_KEY = 'profile';
+const HOST_EMAIL_KEY = 'hostEmail';
+const EDIT_PROFILE_KEY = 'edit_profile';
+
 function getUserProfile (user_email) {
     // send request to php
     var xmlhttp = new XMLHttpRequest();
@@ -27,6 +31,18 @@ function getUserProfile (user_email) {
 
 function populateProfile (user_data) {
     $(document).ready(function () {
+        var host_email = JSON.parse(sessionStorage.getItem(HOST_EMAIL_KEY));
+        if (user_data.user_email === host_email) {
+            var editProfileButton = $('#edit_profile_button');
+            editProfileButton.show();
+            editProfileButton.click(function () {
+                openEditProfile(user_data.user_email);
+            });
+        }
+        else {
+            $('#edit_profile_button').hide();
+        }
+
         $('#user_data').text(JSON.stringify(user_data)); // store user data right on the page
         $('#user_email').text(user_data.user_email);
         $('#name').text(user_data.first_name + " " + user_data.last_name); // first + last
@@ -40,6 +56,10 @@ function populateProfile (user_data) {
         $('#profile_img').attr("src", "../../../../image/" + user_data.profile_img);
         $('#objective').text(user_data.objective);
     });
+}
+
+function openEditProfile (user_email) {
+    sessionStorage.setItem(EDIT_PROFILE_KEY, JSON.stringify({'user_email' : user_email}));
 }
 
 /**
@@ -56,6 +76,6 @@ function extractJSONObject (string) {
 
 $(document).ready(function () {
     // TODO email address needs to be passed to this from search.js.
-    var profile = JSON.parse(sessionStorage.getItem('profile'));
+    var profile = JSON.parse(sessionStorage.getItem(PROFILE_KEY));
     getUserProfile(profile.user_email);
 });

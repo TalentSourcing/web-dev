@@ -20,6 +20,7 @@
 //	}, 5000);
 //});
 
+const HOST_EMAIL_KEY = 'hostEmail';
 
 function login () {
 	$(document).ready(function () {
@@ -44,7 +45,7 @@ function login () {
 
 		// TODO create getUser php function to pull all user data from various tables
 
-		sessionStorage.setItem('hostEmail', JSON.stringify(user_email));
+		sessionStorage.setItem(HOST_EMAIL_KEY, JSON.stringify(user_email));
 		var dashboardStorage = {
 			'user_email' : user_email,
 			'userProfile' : {},

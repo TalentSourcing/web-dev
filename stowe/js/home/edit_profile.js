@@ -4,6 +4,7 @@
 // request types: create_user, update_user, delete_user
 const UPDATE_USER = "update_user";
 const GET_USER_PROFILE = "get_user_profile";
+const EDIT_PROFILE_KEY = 'edit_profile';
 
 function getProfileData(user_email) {
     // send profile to php
@@ -131,6 +132,6 @@ function extractJSONObject (string) {
 }
 
 $(document).ready(function () {
-    var editProfile = JSON.parse(sessionStorage.getItem('edit_profile'));
+    var editProfile = JSON.parse(sessionStorage.getItem(EDIT_PROFILE_KEY));
     getProfileData('naina@gmail.com');
 });
