@@ -133,5 +133,5 @@ function extractJSONObject (string) {
 
 $(document).ready(function () {
     var editProfile = JSON.parse(sessionStorage.getItem(EDIT_PROFILE_KEY));
-    getProfileData('naina@gmail.com');
+    getProfileData(editProfile.user_email);
 });
