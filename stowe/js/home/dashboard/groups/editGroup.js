@@ -77,7 +77,7 @@ function generateHtml(editGroup)
             return null;
         }
 		 
-		 	$("#img_group").attr("src", editGroup.group_img);
+		 	$("#img_group").attr("src", "../../../../image/" + editGroup.group_img);
 			$('#title_field').val(editGroup.group_name); // first + last
 			$('#about').val( editGroup.about);
 			$("textarea#desired_skills").val(editGroup.desired_skills);
