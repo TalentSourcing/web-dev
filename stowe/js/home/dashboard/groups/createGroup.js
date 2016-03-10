@@ -4,20 +4,26 @@
 
 const CREATE_GROUP = "create_group";
 
-function getFields () {
+function getFields() {
     var groupprofile = {};
-    $(document).ready(function () {
-        groupprofile.group_name = $('input[name="group_name"]').val();
-        groupprofile.about_info = $('input[name="about"]').val();
-        groupprofile.skill_list = $('input[name="desired_skills"]').val();
-        groupprofile.experience_list = $('input[name="experience"]').val();
 
-    });
-
+		groupprofile.group_name = $("#title_field").val();
+        groupprofile.about_info = $("#about").val();
+        groupprofile.skill_list = $("#desired_skills").val();
+		groupprofile.group_img = $('#img_group').attr('src');
 
     sessionStorage.setItem('saved_state', JSON.stringify(groupprofile));
     console.log("groupprofile obj: " + JSON.stringify(groupprofile));
-    return groupprofile;
+	
+	 // send profile to php
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                console.log(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open("GET","../../../../php/Group.php?" + CREATE_GROUP + "=" + JSON.stringify(groupprofile), true);
+        xmlhttp.send();
 }
 //
 //function validate () {
@@ -26,24 +32,24 @@ function getFields () {
 //        'requiredFields' : "",
 //        'password' : ""
 //    };
-    var groupprofile = getFields();
-
-
-
-    if (valid) {
-        sessionStorage.removeItem('saved_state');
-
-        // send profile to php
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                console.log(xmlhttp.responseText);
-            }
-        };
-        xmlhttp.open("GET","../../php/Group.php?" + CREATE_group + "=" + JSON.stringify(groupprofile), true);
-        xmlhttp.send();
-    }
-    else {
-        alert("Error!\n\n" + error_msg.requiredFields + "\n" + error_msg.password);
-    }
-}
+//    var groupprofile = getFields();
+//
+//
+//
+//    if (valid) {
+//        sessionStorage.removeItem('saved_state');
+//
+//        // send profile to php
+//        var xmlhttp = new XMLHttpRequest();
+//        xmlhttp.onreadystatechange = function() {
+//            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//                console.log(xmlhttp.responseText);
+//            }
+//        };
+//        xmlhttp.open("GET","../../php/Group.php?" + CREATE_group + "=" + JSON.stringify(groupprofile), true);
+//        xmlhttp.send();
+//    }
+//    else {
+//        alert("Error!\n\n" + error_msg.requiredFields + "\n" + error_msg.password);
+//    }
+//}

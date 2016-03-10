@@ -11,11 +11,11 @@
     <script src="../../../../js/home/dashboard/groups/user_decline.js"></script>
     <script src="../../../../js/home/dashboard/groups/remove_users.js"></script>
     <script src="../../../../js/home/dashboard/groups/approve_User.js"></script>
-    <script src="../../../../js/home/dashboard/groups/invite_User.js"></script>
+<!--    <script src="../../../../js/home/dashboard/groups/invite_User.js"></script>-->
 
 
 </head>
-<body>
+<body onload="geteditgroupFields()">
 <header id="header_content">
     <div id="header_logo_container">
         <img id="logo_image" src="../../../../image/home/logo.jpg" alt="Logo">
@@ -135,7 +135,7 @@
 
     <div class="panel" id="div_buttons">
         <div id="div_button_group">
-            <button id="button_save">save</button>
+            <button id="button_save" onclick="saveUpdatedFields()">save</button>
             <button id="button_cancel">cancel</button>
         </div>
     </div>
