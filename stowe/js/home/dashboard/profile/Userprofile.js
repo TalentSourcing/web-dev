@@ -37,7 +37,7 @@ function populateProfile (user_data) {
         });
 
         $('#occupation').text(user_data.occupation);
-        $('#profile_img').attr("src", "../../../../" + user_data.profile_img);
+        $('#profile_img').attr("src", "../../../../image/" + user_data.profile_img);
         $('#objective').text(user_data.objective);
     });
 }
