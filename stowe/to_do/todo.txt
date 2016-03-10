@@ -2,3 +2,8 @@
  - Link search entries to group pages
  - fix image display in search
  - Apply buttons on search
+
+
+ Create Group:
+  - Need to add founder entry to UserGroupTable
+  - Save and Cancel buttons need to navigate back to Dashboard
