@@ -7,3 +7,6 @@
  Create Group:
   - Need to add founder entry to UserGroupTable
   - Save and Cancel buttons need to navigate back to Dashboard
+
+ Edit Group:
+  - Populate applied/invited lists
