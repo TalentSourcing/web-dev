@@ -108,7 +108,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 					});
 	var image = $('<img/>', {
 				class: "image",
-				src: (groupImg != null) ? groupImg : "../../../../image/default-placeholder.png",
+				src: (groupImg != null) ? "../../../../image/" + groupImg : "../../../../image/default-placeholder.png",
 				alt: "Group image"
 				});
 
@@ -202,7 +202,7 @@ function createEntryForUser(userEmail, userProfileImg, userName, skills, objecti
 					});
 	var image = $('<img/>', {
 				class: "image",
-				src: (userProfileImg == null) ? userProfileImg : "../../../../image/default-placeholder.png",
+				src: (userProfileImg !== null) ? "../../../../image/" + userProfileImg : "../../../../image/default-placeholder.png",
 				alt: "User image"
 				});
 	image_container.append(image);
@@ -217,7 +217,10 @@ function createEntryForUser(userEmail, userProfileImg, userName, skills, objecti
 						href: "../profile/userProfile.html",
 						target: "_blank",
 						text: userName
-						})
+					}).click(function() {
+						console.log('email: ' + userEmail);
+						sessionStorage.setItem('profile', JSON.stringify({'user_email': userEmail}));
+					})
 					);
 	content.append(name_entry);
 

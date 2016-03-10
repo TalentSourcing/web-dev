@@ -56,5 +56,6 @@ function extractJSONObject (string) {
 
 $(document).ready(function () {
     // TODO email address needs to be passed to this from search.js.
-    getUserProfile('d.lindskog1@gmail.com');
+    var profile = JSON.parse(sessionStorage.getItem('profile'));
+    getUserProfile(profile.user_email);
 });
