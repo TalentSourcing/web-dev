@@ -35,6 +35,8 @@ function saveUpdatedFields()
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					console.log(xmlhttp.responseText);
+					// reload the page
+					window.location.href = "../../../home/dashboard/dashboard.html";
 				}
 			};
 			xmlhttp.open("GET","../../../../php/Group.php?" + UPDATE_GROUP + "=" + JSON.stringify(groupprofile), true);
