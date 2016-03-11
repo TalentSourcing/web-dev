@@ -27,7 +27,7 @@ function initChat(host_email, user_email) {
         }
     };
     //xmlhttp.open("GET","http://localhost/init_chat_private.php?" + INIT_CHAT + "=" + str_rot13(JSON.stringify(request)), true);
-    xmlhttp.open("GET","../../../../phpinit_chat_private.php?" + INIT_CHAT + "=" + str_rot13(JSON.stringify(request)), true);
+    xmlhttp.open("GET","../../../../php/init_chat_private.php?" + INIT_CHAT + "=" + str_rot13(JSON.stringify(request)), true);
     xmlhttp.send();
 }
 
