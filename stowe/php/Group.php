@@ -40,20 +40,47 @@ class Group
 
 	
 	//naina start
-   public function createGroup($group_name, $about, $desired_skills, $group_img)
+   public function createGroup($user_email,$group_name, $about, $desired_skills, $group_img)
     {
         $sql = "INSERT INTO GroupTable " .
             "( group_name, group_img , about, desired_skills) " .
             "VALUES ( '$group_name', '$group_img', '$about', '$desired_skills') ";
-
+		
+		$sql2 = "SELECT * FROM GROUPTABLE". 
+			   " ORDER BY GROUP_ID DESC".
+			   " LIMIT 1";
 
         if ($this->conn->query($sql)) {
             echo "Success!";
+			
+			if($result = $this->conn->query($sql2))
+			{
+				$row = $result->fetch_assoc();
+				$id = $row['group_id'];
+				echo $id;
+				
+				$sql3 = "INSERT INTO USERGROUPTABLE ".
+					    " (user_group_id, user_email, group_id, user_role)".
+						" VALUES (NULL,'$user_email','$id','founder')";
+				
+				if($this->conn->query($sql3))
+				{
+					echo "Founder record inserted";
+				}
+				else
+				{
+					echo "error in founder record insert";
+				}
+			}
+			else
+			{
+				echo "error while getting group id of created group";
+			}
+			
         } else {
 
             echo "Not able to create group!";
         }
-
 
     }//working
 	
@@ -232,6 +259,7 @@ if (array_key_exists(CREATE_GROUP, $_GET)) {
     if ($html_data != null) {
         $group_profile = new Group();
         $group_profile->createGroup(
+			$html_data->user_email,
             $html_data->group_name,
             $html_data->about_info,
             $html_data->skill_list,
