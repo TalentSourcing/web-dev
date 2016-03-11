@@ -9,6 +9,7 @@ const CREATE_GROUP = "create_group";
 const DELETE_GROUP = "delete_group";
 const UPDATE_GROUP = "update_group";
 const DISPLAY_UPDATE_GROUP = "display_update_group";
+const GET_MEMBER_DATA = "get_member_data";
 
 class Group
 {
@@ -86,6 +87,35 @@ class Group
 		if ($result = $this->conn->query($sql)) {
             echo json_encode($result->fetch_assoc());
             return json_encode($result->fetch_assoc());
+        }
+        else {
+            echo json_encode("{'error' : 'displayUpdateGroup Failure'}");
+        }
+	}
+	
+	public function displayMemberData($group_id)
+	{
+		echo "In display member function";
+		//get the member,invited and applied applicants list
+		$sql  ="SELECT   t1.*, t2.user_role, t2.group_id".
+			   " FROM USERTABLE as t1 inner join USERGROUPTABLE as t2".
+			   " ON t1.USER_EMAIL = t2.USER_EMAIL".
+			   " WHERE GROUP_ID = '$group_id'";
+		
+		if ($result = $this->conn->query($sql)) {
+			
+			if ($result->num_rows > 0) {
+                $json_objs = array();
+                for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+                    $json_objs[$i] = $row;
+                }
+                echo json_encode($json_objs);
+                return json_encode($json_objs);
+            }
+            else {
+                echo '{"error" : "No applied groups for user: '.$user_email.'"}';
+                return null;
+            }
         }
         else {
             echo json_encode("{'error' : 'displayUpdateGroup Failure'}");
@@ -200,6 +230,16 @@ else if (array_key_exists(UPDATE_GROUP, $_GET)) {
             $html_data->about_info,
             $html_data->skill_list
             );
+    }
+}
+
+else if (array_key_exists(GET_MEMBER_DATA, $_GET)) {
+	
+	echo "In member data update";
+    $html_data = json_decode($_GET[GET_MEMBER_DATA]);
+    if ($html_data != null) {
+        $group_profile = new Group();
+		$group_profile->displayMemberData($html_data->group_id);
     }
 }
 
