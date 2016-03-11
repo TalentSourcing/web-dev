@@ -29,7 +29,7 @@ function generateList(searchFieldText) {
         		}
 		};
         	//xmlhttp.open("GET", "http://localhost/search.php?q=" + searchFieldText, true);
-			xmlhttp.open("GET", "../../../../php/search.php?q=" + searchFieldText, true);
+		xmlhttp.open("GET", "../../../../php/search.php?q=" + searchFieldText, true);
         	xmlhttp.send();
     	}
 }
@@ -129,7 +129,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 						})
 					);
 	content.append(name_entry);
-
+/*
 	var name_founder = $('<h3/>', {
 				text: "Founder: "
 				}).append(
@@ -141,7 +141,7 @@ function createEntryForGroup(groupId, groupImg, groupName, founderName, groupInt
 					})
 				);
 	content.append(name_founder);
-
+*/
 	var group_intro = $('<p/>', {
 				class: "description",
 				text: groupIntro
@@ -192,13 +192,7 @@ function createEntryForUser(userEmail, userProfileImg, userName, skills, objecti
 	var entry = $('<div/>', {
 				class: "entry"
 				});
-/*
-	var id = $('<p/>', {
-				hidden: true,
-				text: userEmail
-			});
-	entry.append(id);
-*/
+
 	var image_container = $('<div/>', {
 					class: "image_container"
 					});
