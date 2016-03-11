@@ -10,6 +10,8 @@ const DELETE_GROUP = "delete_group";
 const UPDATE_GROUP = "update_group";
 const DISPLAY_UPDATE_GROUP = "display_update_group";
 const GET_MEMBER_DATA = "get_member_data";
+const REMOVE_INVITIE = "remove_invitie";
+const ACCEPT_MEMBER = "accept_member";
 
 class Group
 {
@@ -121,6 +123,34 @@ class Group
             echo json_encode("{'error' : 'displayUpdateGroup Failure'}");
         }
 	}
+	
+	public function removeInvitie($user_email, $group_id)
+	{
+		$sql = "DELETE FROM USERGROUPTABLE WHERE user_email = '$user_email' AND group_id = '$group_id'";
+		
+		if ($result = $this->conn->query($sql)) {
+           $response["removeInvitie"] = "removeInvitie remove success";
+        }
+        else {
+           $response["removeInvitie"] = "removeInvitie remove failure";
+        }
+		
+		echo json_encode($response);
+	}
+	
+	public function acceptMember($user_email, $group_id)
+	{
+		$sql = "UPDATE USERGROUPTABLE SET user_role = 'member' WHERE user_email = '$user_email' AND group_id = '$group_id'";
+		
+		if ($result = $this->conn->query($sql)) {
+           $response["acceptMember"] = "acceptMember accepted success";
+        }
+        else {
+           $response["acceptMember"] = "acceptMember accepted failure";
+        }
+		
+		echo json_encode($response);
+	}
 //naina end
 
     public function deleteGroup($group_id)
@@ -219,6 +249,16 @@ else if (array_key_exists(DISPLAY_UPDATE_GROUP, $_GET)) {
     }
 }
 
+else if (array_key_exists(GET_MEMBER_DATA, $_GET)) {
+	
+	echo "In member data update";
+    $html_data = json_decode($_GET[GET_MEMBER_DATA]);
+    if ($html_data != null) {
+        $group_profile = new Group();
+		$group_profile->displayMemberData($html_data->group_id);
+    }
+}
+
 else if (array_key_exists(UPDATE_GROUP, $_GET)) {
     $html_data = json_decode($_GET[UPDATE_GROUP]);
     if ($html_data != null) {
@@ -233,14 +273,24 @@ else if (array_key_exists(UPDATE_GROUP, $_GET)) {
     }
 }
 
-else if (array_key_exists(GET_MEMBER_DATA, $_GET)) {
-	
-	echo "In member data update";
-    $html_data = json_decode($_GET[GET_MEMBER_DATA]);
+//remove invited member
+else if(array_key_exists(REMOVE_INVITIE, $_GET))
+{
+	$html_data = json_decode($_GET[REMOVE_INVITIE]);
     if ($html_data != null) {
-        $group_profile = new Group();
-		$group_profile->displayMemberData($html_data->group_id);
-    }
+		$group_profile = new Group();
+        $group_profile->removeInvitie($html_data->user_email,$html_data->group_id);
+	}
+}
+
+//accept applied member
+else if(array_key_exists(ACCEPT_MEMBER, $_GET))
+{
+	$html_data = json_decode($_GET[ACCEPT_MEMBER]);
+    if ($html_data != null) {
+		$group_profile = new Group();
+        $group_profile->acceptMember($html_data->user_email,$html_data->group_id);
+	}
 }
 
 //end naina

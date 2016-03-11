@@ -6,6 +6,8 @@
 const UPDATE_GROUP = "update_group";
 const DISPLAY_UPDATE_GROUP = "display_update_group";
 const GET_MEMBER_DATA = "get_member_data";
+const REMOVE_INVITIE = "remove_invitie";
+const ACCEPT_MEMBER = "accept_member";
 const $FOUNDER = "founder";
 const $MEMBER = "member";
 const $INVITED = "invited";
@@ -125,7 +127,8 @@ function generateHtml2(member)
             // TODO print message to list
             return null;
         }
-		
+		 
+//		 var allMembers = {'Members': memberData};
 		 var list_invited = $("#list_invited");
 		 var list_applicants = $("#list_applicants");
 		 var member_list = $("#member_list");
@@ -141,7 +144,7 @@ function generateHtml2(member)
 							"<label class='group_name'><a href='../profile/userProfile.html'>"+member.first_name+" "+member.last_name+"</a></label><br>"+
 							"<label class='label_subtext'>"+member.occupation+"</label>"+
 						"</div>"+
-						"<button class='list_button'>remove</button>"+
+						"<button class='list_button' onclick=\"(removeInvitie('" + member.user_email +","+ member.group_id +"'))\"> remove</button>"+
 					"</li>";
 				
 				list_invited.append(appMember);
@@ -156,8 +159,8 @@ function generateHtml2(member)
                     		"<label class='group_name'><a href='../profile/userProfile.html'>"+member.first_name+" "+member.last_name+"</a></label><br>"+
                     		"<label class='label_subtext'>"+member.occupation+"</label>"+
 						"</div>"+
-                		"<button class='list_button'  onclick='delete1('deleteme1')'>decline</button>"+
-                		"<button class='list_button'>accept</button>"+
+                		"<button class='list_button' onclick=\"(removeInvitie('" + member.user_email +","+ member.group_id +"'))\">decline</button>"+
+                		"<button class='list_button' onclick=\"(acceptMember('" + member.user_email +","+ member.group_id +"'))\">accept</button>"+
             		"</li>";
 				
 				list_applicants.append(inviteMember);
@@ -180,6 +183,67 @@ function generateHtml2(member)
 		});
 		
 	 });
+}
+
+//remove button of invite group
+function removeInvitie(userData){
+	$(document).ready(function() {
+		
+		var arr = userData.split(',');
+		var request = {'user_email':arr[0], 'group_id': arr[1]};
+		console.log(request);
+		var xmlhttp = new XMLHttpRequest();
+		var response = null;
+	
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				var json_str = extractJSONObject(xmlhttp.responseText);
+				console.log("leavGroup: " + json_str);
+				response = JSON.parse(json_str);
+				if ('error' in response) {
+					console.log("leaveGroup: " + response.error);
+				}
+				else {
+					// reload the page
+					window.location.href = "../../../home/dashboard/groups/edit_group.html";
+				}
+			}
+		};
+		
+		xmlhttp.open("GET","../../../../php/Group.php?" + REMOVE_INVITIE + "=" +JSON.stringify(request), true);
+		xmlhttp.send();
+	});
+}
+
+//accept the applicant
+function acceptMember(userData)
+{
+	$(document).ready(function() {
+		
+		var arr = userData.split(',');
+		var request = {'user_email':arr[0], 'group_id': arr[1]};
+		console.log(request);
+		var xmlhttp = new XMLHttpRequest();
+		var response = null;
+	
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				var json_str = extractJSONObject(xmlhttp.responseText);
+				console.log("leavGroup: " + json_str);
+				response = JSON.parse(json_str);
+				if ('error' in response) {
+					console.log("leaveGroup: " + response.error);
+				}
+				else {
+					// reload the page
+					window.location.href = "../../../home/dashboard/groups/edit_group.html";
+				}
+			}
+		};
+		
+		xmlhttp.open("GET","../../../../php/Group.php?" + ACCEPT_MEMBER + "=" +JSON.stringify(request), true);
+		xmlhttp.send();
+	});
 }
 
 function extractJSONObject (string) { // TODO make return the message too
