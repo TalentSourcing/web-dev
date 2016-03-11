@@ -88,13 +88,6 @@
 				echo 'Exception in sendMessage() :'.$e->getMessage();
 			}
 		}
-
-		// TODO DELTE THIS! =======================================================================================
-		function writeToFile($text) {
-			$file = fopen("debug.txt", "w+");
-			fwrite($file, $text);
-			fclose($file);
-		}
 		?>
 		
 <!--		Header section-->
@@ -214,7 +207,6 @@
 		<div class="messages">
 		<?php
 
-			// TODO none of the cookies are being set...
 			//check if individual is selected
 			if(isset($_GET['receiver']) && isset($_GET['sender']) && isset($_GET['recName']))
 			{
@@ -396,7 +388,6 @@
 			 }
 			
 			 //check if send button is pressed
-			 writeToFile($_GET['msg']);  // TODO delete
 			 if(isset($_GET['send']) && isset($_GET['msg']))
 			 {
 				 //check whether its a group message
@@ -419,7 +410,6 @@
 			
 <!--			the send message section-->
 		<div id="input">
-			<script>function logg(str) {console.log(str); alert("");} // TODO delete</script>
 			<form action="<?=$_SERVER['PHP_SELF'];?>" method="get">
 				<textarea id="searchtext" name="msg" placeholder="Type message here..." rows="3" cols="75"></textarea>
 				<input type="hidden" name="sender" value="">
