@@ -38,9 +38,12 @@ class Group
         }
     }//working
 
+
 	
 	//naina start
+
    public function createGroup($user_email,$group_name, $about, $desired_skills, $group_img)
+
     {
         $sql = "INSERT INTO GroupTable " .
             "( group_name, group_img , about, desired_skills) " .
@@ -83,7 +86,10 @@ class Group
         }
 
     }//working
-	
+
+
+
+
     public function updateGroup( $group_id, $group_name,$group_img,$about, $desired_skills )
     {
 		$id = $group_id->group_id;
@@ -253,8 +259,10 @@ if (array_key_exists(GET_GROUP_VIEW, $_GET)) {
 //start Naina
 
 if (array_key_exists(CREATE_GROUP, $_GET)) {
+<<<<<<< Updated upstream
 	
 	echo "In create group";
+
     $html_data = json_decode($_GET[CREATE_GROUP]);
     if ($html_data != null) {
         $group_profile = new Group();
@@ -264,6 +272,7 @@ if (array_key_exists(CREATE_GROUP, $_GET)) {
             $html_data->about_info,
             $html_data->skill_list,
             $html_data->group_img);
+
     }
 }
 
@@ -331,7 +340,7 @@ else if (array_key_exists(DELETE_GROUP, $_GET)) {
     }
 }
 
-#$group->getGroupView(4);
+//s$group->getGroupView();
 //$group->createGroup( "Group1", "Math","Query", "kasdnv");
 //$group->createGroup( "Group2", "Math","Query", "kasdnv");
 //$group->createGroup( "Group3", "Math","Query", "kasdnv");
