@@ -4,6 +4,22 @@
 // request types: create_user, update_user, delete_user
 const CREATE_USER = "create_user";
 
+function getProfilePic(imgPath)
+{
+	if (imgPath.files && imgPath.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile_img')
+                    .attr('src', e.target.result)
+                    .width(250)
+                    .height(250);
+            };
+
+            reader.readAsDataURL(imgPath.files[0]);
+        }
+}
+
 function getFields () {
     var profile = {};
     $(document).ready(function () {

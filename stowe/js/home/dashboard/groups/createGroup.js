@@ -5,6 +5,21 @@
 const CREATE_GROUP = "create_group";
 const DASHBOARD_KEY = 'dashboard';
 
+function getProfilePic(imgPath)
+{
+	if (imgPath.files && imgPath.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img_group')
+                    .attr('src', e.target.result)
+                    .width('100%')
+                    .height('100%');
+            };
+
+            reader.readAsDataURL(imgPath.files[0]);
+        }
+}
 
 function getFields() {
     var dashboard = JSON.parse(sessionStorage.getItem(DASHBOARD_KEY));
