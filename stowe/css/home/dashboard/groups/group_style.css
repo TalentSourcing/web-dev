@@ -84,11 +84,12 @@ body {
 
 /* INVITE */
 #div_invite {
-    min-height: 450px; /* TODO make % */
+    max-height: 450px;
 }
 
 #list_invited {
-    height: 300px; /* TODO make % */
+    min-height: 100px;
+    max-height: 350px;
 }
 
 #div_invite_buttons {
@@ -103,11 +104,24 @@ body {
 
 /* APPLICANTS */
 #div_applicants {
-
+    max-height: 450px;
 }
 
 #list_applicants {
-    height: 300px; /* TODO make % */
+    min-height: 100px;
+    max-height: 350px;
+}
+
+
+/* MEMBERS */
+/* APPLICANTS */
+#div_members {
+    max-height: 450px;
+}
+
+#members_list {
+    min-height: 100px;
+    max-height: 350px;
 }
 
 
