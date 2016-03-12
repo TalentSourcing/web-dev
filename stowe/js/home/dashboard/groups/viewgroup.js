@@ -1,6 +1,7 @@
 
 // php requests:
 const GET_GROUP_VIEW = "get_group_view";
+const APPLY_FOR_GROUP = "apply_for_group";
 
 function getGroupView (group_id) {
     // send request to php
@@ -35,7 +36,39 @@ function populateGroupView (group_data) {
                 $('#desired_skills').append("<li>" + skill + "</li>");
             });
         }
+
+        $('#button_apply').click(function () {
+            apply(group_data.group_id);
+        });
     });
+}
+
+function apply(group_id) {
+    var request = {
+        'user_email' : JSON.parse(sessionStorage.getItem('hostEmail')),
+        'group_id' : group_id
+    };
+
+    var xmlhttp = new XMLHttpRequest();
+    var response = null;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json_str = extractJSONObject(xmlhttp.responseText);
+            console.log(json_str); // print json to console
+            response = JSON.parse(json_str);
+            if ('error' in response) {
+                console.log(response.error);
+                alert('You are either already in this group or have already applied for it!');
+            }
+            else {
+                console.log('Group apply success!');
+                alert('Group application success!');
+                window.location.href = "../../../../html/home/dashboard/dashboard.html";
+            }
+        }
+    };
+    xmlhttp.open("GET","../../../../php/user.php?" + APPLY_FOR_GROUP + "=" + JSON.stringify(request), true);
+    xmlhttp.send();
 }
 
 /**
