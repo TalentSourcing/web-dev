@@ -27,7 +27,7 @@ function getGroupView (group_id) {
 function populateGroupView (group_data) {
     $(document).ready(function () {
         $('#group_data').text(JSON.stringify(group_data)); // store user data right on the page
-        $('#group_img').text(group_data.group_img);//image id must be changed in html
+        $('#img_group').attr('src', '../../../../image/' + group_data.group_img);//image id must be changed in html
         $('#group_name').text(group_data.group_name); // first + last
         $('#about').text( group_data.about);
 
