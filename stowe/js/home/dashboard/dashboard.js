@@ -90,9 +90,9 @@ function getJoinedGroups() {
 function populateJoinedGroupsList(groups_list) {
     $(document).ready(function () {
         groups_list.forEach(function (group) {
-            if (group.group_img === "") {
-                group.group_img = "default-placeholder.png";
-            }
+            //if (group.group_img === "") {
+            //    group.group_img = "default-placeholder.png";
+            //}
             var joinedGroup =
                 '<div class="individualGrp">' +
                     '<div>' +
@@ -144,9 +144,9 @@ function getAppliedGroups () {
 function populateAppliedGroups (groups_list) {
     $(document).ready(function () {
         groups_list.forEach(function (group) {
-            if (group.group_img === "") {
-                group.group_img = "default-placeholder.png";
-            }
+            //if (group.group_img === "") {
+            //    group.group_img = "default-placeholder.png";
+            //}
             var appliedGroup =
                 '<div class="individualGrp">' +
                     '<div>' +
@@ -195,9 +195,9 @@ function getCreatedGroups () {
 function populateCreatedGroups (groups_list) {
     $(document).ready(function () {
         groups_list.forEach(function (group) {
-            if (group.group_img === "") {
-                group.group_img = "default-placeholder.png";
-            }
+            //if (group.group_img === "") {
+            //    group.group_img = "default-placeholder.png";
+            //}
             var createdGroup =
                 '<div class="individualGrp">' +
                     '<div>' +

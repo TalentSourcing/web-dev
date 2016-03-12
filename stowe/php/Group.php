@@ -259,8 +259,7 @@ if (array_key_exists(GET_GROUP_VIEW, $_GET)) {
 //start Naina
 
 if (array_key_exists(CREATE_GROUP, $_GET)) {
-<<<<<<< Updated upstream
-	
+
 	echo "In create group";
 
     $html_data = json_decode($_GET[CREATE_GROUP]);

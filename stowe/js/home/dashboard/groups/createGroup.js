@@ -3,6 +3,7 @@
 
 
 const CREATE_GROUP = "create_group";
+const DASHBOARD_KEY = 'dashboard';
 
 
 function getFields() {
@@ -16,6 +17,10 @@ function getFields() {
         groupprofile.about_info = $("#about").val();
         groupprofile.skill_list = $("#desired_skills").val();
 		groupprofile.group_img = $('#img_group').attr('src');
+        // do not save group_img if one is not given
+        if (groupprofile.group_img.indexOf("default-placeholder.png") > -1) {
+            groupprofile.group_img = "";
+        }
 
     sessionStorage.setItem('saved_state', JSON.stringify(groupprofile));
     console.log("groupprofile obj: " + JSON.stringify(groupprofile));
