@@ -27,6 +27,7 @@ class Chat
                 for ($i = 0; $row = $result->fetch_assoc(); $i++) {
                     $json_objs[$i] = $row;
                 }
+                echo json_encode($json_objs);
                 return json_encode($json_objs);
             }
             else {
@@ -53,6 +54,7 @@ class Chat
                 for ($i = 0; $row = $result->fetch_assoc(); $i++) {
                     $json_objs[$i] = $row;
                 }
+                echo json_encode($json_objs);
                 return json_encode($json_objs);
             }
             else {
@@ -78,6 +80,7 @@ class Chat
                 for ($i = 0; $row = $result->fetch_assoc(); $i++) {
                     $json_objs[$i] = $row;
                 }
+                echo json_encode($json_objs);
                 return json_encode($json_objs);
             }
             else {
@@ -103,6 +106,7 @@ class Chat
                 for ($i = 0; $row = $result->fetch_assoc(); $i++) {
                     $json_objs[$i] = $row;
                 }
+                echo json_encode($json_objs);
                 return json_encode($json_objs);
             }
             else {
@@ -121,6 +125,7 @@ class Chat
 		if ($result = $this->conn->query($sql)) {
 			
 			if ($result->num_rows > 0) {
+                echo json_encode($result->fetch_assoc());
                 return json_encode($result->fetch_assoc());
             }
             else {
