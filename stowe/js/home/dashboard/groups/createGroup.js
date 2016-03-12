@@ -16,10 +16,14 @@ function getFields() {
 		groupprofile.group_name = $("#title_field").val();
         groupprofile.about_info = $("#about").val();
         groupprofile.skill_list = $("#desired_skills").val();
-		groupprofile.group_img = $('#img_group').attr('src');
+		var img_str = $('#img_group').attr('src');
+        img_str = img_str.substring(img_str.lastIndexOf('image/') + 6);
         // do not save group_img if one is not given
-        if (groupprofile.group_img.indexOf("default-placeholder.png") > -1) {
+        if (img_str.indexOf("default-placeholder.png") > -1) {
             groupprofile.group_img = "";
+        }
+        else {
+            groupprofile.group_img = img_str;
         }
 
     sessionStorage.setItem('saved_state', JSON.stringify(groupprofile));

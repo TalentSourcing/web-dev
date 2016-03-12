@@ -25,7 +25,10 @@ function saveUpdatedFields()
 		groupprofile.group_name = $("#title_field").val();
         groupprofile.about_info = $("#about").val();
         groupprofile.skill_list = $("#desired_skills").val();
-		groupprofile.group_img = $('#img_group').attr('src');
+		// remove relative path to image
+		var img_str = $('#img_group').attr('src');
+		img_str = img_str.substring(img_str.lastIndexOf('image/') + 6);
+		groupprofile.group_img = img_str;
 
 		sessionStorage.setItem('saved_state', JSON.stringify(groupprofile));
 		console.log("groupprofile obj: " + JSON.stringify(groupprofile));
