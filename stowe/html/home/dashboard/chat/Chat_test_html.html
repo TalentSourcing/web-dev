@@ -1,0 +1,105 @@
+<html>
+	<title></title>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../../../css/home/dashboard/chat/chatstyle.css">
+    	<link rel="stylesheet" type="text/css" href="../../../../css/header.css">
+    	<link rel="stylesheet" type="text/css" href="../../../../css/footer.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="../../../../js/home/dashboard/chat/Chat_test_JS.js"></script>
+	</head>
+	<body>
+<!--		Header section-->
+		<header id="header_content">
+			<div id="header_logo_container">
+				<img id="logo_image" src="../../../../image/home/logo.jpg" alt="Logo">
+			</div>
+			<div id="header_bar">
+				<p><a href="#">TalentMe</a></p>
+			</div>
+		</header>
+		
+		
+		<br><br>
+		<div id="body" onload="displayNamesData()">
+			
+<!--			search section-->
+			<div id="topsearch">
+				<input id="topsearchtext"type="search" name="googlesearch" placeholder="Search chat...">
+				<input id="search" type="submit" value="Search">
+			</div>
+		<br>
+		
+			
+<!--		the chat list section	-->
+		<div class="openedchats">
+        	<p id="chattitle">Opened Chats</p>
+			<ul id="listData">
+			</ul>
+		</div>
+		
+			
+		<!--	the message section		-->
+		<div class="chat">
+		
+<!--		the sender name displayed-->
+			<div class='senderName'>
+			<p id='sender'></p>
+			</div>
+			
+<!--			the display message section-->			
+			<div class="messages">	
+			
+			</div>
+		</div>
+			
+<!--			the send message section-->				
+		<div id="input">
+<!--			<form>-->
+				<textarea id="searchtext" name="msg" placeholder="Type message here..." rows="3" cols="75"></textarea>
+				<input type="hidden" name="sender" value="">
+            	<input id="search" type="button" value="Send" name="send" onclick="sendMessage()">
+<!--			</form>-->
+        </div>
+		
+<!--			footer section-->
+		<div id="footer">
+			 <footer>
+					<table id="footer_table">
+						<tr class="table_row">
+							<th class="table_header">TalentMe</th>
+							<th class="table_header">Features</th>
+							<th class="table_header">Support</th>
+							<th class="table_header">Legal</th>
+						</tr>
+						<tr class="table_row">
+							<td class="table_data"><a href="">Home</a></td>
+							<td class="table_data"><a href="#">Overview</a></td>
+							<td class="table_data"><a href="#">Help</a></td>
+							<td class="table_data"><a href="#">Terms</a></td>
+						</tr>
+						<tr class="table_row">
+							<td class="table_data"><a href="#">About</a></td>
+							<td class="table_data"><a href="#">TalentMe Mobile</a></td>
+							<td class="table_data"><a href="#">Survey</a></td>
+							<td class="table_data"><a href="#">Privacy</a></td>
+						</tr>
+						<tr class="table_row">
+							<td class="table_data"><a href="#">Jobs</a></td>
+							<td class="table_data"><a href="#">Premium TalentMe</a></td>
+							<td class="table_data"><a href="#">Investor Relation</a></td>
+							<td class="table_data"></td>
+						</tr>
+						<tr class="table_row">
+							<td class="table_data"><a href="#">Advertise</a></td>
+							<td class="table_data"><a href="#">Meet Talent</a></td>
+							<td class="table_data"></td>
+							<td class="table_data"></td>
+						</tr>
+					</table>
+					<br><br>
+					<p id="footer_text">Copyright &copy; 2016 TalentMe.</p>
+				</footer>	
+			</div>
+		</div>
+	</body>
+</html>

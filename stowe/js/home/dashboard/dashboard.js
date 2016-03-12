@@ -106,7 +106,7 @@ function populateJoinedGroupsList(groups_list) {
                             '</a>' +
                         '</div>' +
                         '<div class="groupButtons">' +
-                            '<a href="../../../php/chat1.php"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
+                            '<a href="../../../html/home/dashboard/chat/Chat_test_html.html"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
                             '<a><button onclick="leaveGroup('+ group.group_id +')">Leave</button></a>' +
                         '</div>' +
                     '</div>' +
@@ -211,7 +211,7 @@ function populateCreatedGroups (groups_list) {
                             '</a>' +
                         '</div>' +
                         '<div class="groupButtons">' +
-                            '<a href="../../../php/chat1.php"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
+                            '<a href="../../../html/home/dashboard/chat/Chat_test_html.html"><button onclick="openGroupChat('+ group.group_id +')">Chat</button></a>' +
                         '</div>' +
                     '</div>' +
                 '</div>';
@@ -257,7 +257,7 @@ function openGroupChat (group_id) {
             }
         }
     };
-    xmlhttp.open("GET","../../../php/home/dashboard/chat/chat1.php?" + "sender_data=" + JSON.stringify(chatStorage), true);
+    xmlhttp.open("GET","../../../html/home/dashboard/chat/Chat_test_html.html?" + "sender_data=" + JSON.stringify(chatStorage), true);
     xmlhttp.send();
 }
 
