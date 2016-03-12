@@ -18,7 +18,7 @@ body {
         min-width:42%;
         color: #E8EDF9;
 /*         color: black;*/
-        overflow:auto;
+        overflow:hidden;
     }
 /*Bhargavi's stuff*/
 .button2
