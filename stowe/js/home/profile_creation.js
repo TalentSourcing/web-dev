@@ -31,10 +31,10 @@ function getFields () {
         profile.skills = $('textarea[name="skills"]').val();
         profile.occupation = $('input[name="occupation"]').val();
         profile.gender = $('input[name="gender"]:checked').val();
-        profile.profile_img = ""; // TODO need to use a button to select
-        var img_str = $('#profile_img').attr('src');
-        img_str = img_str.substring(img_str.lastIndexOf('image/') + 6);
-        profile.profile_img = img_str;
+//        profile.profile_img = ""; // TODO need to use a button to select
+//        var img_str = $('#profile_img').attr('src');
+//        img_str = img_str.substring(img_str.lastIndexOf('image/') + 6);
+        profile.profile_img = "";
         profile.objective = $('textarea[name="objective"]:checked').val();
     });
     // convert whitespace to ""
